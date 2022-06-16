@@ -79,7 +79,11 @@ export default {
       this.renderer.render(this.scene, this.camera);
       requestAnimationFrame(this.animate);
       this.controls.update();
-    },
+    },//material, rotation, position, scale
+    async sendData() {
+         let datos = { name: 'cone' };
+         this.$emit('onClickMaterial', datos);
+    }
   },
 };
 </script>

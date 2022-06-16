@@ -4,12 +4,15 @@
       <v-row>
         <v-col cols="3" class="mt-8">
           <v-avatar
-            v-for="{ id, icon } in properties"
+            v-for="{ id, icon, name, method } in properties"
             :key="id"
-            size="30"
+            size="55"
             class="d-block text-center mx-auto my-9"
           >
+          <button  v-on:method="method">
             <Icon :icon="icon" class="icon grey--text"> </Icon>
+            <h3 style="font-size: 10px;">{{name}}</h3>
+          </button>
           </v-avatar>
         </v-col>
         <v-col cols="9" class="mt-2">
@@ -63,10 +66,10 @@ export default {
         { id: 4, name: "Base 3", path: "/base3", icon: "mdi-cone" },
       ],
       properties: [
-        { id: 1, name: "material", icon: "mdi-palette-swatch" },
-        { id: 2, name: "rotation", icon: "mdi-rotate-3d-variant" },
-        { id: 3, name: "position", icon: "mdi-chart-ppf" },
-        { id: 4, name: "scale", icon: "mdi-relative-scale" },
+        { id: 1, name: "material", icon: "mdi-palette-swatch", method: "onClickMaterial"},
+        { id: 2, name: "rotation", icon: "mdi-rotate-3d-variant", method: "onClickRotation"},
+        { id: 3, name: "position", icon: "mdi-chart-ppf", method: "onClickPosition"},
+        { id: 4, name: "scale", icon: "mdi-relative-scale", method: "onClickScale"},
       ],
     };
   },
@@ -76,6 +79,18 @@ export default {
   methods: {
     pushRoute(path) {
       this.$router.push(path).catch(() => {});
+    },
+    onClickMaterial(data) {
+      console.log("vengo de ", data.name);
+    },
+    onClickRotation(data) {
+      console.log("vengo de ", data.name);
+    },
+    onClickPosition(data) {
+      console.log("vengo de ", data.name);
+    },
+    onClickScale(data) {
+      console.log("vengo de ", data.name);
     },
   },
 };
