@@ -2,19 +2,16 @@
   <div>
     <v-navigation-drawer v-model="drawer" app>
       <v-row>
-        <v-col cols="3" class="mt-8">
-          <v-avatar
-            v-for="{ id, icon } in properties"
-            :key="id"
-            size="30"
-            class="d-block text-center mx-auto my-9"
-          >
-            <Icon :icon="icon" class="icon grey--text"> </Icon>
-          </v-avatar>
+        <v-col cols="4" class="mt-16">
+          <v-col v-for="{ id, icon, name } in properties" :key="id">
+            <v-avatar size="30" class="d-block text-center mx-auto my-1 ">
+              <Icon :icon="icon" class="icon grey--text"> </Icon>
+            </v-avatar>
+            <p class="title">{{ name }}</p >
+          </v-col>
         </v-col>
-        <v-col cols="9" class="mt-2">
+        <v-col cols="8" class="mt-2">
           <h1 class="mt-1">Propiedades</h1>
-          
         </v-col>
       </v-row>
     </v-navigation-drawer>
@@ -43,7 +40,7 @@
       </v-row>
     </v-app-bar>
 
-    <v-main class="py-0">
+    <v-main class="py-0 px-0">
       <!--  -->
     </v-main>
   </div>
@@ -63,10 +60,10 @@ export default {
         { id: 4, name: "Base 3", path: "/base3", icon: "mdi-cone" },
       ],
       properties: [
-        { id: 1, name: "material", icon: "mdi-palette-swatch" },
-        { id: 2, name: "rotation", icon: "mdi-rotate-3d-variant" },
-        { id: 3, name: "position", icon: "mdi-chart-ppf" },
-        { id: 4, name: "scale", icon: "mdi-relative-scale" },
+        { id: 1, name: "Material", icon: "mdi-palette-swatch" },
+        { id: 2, name: "Rotation", icon: "mdi-rotate-3d-variant" },
+        { id: 3, name: "Position", icon: "mdi-chart-ppf" },
+        { id: 4, name: "Scale", icon: "mdi-relative-scale" },
       ],
     };
   },
@@ -88,8 +85,18 @@ export default {
   align-items: center;
   cursor: pointer;
 }
+
 .icon {
   width: 30px;
   height: 30px;
 }
+.v-application .title {
+    font-size: 0.8rem !important;
+    font-weight: 500;
+    line-height: 1rem; 
+    letter-spacing: 0.0125em !important; 
+    font-family: "Roboto", sans-serif !important;
+    text-align: center;
+}
+
 </style>
