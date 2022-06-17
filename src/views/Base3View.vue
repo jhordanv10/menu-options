@@ -1,7 +1,7 @@
 <template>
   <div>
     <div ref="canvas" class="contenedor3D"></div>
-    <Menu />
+    <Menu figure="cone" :info="this.info"></Menu>
   </div>
 </template>
 
@@ -42,6 +42,7 @@ export default {
     //Ligths
     const AmbientalLigth = new THREE.AmbientLight(0xffffff, 1);
     const DirectionalLigth = new THREE.DirectionalLight(0xffffff, 2);
+    let info;
 
     return {
       scene: scene,
@@ -51,6 +52,7 @@ export default {
       controls: [],
       AmbientalLigth: AmbientalLigth,
       DirectionalLigth: DirectionalLigth,
+      info: this.info,
     };
   },
 
@@ -81,7 +83,7 @@ export default {
 
   methods: {
     info() {
-      const info = this.cone;
+      info = this.cone;
       console.log(info);
     },
     animate() {

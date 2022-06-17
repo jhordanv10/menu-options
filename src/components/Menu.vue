@@ -1,11 +1,16 @@
 <template>
   <v-navigation-drawer v-model="drawer" app>
     <v-row>
-      <v-col cols="4" class="mt-16">
+      
+      <v-col cols="12" class="mt-2 ml-2">
+        <h1 class="mt-1">Propiedades</h1>
+      </v-col>
+      <v-col cols="4" class="mt-2">
         <v-col
           class="option mx-1 my-4 py-0"
           v-for="{ id, icon, name } in properties"
           :key="id"
+          @click="sendData(name)"
         >
           <v-avatar size="30" class="d-block text-center mx-auto my-1">
             <Icon :icon="icon" class="icon grey--text"> </Icon>
@@ -13,9 +18,9 @@
           <p class="title">{{ name }}</p>
         </v-col>
       </v-col>
-      <v-col cols="8" class="mt-2">
-        <h1 class="mt-1">Propiedades</h1>
-      </v-col>
+    <v-col cols="6" class="mt-2">
+      Estoy en la propiedad: {{this.getName}} del {{figure}}
+    </v-col>
     </v-row>
   </v-navigation-drawer>
 </template>
@@ -24,7 +29,12 @@
 import { Icon } from "@iconify/vue2";
 
 export default {
+  props: {
+    figure: String,
+    info: Array
+  },
   data() {
+    let getName='';
     return {
       drawer: true,
       properties: [
@@ -33,6 +43,7 @@ export default {
         { id: 3, name: "Position", icon: "mdi-chart-ppf" },
         { id: 4, name: "Scale", icon: "mdi-relative-scale" },
       ],
+      getName: getName,
     };
   },
   components: {
@@ -42,6 +53,9 @@ export default {
   methods: {
     drawer() {
         this.drawer = !this.drawer
+    },
+    sendData(name){
+      this.getName= name;
     }
   },
 };
