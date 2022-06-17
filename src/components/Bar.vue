@@ -1,25 +1,6 @@
 <template>
   <div>
-    <v-navigation-drawer v-model="drawer" app>
-      <v-row>
-        <v-col cols="4" class="mt-16">
-          <v-col v-for="{ id, icon, name } in properties" :key="id">
-            <v-avatar size="30" class="d-block text-center mx-auto my-1 ">
-              <Icon :icon="icon" class="icon grey--text"> </Icon>
-            </v-avatar>
-            <p class="title">{{ name }}</p >
-          </v-col>
-        </v-col>
-        <v-col cols="8" class="mt-2">
-          <h1 class="mt-1">Propiedades</h1>
-        </v-col>
-      </v-row>
-    </v-navigation-drawer>
-
     <v-app-bar app>
-      <v-app-bar-nav-icon @click="drawer = !drawer">
-        <Icon icon="mdi-pencil" class="icon grey--text"> </Icon>
-      </v-app-bar-nav-icon>
       <v-toolbar-title class="px-8">
         <v-img
           @click="pushRoute('/')"
@@ -52,7 +33,6 @@ import { Icon } from "@iconify/vue2";
 export default {
   data() {
     return {
-      drawer: false,
       routes: [
         { id: 1, name: "Home", path: "/", icon: "mdi-home" },
         { id: 2, name: "Base 1", path: "/base1", icon: "mdi-sphere" },
@@ -70,9 +50,15 @@ export default {
   components: {
     Icon,
   },
+  mounted(){
+    this.info()
+  },
   methods: {
     pushRoute(path) {
       this.$router.push(path).catch(() => {});
+    },
+    info(){
+      console.log(this.sphere);
     },
   },
 };
@@ -90,13 +76,26 @@ export default {
   width: 30px;
   height: 30px;
 }
-.v-application .title {
+.v-application {
+  .title {
     font-size: 0.8rem !important;
     font-weight: 500;
-    line-height: 1rem; 
-    letter-spacing: 0.0125em !important; 
+    line-height: 1rem;
+    letter-spacing: 0.0125em !important;
     font-family: "Roboto", sans-serif !important;
     text-align: center;
+  }
 }
 
+.option {
+  border: 1px solid grey;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.8s all ease;
+
+  &:hover {
+    transform: scale(1.05);
+    background: #EFEFEF;
+  }
+}
 </style>

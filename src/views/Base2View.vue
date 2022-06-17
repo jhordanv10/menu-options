@@ -1,11 +1,18 @@
 <template>
-  <div ref="canvas" class="contenedor3D"></div>
+  <div>
+    <div ref="canvas" class="contenedor3D"></div>
+    <Menu />
+  </div>
 </template>
 
 <script>
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import Menu from "../components/Menu.vue";
 export default {
+  components: {
+    Menu,
+  },
   data() {
     //Scene
     let scene = new THREE.Scene();
@@ -24,9 +31,9 @@ export default {
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     //Cube
-    const geometry = new THREE.BoxBufferGeometry(1.5,1.5,1.5);
+    const geometry = new THREE.BoxBufferGeometry(1.5, 1.5, 1.5);
     const material = new THREE.MeshStandardMaterial({
-      color:0xB25068,
+      color: 0xb25068,
     });
     let cube = new THREE.Mesh(geometry, material);
 
@@ -51,12 +58,12 @@ export default {
     this.scene.add(this.camera);
 
     //Cube
-    this.cube.rotation.set(0.5,1,0)
+    this.cube.rotation.set(0.5, 1, 0);
     this.scene.add(this.cube);
 
     //Ligth
     this.scene.add(this.AmbientalLigth);
-    this.DirectionalLigth.position.set(3,3,3);
+    this.DirectionalLigth.position.set(3, 3, 3);
     this.scene.add(this.DirectionalLigth);
 
     //Controls
