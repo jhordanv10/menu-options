@@ -1,7 +1,7 @@
 <template>
   <div>
     <div ref="canvas" class="contenedor3D"></div>
-    <Menu />
+    <Menu figure="cube" />
   </div>
 </template>
 

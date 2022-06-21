@@ -1,14 +1,14 @@
 <template>
-<div>
-  <Menu @drawer="drawer"/>
-  <div ref="canvas" class="contenedor3D"></div>
-</div>
+  <div>
+    <Menu figure="sphere" :info="this.sphere" />
+    <div ref="canvas" class="contenedor3D"></div>
+  </div>
 </template>
 
 <script>
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import Menu from "../components/Menu.vue"
+import Menu from "../components/Menu.vue";
 
 export default {
   components: {
@@ -53,7 +53,6 @@ export default {
     };
   },
 
-
   created() {
     //Camera
     this.camera.position.z = 6;
@@ -75,9 +74,8 @@ export default {
   mounted() {
     this.$refs.canvas.appendChild(this.renderer.domElement);
     this.animate();
-
+    // console.log(this.sphere);
   },
-
 
   methods: {
     animate() {
@@ -85,10 +83,6 @@ export default {
       requestAnimationFrame(this.animate);
       this.controls.update();
     },
-    drawer() {
-      drawer = !drawer
-    },
-    
   },
 };
 </script>

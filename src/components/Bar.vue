@@ -50,15 +50,9 @@ export default {
   components: {
     Icon,
   },
-  mounted(){
-    this.info()
-  },
   methods: {
     pushRoute(path) {
       this.$router.push(path).catch(() => {});
-    },
-    info(){
-      console.log(this.sphere);
     },
   },
 };
