@@ -35,9 +35,8 @@
         </div>
 
         <!-- -------------------------------- Position --------------------------------------->
-        <div v-if="getName === 'Position'">
-          <h1>Position</h1>
-        </div>
+        <Position v-if="getName === 'Position'" :info="info" :figure="figure" />
+
 
         <!-- -------------------------------- Scale --------------------------------------->
         <div v-if="getName === 'Scale'">
@@ -53,7 +52,8 @@
 <script>
 import * as THREE from "three";
 import { Icon } from "@iconify/vue2";
-import Material from "../components/Atoms/Material.vue"
+import Material from "../components/Atoms/Material.vue";
+import Position from "../components/Atoms/Position.vue";
 
 export default {
   props: {
@@ -77,6 +77,7 @@ export default {
   components: {
     Icon,
     Material,
+    Position
   },
   methods: {
     sendData(name) {
