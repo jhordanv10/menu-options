@@ -42,14 +42,14 @@
         <!-- -------------------------------- Position --------------------------------------->
         <Position
           v-if="getName === 'Position'"
-          :rotation="info.position"
+          :position="info.position"
           :figure="figure"
         />
 
         <!-- -------------------------------- Scale --------------------------------------->
         <Scale
           v-if="getName === 'Scale'"
-          :rotation="info.scale"
+          :scale="info.scale"
           :figure="figure"
         />
       </v-col>
