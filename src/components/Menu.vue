@@ -18,10 +18,21 @@
         </v-col>
       </v-col>
       <v-col cols="6" class="mt-6">
-        <!-- Estoy en la propiedad: {{ getName }} del {{ figure }} -->
+        Estoy en la propiedad: {{ getName }} del {{ figure }}
 
         <!-- Material -->
-        <div>
+        <div >
+          <!-- color -->
+          <v-container v-if="this.info.material.color">
+            <span class="colorPicker"
+              ><input
+                id="cone-color"
+                type="color"
+                value="#ff0000"
+                onchange="this.changeColor()"
+              /><br />Color</span
+            >
+          </v-container>
           <!-- Wireframe -->
           <v-container>
             <v-row>
@@ -85,15 +96,18 @@
 </template>
 
 <script>
+import * as THREE from "three";
 import { Icon } from "@iconify/vue2";
 
 export default {
   props: {
     figure: String,
     info: Object,
+    material: THREE.MeshBasicMaterial,
   },
   data() {
     let getName = "";
+    let color = "";
     return {
       drawer: true,
       getName: getName,
@@ -110,6 +124,8 @@ export default {
         { id: 3, name: "Position", icon: "mdi-chart-ppf" },
         { id: 4, name: "Scale", icon: "mdi-relative-scale" },
       ],
+      getName: getName,
+      color: color,
     };
   },
   components: {
@@ -150,6 +166,29 @@ export default {
       } else {
         this.info.material.visible = false;
       }
+    },
+    sendData(name) {
+      this.getName = name;
+    },
+    changeColor() {
+      // var guiControls = new function() {
+      //   this.color = material.color.getStyle();
+      // }();
+
+      // var gui = new dat.GUI();
+      // gui
+      //   .addColor(guiControls, "color")
+      //   .listen()
+      //   .onChange(function(e) {
+      //     selected.material.color.setStyle(e);
+      //   });
+
+      // const colorInput = document.getElementById( 'cone-color' );
+      // colorInput.addEventListener( 'input', function () {
+      this.color = document.getElementById("cone-color").value;
+      material.color.set(this.color);
+
+      // } );
     },
   },
 };
