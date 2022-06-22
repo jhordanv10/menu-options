@@ -65,7 +65,7 @@
                   class="mx-2"
                   fab
                   dark
-                  color="primary"
+                  :color="visible === true ? 'red' : 'green'"
                 >
                   <v-icon dark>
                     {{
@@ -125,6 +125,7 @@ export default {
   methods: {
     sendData(name) {
       this.getName = name;
+      console.log(this.getName);
     },
 
     changeWireframe() {
