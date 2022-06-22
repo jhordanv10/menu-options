@@ -18,18 +18,23 @@
         </v-col>
       </v-col>
       <v-col cols="6" class="mt-6">
-        Estoy en la propiedad: {{ getName }} del {{ figure }}
+        <!-- Estoy en la propiedad: {{ getName }} del {{ figure }} -->
 
-        <!-- Material -->
-        <div >
+        <!-- -------------------------------- Principal --------------------------------------->
+        <div v-if="getName === ''">
+          <h1>Principal</h1>
+        </div>
+
+        <!-- -------------------------------- Material --------------------------------------->
+        <div v-if="getName === 'Material'">
           <!-- color -->
           <v-container v-if="this.info.material.color">
             <span class="colorPicker"
               ><input
-                id="cone-color"
+                :id="figure+'-color'"
                 type="color"
                 value="#ff0000"
-                onchange="this.changeColor()"
+                @change="changeColor"
               /><br />Color</span
             >
           </v-container>
@@ -90,6 +95,23 @@
             </v-row>
           </v-container>
         </div>
+
+        <!-- -------------------------------- Rotation --------------------------------------->
+        <div v-if="getName === 'Rotation'">
+          <h1>Rotation</h1>
+        </div>
+
+        <!-- -------------------------------- Position --------------------------------------->
+        <div v-if="getName === 'Position'">
+          <h1>Position</h1>
+        </div>
+
+        <!-- -------------------------------- Scale --------------------------------------->
+        <div v-if="getName === 'Scale'">
+          <h1>Scale</h1>
+        </div>
+
+
       </v-col>
     </v-row>
   </v-navigation-drawer>
@@ -103,7 +125,6 @@ export default {
   props: {
     figure: String,
     info: Object,
-    material: THREE.MeshBasicMaterial,
   },
   data() {
     let getName = "";
@@ -132,16 +153,13 @@ export default {
     Icon,
   },
   mounted() {
-    // this.changeWireframe();
-    // this.changeSide();
-    // this.changeVisible();
+    
     console.log(this.info.material);
   },
 
   methods: {
     sendData(name) {
       this.getName = name;
-      console.log(this.getName);
     },
 
     changeWireframe() {
@@ -171,24 +189,8 @@ export default {
       this.getName = name;
     },
     changeColor() {
-      // var guiControls = new function() {
-      //   this.color = material.color.getStyle();
-      // }();
-
-      // var gui = new dat.GUI();
-      // gui
-      //   .addColor(guiControls, "color")
-      //   .listen()
-      //   .onChange(function(e) {
-      //     selected.material.color.setStyle(e);
-      //   });
-
-      // const colorInput = document.getElementById( 'cone-color' );
-      // colorInput.addEventListener( 'input', function () {
-      this.color = document.getElementById("cone-color").value;
-      material.color.set(this.color);
-
-      // } );
+      this.color = document.getElementById(`${this.figure}-color`).value;
+      this.info.material.color.set(this.color);
     },
   },
 };
