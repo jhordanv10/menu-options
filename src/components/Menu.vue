@@ -25,25 +25,33 @@
           <h1>Principal</h1>
         </div>
 
-        <Material v-if="getName === 'Material'" :info="info" :figure="figure" />
-
-
+        <!-- -------------------------------- Material --------------------------------------->
+        <Material
+          v-if="getName === 'Material'"
+          :material="info.material"
+          :figure="figure"
+        />
 
         <!-- -------------------------------- Rotation --------------------------------------->
-        <div v-if="getName === 'Rotation'">
-          <h1>Rotation</h1>
-        </div>
+        <Rotation
+          v-if="getName === 'Rotation'"
+          :rotation="info.rotation"
+          :figure="figure"
+        />
 
         <!-- -------------------------------- Position --------------------------------------->
-        <Position v-if="getName === 'Position'" :info="info" :figure="figure" />
-
+        <Position
+          v-if="getName === 'Position'"
+          :rotation="info.position"
+          :figure="figure"
+        />
 
         <!-- -------------------------------- Scale --------------------------------------->
-        <div v-if="getName === 'Scale'">
-          <h1>Scale</h1>
-        </div>
-
-
+        <Scale
+          v-if="getName === 'Scale'"
+          :rotation="info.scale"
+          :figure="figure"
+        />
       </v-col>
     </v-row>
   </v-navigation-drawer>
@@ -53,8 +61,9 @@
 import * as THREE from "three";
 import { Icon } from "@iconify/vue2";
 import Material from "../components/Atoms/Material.vue";
+import Rotation from "../components/Atoms/Rotation.vue";
 import Position from "../components/Atoms/Position.vue";
-
+import Scale from "../components/Atoms/Scale.vue";
 export default {
   props: {
     figure: String,
@@ -71,13 +80,14 @@ export default {
         { id: 3, name: "Position", icon: "mdi-chart-ppf" },
         { id: 4, name: "Scale", icon: "mdi-relative-scale" },
       ],
-      
     };
   },
   components: {
     Icon,
     Material,
-    Position
+    Rotation,
+    Position,
+    Scale,
   },
   methods: {
     sendData(name) {
@@ -85,9 +95,8 @@ export default {
     },
   },
   mounted() {
-    console.log(this.info.material);
+    console.log(this.info.rotation);
   },
-
 };
 </script>
 

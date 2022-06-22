@@ -74,13 +74,11 @@ export default {
   mounted() {
     this.$refs.canvas.appendChild(this.renderer.domElement);
     this.animate();
-    this.info();
   },
 
   methods: {
     info() {
       const info = this.cube;
-      console.log(info);
     },
     animate() {
       this.renderer.render(this.scene, this.camera);
@@ -88,9 +86,9 @@ export default {
       this.controls.update();
     },
     async sendData() {
-         let datos = { name: 'cube' };
-         this.$emit('onClickMaterial', datos);
-    }
+      let datos = { name: "cube" };
+      this.$emit("onClickMaterial", datos);
+    },
   },
 };
 </script>

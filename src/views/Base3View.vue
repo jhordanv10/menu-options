@@ -1,7 +1,7 @@
 <template>
   <div>
     <div ref="canvas" class="contenedor3D"></div>
-    <Menu figure="cone" :info="this.cone" :material="this.material"></Menu>
+    <Menu figure="cone" :info="this.cone"></Menu>
   </div>
 </template>
 
@@ -34,9 +34,14 @@ export default {
 
     //Cone
     const geometry = new THREE.ConeGeometry(1.5, 2, 4);
-    const material = new THREE.MeshStandardMaterial({
-					color: 0xff0000, metalness: 1.0, roughness: 0.5, clearcoat: 1.0, clearcoatRoughness: 0.03, sheen: 0.5
-		});
+    const material = new THREE.MeshPhysicalMaterial({
+      color: 0xff0000,
+      metalness: 1.0,
+      roughness: 0.5,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.03,
+      sheen: 0.5,
+    });
     let cone = new THREE.Mesh(geometry, material);
 
     //Ligths
@@ -77,22 +82,18 @@ export default {
   mounted() {
     this.$refs.canvas.appendChild(this.renderer.domElement);
     this.animate();
-    this.getInfo();
   },
 
   methods: {
-    getInfo() {
-      console.log('send...',this.cone);
-    },
     animate() {
       this.renderer.render(this.scene, this.camera);
       requestAnimationFrame(this.animate);
       this.controls.update();
-    },//material, rotation, position, scale
+    }, //material, rotation, position, scale
     async sendData() {
-         let datos = { name: 'cone' };
-         this.$emit('onClickMaterial', datos);
-    }
+      let datos = { name: "cone" };
+      this.$emit("onClickMaterial", datos);
+    },
   },
 };
 </script>
