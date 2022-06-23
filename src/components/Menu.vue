@@ -1,64 +1,63 @@
 <template>
-  <v-navigation-drawer v-model="drawer" app>
-    <v-row>
-      <v-col cols="12" class="mt-2 ml-2 text-center">
-        <h1 class="mt-1">Propiedades</h1>
-      </v-col>
-      <v-col cols="4" class="mt-2">
-        <v-col
-          class="option mx-1 my-4 py-0"
-          v-for="{ id, icon, name } in properties"
-          :key="id"
-          @click="sendData(name)"
-        >
-          <v-avatar size="30" class="d-block text-center mx-auto my-1">
-            <Icon :icon="icon" class="icon grey--text"> </Icon>
-          </v-avatar>
-          <p class="title">{{ name }}</p>
+  <div>
+    <v-navigation-drawer v-model="drawer" app  @mousedown="drag">
+      <v-row>
+        <v-col cols="12" class="mt-2 ml-2 text-center">
+          <h1 class="mt-1">Propiedades</h1>
         </v-col>
-      </v-col>
-      <v-col cols="6" class="mt-6">
-        <!-- Estoy en la propiedad: {{ getName }} del {{ figure }} -->
+        <v-col cols="4" class="mt-2">
+          <v-col
+            class="option mx-1 my-4 py-0"
+            v-for="{ id, icon, name } in properties"
+            :key="id"
+            @click="sendData(name)"
+          >
+            <v-avatar size="30" class="d-block text-center mx-auto my-1">
+              <Icon :icon="icon" class="icon grey--text"> </Icon>
+            </v-avatar>
+            <p class="title">{{ name }}</p>
+          </v-col>
+        </v-col>
+        <v-col cols="6" class="mt-6">
+          <!-- -------------------------------- Principal --------------------------------------->
+          <div v-if="getName === ''">
+            <h1>Principal</h1>
+          </div>
 
-        <!-- -------------------------------- Principal --------------------------------------->
-        <div v-if="getName === ''">
-          <h1>Principal</h1>
-        </div>
+          <!-- -------------------------------- Material --------------------------------------->
+          <Material
+            v-if="getName === 'Material'"
+            :material="info.material"
+            :figure="figure"
+          />
 
-        <!-- -------------------------------- Material --------------------------------------->
-        <Material
-          v-if="getName === 'Material'"
-          :material="info.material"
-          :figure="figure"
-        />
+          <!-- -------------------------------- Rotation --------------------------------------->
+          <Rotation
+            v-if="getName === 'Rotation'"
+            :rotation="info.rotation"
+            :figure="figure"
+          />
 
-        <!-- -------------------------------- Rotation --------------------------------------->
-        <Rotation
-          v-if="getName === 'Rotation'"
-          :rotation="info.rotation"
-          :figure="figure"
-        />
+          <!-- -------------------------------- Position --------------------------------------->
+          <Position
+            v-if="getName === 'Position'"
+            :position="info.position"
+            :figure="figure"
+          />
 
-        <!-- -------------------------------- Position --------------------------------------->
-        <Position
-          v-if="getName === 'Position'"
-          :rotation="info.position"
-          :figure="figure"
-        />
-
-        <!-- -------------------------------- Scale --------------------------------------->
-        <Scale
-          v-if="getName === 'Scale'"
-          :rotation="info.scale"
-          :figure="figure"
-        />
-      </v-col>
-    </v-row>
-  </v-navigation-drawer>
+          <!-- -------------------------------- Scale --------------------------------------->
+          <Scale
+            v-if="getName === 'Scale'"
+            :scale="info.scale"
+            :figure="figure"
+          />
+        </v-col>
+      </v-row>
+    </v-navigation-drawer>
+  </div>
 </template>
 
 <script>
-import * as THREE from "three";
 import { Icon } from "@iconify/vue2";
 import Material from "../components/Atoms/Material.vue";
 import Rotation from "../components/Atoms/Rotation.vue";
@@ -92,6 +91,8 @@ export default {
   methods: {
     sendData(name) {
       this.getName = name;
+    },
+    drag() {
     },
   },
   mounted() {
