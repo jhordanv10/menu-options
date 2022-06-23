@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-app-bar app>
-      <v-toolbar-title class="px-8">
+      <v-toolbar-title class="px-4">
         <v-img
           @click="pushRoute('/')"
           class="img"
@@ -38,6 +38,7 @@ export default {
         { id: 2, name: "Base 1", path: "/base1", icon: "mdi-sphere" },
         { id: 3, name: "Base 2", path: "/base2", icon: "mdi-cube" },
         { id: 4, name: "Base 3", path: "/base3", icon: "mdi-cone" },
+        { id: 5, name: "Base 4", path: "/base4", icon: "mdi-record-circle-outline" },
       ],
       properties: [
         { id: 1, name: "Material", icon: "mdi-palette-swatch" },
