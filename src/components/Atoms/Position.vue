@@ -1,8 +1,8 @@
 <template>
   <div>
-    
-      <v-card-text class="pa-0">
-        <h3>Position x</h3>
+    <v-card>
+      <v-card-text>
+        <h3>Value X</h3>
         <v-slider
           v-model="valueX"
           step="0.1"
@@ -11,8 +11,9 @@
           thumb-label
           ticks
           @change="changePosition"
-        ></v-slider>
-        <h3>Position y</h3>
+        >
+        </v-slider>
+        <h3>Value Y</h3>
         <v-slider
           v-model="valueY"
           step="0.1"
@@ -21,8 +22,9 @@
           thumb-label
           ticks
           @change="changePosition"
-        ></v-slider>
-        <h3>Position z</h3>
+        >
+        </v-slider>
+        <h3>Value Z</h3>
         <v-slider
           v-model="valueZ"
           step="0.1"
@@ -31,9 +33,10 @@
           thumb-label
           ticks
           @change="changePosition"
-        ></v-slider>
+        >
+        </v-slider>
       </v-card-text>
-    
+    </v-card>
   </div>
 </template>
 
@@ -58,12 +61,21 @@ export default {
     changePosition() {
       this.position.set(this.valueX, this.valueY, this.valueZ);
     },
+    props: {
+      position: Object,
+      figure: String,
+    },
+    methods: {
+      changePosition() {
+        this.position.set(this.valueX, this.valueY, this.valueZ);
+      },
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
 h3 {
-    text-align: center;
+  text-align: center;
 }
 </style>

@@ -45,6 +45,7 @@
             :figure="figure"
           />
 
+<<<<<<< HEAD
           <!-- -------------------------------- Scale --------------------------------------->
           <Scale
             v-if="getName === 'Scale'"
@@ -55,6 +56,24 @@
       </v-row>
     </v-navigation-drawer>
   </div>
+=======
+        <!-- -------------------------------- Position --------------------------------------->
+        <Position
+          v-if="getName === 'Position'"
+          :position="info.position"
+          :figure="figure"
+        />
+
+        <!-- -------------------------------- Scale --------------------------------------->
+        <Scale
+          v-if="getName === 'Scale'"
+          :scale="info.scale"
+          :figure="figure"
+        />
+      </v-col>
+    </v-row>
+  </v-navigation-drawer>
+>>>>>>> DevelopDaniela
 </template>
 
 <script>
