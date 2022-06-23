@@ -6,7 +6,7 @@
       </v-col>
       <v-col cols="4" class="mt-2">
         <v-col
-          class="option mx-1 my-4 py-0"
+          class="option mx-3 my-4 py-0"
           v-for="{ id, icon, name } in properties"
           :key="id"
           @click="sendData(name)"
@@ -17,11 +17,9 @@
           <p class="title">{{ name }}</p>
         </v-col>
       </v-col>
-      <v-col cols="6" class="mt-6">
+      <v-col cols="7" class="mt-6 ">
         <!-- -------------------------------- Principal --------------------------------------->
-        <div v-if="getName === ''">
-          <h1>Principal</h1>
-        </div>
+        <Main v-if="getName === ''" />
 
         <!-- -------------------------------- Material --------------------------------------->
         <Material
@@ -57,10 +55,12 @@
 
 <script>
 import { Icon } from "@iconify/vue2";
+import Main from "../components/Atoms/Main.vue";
 import Material from "../components/Atoms/Material.vue";
 import Rotation from "../components/Atoms/Rotation.vue";
 import Position from "../components/Atoms/Position.vue";
 import Scale from "../components/Atoms/Scale.vue";
+
 export default {
   props: {
     figure: String,
@@ -81,6 +81,7 @@ export default {
   },
   components: {
     Icon,
+    Main,
     Material,
     Rotation,
     Position,

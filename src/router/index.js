@@ -4,6 +4,7 @@ import HomeView from '../views/HomeView.vue'
 import Base1View from '../views/Base1View.vue'
 import Base2View from '../views/Base2View.vue'
 import Base3View from '../views/Base3View.vue'
+import Base4View from '../views/Base4View.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/base3',
     name: 'base3',
     component: Base3View,
+  },
+  {
+    path: '/base4',
+    name: 'base4',
+    component: Base4View,
   },
 ]
 const router = new VueRouter({

@@ -2,12 +2,12 @@
   <div>
     <!-- x -->
     <v-container class="mb-8 pt-16">
-      <v-row>
+      <v-row class="justify-center">
         <label :class="rotationx === true ? 'green--text' : 'red--text'">{{
           rotationx === true ? "Rotation x true" : "Rotation x false"
         }}</label>
       </v-row>
-      <v-row>
+      <v-row class="justify-center">
         <v-switch
           :class="rotationx === true ? 'text--green my-0' : 'text--red my-0'"
           v-model="rotationx"
@@ -20,12 +20,12 @@
 
     <!-- y -->
     <v-container class="mb-8">
-      <v-row>
+      <v-row class="justify-center">
         <label :class="rotationy === true ? 'green--text' : 'red--text'">{{
           rotationy === true ? "Rotation y true" : "Rotation y false"
         }}</label>
       </v-row>
-      <v-row>
+      <v-row class="justify-center">
         <v-switch
           :class="rotationy === true ? 'text--green my-0' : 'text--red my-0'"
           v-model="rotationy"
@@ -38,12 +38,12 @@
 
     <!-- z -->
     <v-container class="mb-8">
-      <v-row>
+      <v-row class="justify-center">
         <label :class="rotationz === true ? 'green--text' : 'red--text'">{{
           rotationz === true ? "Rotation z true" : "Rotation z false"
         }}</label>
       </v-row>
-      <v-row>
+      <v-row class="justify-center">
         <v-switch
           :class="rotationz === true ? 'text--green my-0' : 'text--red my-0'"
           v-model="rotationz"
@@ -100,4 +100,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+
+</style>

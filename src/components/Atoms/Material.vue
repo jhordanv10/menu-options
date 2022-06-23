@@ -1,13 +1,13 @@
 <template>
-  <div class="pt-16 ">
+  <div class="pt-16">
     <!-- Wireframe -->
     <v-container>
-      <v-row>
+      <v-row class="justify-center">
         <label :class="wireframe === true ? 'green--text' : 'red--text'">{{
           wireframe === true ? "Wireframe true" : "Wireframe false"
         }}</label>
       </v-row>
-      <v-row>
+      <v-row class="justify-center">
         <v-switch
           :class="wireframe === true ? 'text--green my-0' : 'text--red my-0'"
           @click="changeWireframe"
@@ -50,21 +50,6 @@
           </span>
         </v-col>
       </v-row>
-
-      <!-- <v-row>
-        <v-col class="d-flex px-0 mx-0 justify-center" cols="12">
-          <v-color-picker
-            hide-canvas
-            hide-mode-switch
-            mode="hexa"
-            swatches-max-height="100"
-            :id="figure+'-color'"
-            v-model="color"
-            :color="color"
-            @change="changeColor"
-          ></v-color-picker>
-        </v-col>
-      </v-row> -->
     </v-container>
 
     <!-- Visible -->
@@ -94,7 +79,7 @@
 <script>
 export default {
   data() {
-    let color ='#007BFF'
+    let color = "#007BFF";
     return {
       wireframe: false,
       side: null,
@@ -142,7 +127,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .div-color {
   width: 70px;
   height: 30px;
@@ -164,16 +149,7 @@ export default {
 .colorPicker {
   text-align: center;
 }
-// .v-color-picker__controls {
-//   .v-color-picker__preview {
-//     display: block;
-//     .v-color-picker__dot {
-//       margin: 0 auto;
-//       margin-bottom: 24px;
-//     }
-//   }
-// }
-// .v-color-picker__controls {
-//   padding: 0px;
-// }
+.v-select__slot label {
+  left: 50px;
+}
 </style>
