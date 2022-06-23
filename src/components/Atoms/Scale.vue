@@ -1,16 +1,36 @@
 <template>
-  <div>
-    <v-card>
-      <v-card-text>
-        <h3>Value X</h3>
-        <v-slider v-model="valueX" step="1" min="1" max="5" thumb-label ticks @change="changeScale"></v-slider>
-        <h3>Value Y</h3>
-        <v-slider v-model="valueY" step="1" min="1" max="5" thumb-label ticks @change="changeScale"></v-slider>
-        <h3>Value Z</h3>
-        <v-slider v-model="valueZ" step="1" min="1" max="5" thumb-label ticks @change="changeScale"></v-slider>
-      </v-card-text>
-    </v-card>
-  </div>
+  <v-card-text class="pa-0 pt-16">
+    <h3>Scale X</h3>
+    <v-slider
+      v-model="valueX"
+      step="1"
+      min="1"
+      max="5"
+      thumb-label
+      ticks
+      @change="changeScale"
+    ></v-slider>
+    <h3>Scale Y</h3>
+    <v-slider
+      v-model="valueY"
+      step="1"
+      min="1"
+      max="5"
+      thumb-label
+      ticks
+      @change="changeScale"
+    ></v-slider>
+    <h3>Scale Z</h3>
+    <v-slider
+      v-model="valueZ"
+      step="1"
+      min="1"
+      max="5"
+      thumb-label
+      ticks
+      @change="changeScale"
+    ></v-slider>
+  </v-card-text>
 </template>
 
 <script>
@@ -24,7 +44,7 @@ export default {
       valueX: valueX,
       valueY: valueY,
       valueZ: valueZ,
-    }
+    };
   },
   props: {
     scale: Object,
@@ -33,10 +53,9 @@ export default {
   methods: {
     changeScale() {
       this.scale.set(this.valueX, this.valueY, this.valueZ);
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style>
-</style>
+<style></style>
