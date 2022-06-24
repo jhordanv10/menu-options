@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Bar/>
+    <Bar />
     <v-main>
       <router-view />
     </v-main>
@@ -8,12 +8,12 @@
 </template>
 
 <script>
-import Bar from "./components/Bar.vue"
+import Bar from "./components/Bar.vue";
 export default {
   name: "App",
   components: {
-    Bar
-  }
-  
+    Bar,
+  },
 };
 </script>
+<style lang="scss" scoped></style>
