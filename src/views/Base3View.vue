@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <v-container>
     <div ref="canvas" class="contenedor3D"></div>
     <Menu figure="cone" :info="this.cone"></Menu>
-  </div>
+  </v-container>
 </template>
 
 <script>

@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <v-container>
     <Menu figure="sphere" :info="this.sphere" />
     <div ref="canvas" class="contenedor3D"></div>
-  </div>
+  </v-container>
 </template>
 
 <script>
