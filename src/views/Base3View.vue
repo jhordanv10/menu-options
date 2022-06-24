@@ -1,7 +1,7 @@
 <template>
   <div>
     <div ref="canvas" class="contenedor3D"></div>
-    <Menu figure="cone" :info="this.cone"></Menu>
+    <Menu figure="cone" :info="this.cone" :scene="this.scene" :cone="this.cone" :material="this.material"></Menu>
   </div>
 </template>
 
@@ -34,7 +34,7 @@ export default {
 
     //Cone
     const geometry = new THREE.ConeGeometry(1.5, 2, 4);
-    const material = new THREE.MeshPhysicalMaterial({
+    const material = new THREE.MeshStandardMaterial({
       color: 0xff0000,
       metalness: 1.0,
       roughness: 0.5,
@@ -42,6 +42,12 @@ export default {
       clearcoatRoughness: 0.03,
       sheen: 0.5,
     });
+
+    // const texture = new THREE.TextureLoader().load('https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_gates.jpg');
+    // const material = new THREE.MeshStandardMaterial({
+    //   map: texture,
+    // });
+
     let cone = new THREE.Mesh(geometry, material);
 
     //Ligths
