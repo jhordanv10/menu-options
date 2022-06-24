@@ -66,8 +66,14 @@ export default {
     let color = '#007BFF';
 
     // instantiate a texture loader
-    var loader = new THREE.TextureLoader();
-    var textureToShow = 0;
+    let loader = new THREE.TextureLoader();
+    let textureToShow = 0;
+
+    let arr= [
+        'https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_gates.jpg',
+        'https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate1.jpg',
+        'https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate2.jpg'
+    ];
 
     return {
       wireframe: false,
@@ -80,19 +86,16 @@ export default {
       ],
       loader: loader,
       // The textures to use
-      arr: [
-        'https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_gates.jpg',
-        'https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate1.jpg',
-        'https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate2.jpg'
-      ],
+      arr: arr,
       textureToShow: textureToShow,
     };
   },
   props: {
     material: Object,
     figure: String,
-    scene: THREE.Scene,
-    cone: THREE.Mesh,
+    scene: Object,
+    cone: Object,
+    texture: Object,
   },
   mounted() {
     this.changeTexture()
@@ -127,34 +130,21 @@ export default {
     },
     changeTexture() {
 
-    const texture = new THREE.TextureLoader().load('https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_gates.jpg');
 
       //allow cross origin loading
       this.loader.crossOrigin = '';
 
-
-      // Then load the texture
-      this.loader.load(arr[this.textureToShow], function (tex) {
-        // Once the texture has loaded
-        // Asign it to the material
-        this.material.map = tex;
-        // Update the next texture to show
-        this.textureToShow++;
-        // Add the mesh into the scene
-        this.scene.add(this.cone);
-      });
-
-
-
       // Click interaction
       var canvas = document.getElementsByTagName("canvas")[0];
 
-      this.canvas.addEventListener("click", function () {
+      canvas.addEventListener("click", function () {
+				let loader = new THREE.TextureLoader();
+        console.log('this.texture::',this.texture);
 
-        this.loader.load(this.arr[this.textureToShow], function (tex) {
+        loader.load(this.arr[this.textureToShow], function (tex) {
           // Once the texture has loaded
           // Asign it to the material
-          this.material.map = tex;
+          this.texture.map = tex;
           // Update the next texture to show
           this.textureToShow++;
           // Have we got to the end of the textures array

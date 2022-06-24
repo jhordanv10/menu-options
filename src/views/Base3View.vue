@@ -1,7 +1,7 @@
 <template>
   <div>
     <div ref="canvas" class="contenedor3D"></div>
-    <Menu figure="cone" :info="this.cone" :scene="this.scene" :cone="this.cone" :material="this.material"></Menu>
+    <Menu figure="cone" :info="this.cone" :scene="this.scene" :cone="this.cone" :texture="this.material"></Menu>
   </div>
 </template>
 
@@ -41,6 +41,7 @@ export default {
       clearcoat: 1.0,
       clearcoatRoughness: 0.03,
       sheen: 0.5,
+      map: '',
     });
 
     // const texture = new THREE.TextureLoader().load('https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_gates.jpg');
