@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container>
     <div ref="canvas" class="contenedor3D"></div>
     <Menu figure="cone" :info="this.cone" :scene="this.scene" :cone="this.cone" :texture="this.material"></Menu>
   </div>

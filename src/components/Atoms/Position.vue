@@ -57,10 +57,6 @@ export default {
     changePosition() {
       this.position.set(this.valueX, this.valueY, this.valueZ);
     },
-    props: {
-      position: Object,
-      figure: String,
-    },
   },
 };
 </script>
