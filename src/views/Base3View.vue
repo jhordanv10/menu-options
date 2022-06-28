@@ -58,10 +58,10 @@ export default {
     // instantiate a texture loader
     let textureToShow = 0;
 
-    let arr= [
-        'https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_gates.jpg',
-        'https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate1.jpg',
-        'https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate2.jpg'
+    let arr = [
+      'https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_gates.jpg',
+      'https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate1.jpg',
+      'https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate2.jpg'
     ];
 
     return {
@@ -116,10 +116,10 @@ export default {
       var canvas = document.getElementsByTagName("canvas")[0];
 
       canvas.addEventListener("click", function () {
-				var loader = new THREE.TextureLoader();
+        var loader = new THREE.TextureLoader();
         loader.crossOrigin = '';  //allow cross origin loading
         console.log('material:::', this.material);
-   		  this.material.map = loader.load('https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_gates.jpg');
+        this.material.map = loader.load('https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_gates.jpg');
       });
     }
   },
