@@ -58,22 +58,10 @@
 </template>
 
 <script>
-import * as THREE from "three";
-
 export default {
 
   data() {
     let color = '#007BFF';
-
-    // instantiate a texture loader
-    let loader = new THREE.TextureLoader();
-    let textureToShow = 0;
-
-    let arr= [
-        'https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_gates.jpg',
-        'https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate1.jpg',
-        'https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate2.jpg'
-    ];
 
     return {
       wireframe: false,
@@ -84,21 +72,11 @@ export default {
         { value: "0", text: "Font" },
         { value: "1", text: "Back" },
       ],
-      loader: loader,
-      // The textures to use
-      arr: arr,
-      textureToShow: textureToShow,
     };
   },
   props: {
     material: Object,
     figure: String,
-    scene: Object,
-    cone: Object,
-    texture: Object,
-  },
-  mounted() {
-    this.changeTexture()
   },
   methods: {
     changeWireframe() {
@@ -127,33 +105,7 @@ export default {
     changeColor() {
       this.color = document.getElementById(`${this.figure}-color`).value;
       this.material.color.set(this.color);
-    },
-    changeTexture() {
-
-
-      //allow cross origin loading
-      this.loader.crossOrigin = '';
-
-      // Click interaction
-      var canvas = document.getElementsByTagName("canvas")[0];
-
-      canvas.addEventListener("click", function () {
-				let loader = new THREE.TextureLoader();
-        console.log('this.texture::',this.texture);
-
-        loader.load(this.arr[this.textureToShow], function (tex) {
-          // Once the texture has loaded
-          // Asign it to the material
-          this.texture.map = tex;
-          // Update the next texture to show
-          this.textureToShow++;
-          // Have we got to the end of the textures array
-          if (this.textureToShow > this.arr.length - 1) {
-            this.textureToShow = 0;
-          }
-        });
-      });
-    }
+    }, 
   },
 }
 </script>

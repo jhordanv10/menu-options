@@ -26,9 +26,6 @@
           v-if="getName === 'Material'"
           :material="info.material"
           :figure="figure"
-          :scene="scene" 
-          :cone="cone"
-          :texture="texture"
         />
 
         <!-- -------------------------------- Rotation --------------------------------------->

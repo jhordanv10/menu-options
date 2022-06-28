@@ -1,8 +1,8 @@
 <template>
   <v-container>
     <div ref="canvas" class="contenedor3D"></div>
-    <Menu figure="cone" :info="this.cone" :scene="this.scene" :cone="this.cone" :texture="this.material"></Menu>
-  </div>
+    <Menu figure="cone" :info="this.cone"></Menu>
+  </v-container>
 </template>
 
 <script>
@@ -34,14 +34,13 @@ export default {
 
     //Cone
     const geometry = new THREE.ConeGeometry(1.5, 2, 4);
-    const material = new THREE.MeshStandardMaterial({
+    let material = new THREE.MeshStandardMaterial({
       color: 0xff0000,
       metalness: 1.0,
       roughness: 0.5,
       clearcoat: 1.0,
       clearcoatRoughness: 0.03,
       sheen: 0.5,
-      map: '',
     });
 
     // const texture = new THREE.TextureLoader().load('https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_gates.jpg');
@@ -55,6 +54,16 @@ export default {
     const AmbientalLigth = new THREE.AmbientLight(0xffffff, 1);
     const DirectionalLigth = new THREE.DirectionalLight(0xffffff, 2);
 
+
+    // instantiate a texture loader
+    let textureToShow = 0;
+
+    let arr= [
+        'https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_gates.jpg',
+        'https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate1.jpg',
+        'https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate2.jpg'
+    ];
+
     return {
       scene: scene,
       camera: camera,
@@ -63,7 +72,11 @@ export default {
       controls: [],
       AmbientalLigth: AmbientalLigth,
       DirectionalLigth: DirectionalLigth,
-      material: this.material,
+      material: material,
+      geometry: geometry,
+      // The textures to use
+      arr: arr,
+      textureToShow: textureToShow,
     };
   },
 
@@ -89,6 +102,7 @@ export default {
   mounted() {
     this.$refs.canvas.appendChild(this.renderer.domElement);
     this.animate();
+    this.changeTexture()
   },
 
   methods: {
@@ -96,11 +110,18 @@ export default {
       this.renderer.render(this.scene, this.camera);
       requestAnimationFrame(this.animate);
       this.controls.update();
-    }, //material, rotation, position, scale
-    async sendData() {
-      let datos = { name: "cone" };
-      this.$emit("onClickMaterial", datos);
     },
+    changeTexture() {
+      // Click interaction
+      var canvas = document.getElementsByTagName("canvas")[0];
+
+      canvas.addEventListener("click", function () {
+				var loader = new THREE.TextureLoader();
+        loader.crossOrigin = '';  //allow cross origin loading
+        console.log('material:::', this.material);
+   		  this.material.map = loader.load('https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_gates.jpg');
+      });
+    }
   },
 };
 </script>

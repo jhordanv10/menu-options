@@ -84,11 +84,7 @@ export default {
       this.renderer.render(this.scene, this.camera);
       requestAnimationFrame(this.animate);
       this.controls.update();
-    },
-    async sendData() {
-      let datos = { name: "cube" };
-      this.$emit("onClickMaterial", datos);
-    },
+    }
   },
 };
 </script>
