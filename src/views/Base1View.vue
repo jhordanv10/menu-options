@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <Menu figure="sphere" :info="this.sphere" />
+    <Menu figure="sphere" :info="this.sphere" :material="this.material"/>
     <div ref="canvas" class="contenedor3D"></div>
   </v-container>
 </template>
@@ -50,6 +50,7 @@ export default {
       controls: [],
       AmbientalLigth: AmbientalLigth,
       DirectionalLigth: DirectionalLigth,
+      material: material,
     };
   },
 

@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <Menu figure="torus" :info="this.torus" />
+    <Menu figure="torus" :info="this.torus" :material="this.material"/>
     <div
       @click="onClick"
       @mousemove="onPointer"
@@ -75,6 +75,7 @@ export default {
       raycaster: raycaster,
       pointer: pointer,
       gsap: gsap,
+      material: material,
     };
   },
 

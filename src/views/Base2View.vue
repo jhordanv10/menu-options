@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <div ref="canvas" class="contenedor3D"></div>
-    <Menu figure="cube" :info="this.cube" />
+    <Menu figure="cube" :info="this.cube" :material="this.material"/>
   </v-container>
 </template>
 
@@ -49,6 +49,7 @@ export default {
       controls: [],
       AmbientalLigth: AmbientalLigth,
       DirectionalLigth: DirectionalLigth,
+      material: material,
     };
   },
 

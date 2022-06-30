@@ -24,8 +24,9 @@
         <!-- -------------------------------- Material --------------------------------------->
         <Material
           v-if="getName === 'Material'"
-          :material="info.material"
+          :material_info="info.material"
           :figure="figure"
+          :material="material"
         />
 
         <!-- -------------------------------- Rotation --------------------------------------->
@@ -66,9 +67,7 @@ export default {
   props: {
     figure: String,
     info: Object,
-    scene: Object,
-    cone: Object,
-    texture: Object,
+    material: Object,
   },
   data() {
     let getName = "";

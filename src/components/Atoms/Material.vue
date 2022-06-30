@@ -8,13 +8,8 @@
         }}</label>
       </v-row>
       <v-row class="justify-center">
-        <v-switch
-          :class="wireframe === true ? 'text--green my-0' : 'text--red my-0'"
-          @click="changeWireframe"
-          v-model="wireframe"
-          :color="wireframe === true ? 'green' : 'red'"
-          hide-details
-        ></v-switch>
+        <v-switch :class="wireframe === true ? 'text--green my-0' : 'text--red my-0'" @click="changeWireframe"
+          v-model="wireframe" :color="wireframe === true ? 'green' : 'red'" hide-details></v-switch>
       </v-row>
     </v-container>
 
@@ -28,7 +23,7 @@
     </v-container>
 
     <!-- color -->
-    <v-container class="pa-0 color" v-if="this.material.color">
+    <v-container class="pa-0 color" v-if="this.material_info.color">
       <v-row>
         <v-col class="d-flex px-0 mx-0 justify-center" cols="12">
           <span class="colorPicker">Color
@@ -58,10 +53,21 @@
 </template>
 
 <script>
+import * as THREE from "three";
+
 export default {
 
   data() {
     let color = '#007BFF';
+
+    // instantiate a texture loader
+    const textureToShow = 0;
+
+    const arr = [
+      'https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_gates.jpg',
+      'https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate1.jpg',
+      'https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate2.jpg'
+    ];
 
     return {
       wireframe: false,
@@ -72,40 +78,82 @@ export default {
         { value: "0", text: "Font" },
         { value: "1", text: "Back" },
       ],
+      // The textures to use
+      arr: arr,
+      textureToShow: textureToShow,
     };
   },
   props: {
-    material: Object,
+    material_info: Object,
     figure: String,
+    material: Object
+  },
+  mounted() {
+    this.changeTexture()
   },
   methods: {
     changeWireframe() {
       if (this.wireframe === true) {
-        this.material.wireframe = true;
+        this.material_info.wireframe = true;
       } else {
-        this.material.wireframe = false;
+        this.material_info.wireframe = false;
       }
     },
     changeSide() {
       if (this.side === "0") {
-        this.material.side = 0;
+        this.material_info.side = 0;
       } else if (this.side === "1") {
-        this.material.side = 1;
+        this.material_info.side = 1;
       }
     },
     changeVisible() {
       this.visible = !this.visible;
 
       if (this.visible === true) {
-        this.material.visible = true;
+        this.material_info.visible = true;
       } else {
-        this.material.visible = false;
+        this.material_info.visible = false;
       }
     },
     changeColor() {
       this.color = document.getElementById(`${this.figure}-color`).value;
-      this.material.color.set(this.color);
-    }, 
+      this.material_info.color.set(this.color);
+    },
+    changeTexture() {
+      // Click interaction
+      var canvas = document.getElementsByTagName("canvas")[0];
+      var material = this.material;
+      var arr = this.arr;
+      var textureToShow = this.textureToShow;
+      canvas.addEventListener("click", function () {
+        //LOAD TEXTURE and on completion apply it on SPHERE
+        new THREE.TextureLoader().load(
+          arr[textureToShow],
+          texture => {
+            //Update Texture
+            material.map = texture;
+            material.needsUpdate = true;
+            // Update the next texture to show
+            textureToShow++;
+            // Have we got to the end of the textures array
+            if (textureToShow > arr.length - 1) {
+              textureToShow = 0;
+            }
+          },
+          xhr => {
+            //Download Progress
+            console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+          },
+          error => {
+            //Error CallBack
+            console.log("An error happened" + error);
+          }
+        );
+      });
+
+      this.material = material;
+      this.textureToShow = textureToShow;
+    }
   },
 }
 </script>
@@ -135,6 +183,7 @@ export default {
 .colorPicker {
   text-align: center;
 }
+
 .v-select__slot label {
   left: 50px;
 }
