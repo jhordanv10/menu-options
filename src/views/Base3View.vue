@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="main">
     <div ref="canvas" class="contenedor3D"></div>
     <Menu figure="cone" :info="this.cone"></Menu>
   </v-container>
@@ -97,10 +97,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.contenedor3D {
-  width: 100%;
-  height: 100vh;
-}
-</style>
