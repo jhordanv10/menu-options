@@ -1,11 +1,6 @@
 <template>
-<<<<<<< HEAD
-  <v-container class="main">
-    <Menu figure="torus" :info="this.torus" />
-=======
   <v-container>
     <Menu figure="torus" :info="this.torus" :material="this.material"/>
->>>>>>> DevelopDaniela
     <div
       @click="onClick"
       @mousemove="onPointer"
