@@ -49,11 +49,23 @@
         </v-col>
       </v-row>
     </v-container>
+
+    <!-- Texture -->
+    <v-container justify="center">
+      <v-row>
+        <v-file-input v-model="file_select" :rules="rules" accept="image/png, image/jpeg, image/bmp"
+          placeholder="Pick an avatar" prepend-icon="mdi-camera" label="Avatar" truncate-length="10"></v-file-input>
+
+        <v-btn elevation="2" @click="onUpload">Upload!</v-btn>
+      </v-row>
+    </v-container>
+
   </div>
 </template>
 
 <script>
 import * as THREE from "three";
+import axios from 'axios';
 
 export default {
 
@@ -69,6 +81,8 @@ export default {
       'https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate2.jpg'
     ];
 
+    let file_select;
+
     return {
       wireframe: false,
       side: null,
@@ -81,6 +95,11 @@ export default {
       // The textures to use
       arr: arr,
       textureToShow: textureToShow,
+      selectedFile: null,
+      rules: [
+        value => !value || value.size < 2000000 || 'Avatar size should be less than 2 MB!',
+      ],
+      file_select: file_select,
     };
   },
   props: {
@@ -153,7 +172,25 @@ export default {
 
       this.material = material;
       this.textureToShow = textureToShow;
-    }
+    },
+    onUpload() {
+      // upload file
+      const formData = new FormData()
+      formData.append('myFile', this.file_select, this.file_select.name);
+      axios.post('http://localhost:8080/file-upload/', formData, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+          "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token"
+        }
+      }).then(res => {
+        console.log(res);
+      }).catch(err => {
+        console.log(err.response);
+      });
+
+      console.log('file::', formData);
+    },
   },
 }
 </script>
