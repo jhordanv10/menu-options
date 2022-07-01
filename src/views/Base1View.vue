@@ -1,7 +1,12 @@
 <template>
+<<<<<<< HEAD
   <v-container class="main">
     <Menu figure="sphere" :info="this.sphere" />
     <div ref="one" @mousedown="mousedown" class="id"></div>
+=======
+  <v-container>
+    <Menu figure="sphere" :info="this.sphere" :material="this.material"/>
+>>>>>>> DevelopDaniela
     <div ref="canvas" class="contenedor3D"></div>
   </v-container>
 </template>
@@ -59,6 +64,7 @@ export default {
       el: {},
       prevX: prevX,
       prevY: prevY,
+      material: material
     };
   },
 

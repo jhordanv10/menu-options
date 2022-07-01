@@ -24,8 +24,9 @@
         <!-- -------------------------------- Material --------------------------------------->
         <Material
           v-if="getName === 'Material'"
-          :material="info.material"
+          :material_info="info.material"
           :figure="figure"
+          :material="material"
         />
 
         <!-- -------------------------------- Rotation --------------------------------------->
@@ -60,11 +61,13 @@ import Material from "../components/Atoms/Material.vue";
 import Rotation from "../components/Atoms/Rotation.vue";
 import Position from "../components/Atoms/Position.vue";
 import Scale from "../components/Atoms/Scale.vue";
+import * as THREE from "three";
 
 export default {
   props: {
     figure: String,
     info: Object,
+    material: Object,
   },
   data() {
     let getName = "";
@@ -93,7 +96,7 @@ export default {
     },
   },
   mounted() {
-    console.log(this.info.rotation);
+    console.log(this.info);
   },
 };
 </script>
