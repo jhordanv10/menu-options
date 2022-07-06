@@ -15,6 +15,10 @@ export default {
     Menu,
   },
   data() {
+    //Drags
+    let prevX = 0;
+    let prevY = 0;
+
     //Scene
     let scene = new THREE.Scene();
     scene.background = new THREE.Color(0xf0f0f0);
@@ -50,7 +54,11 @@ export default {
       controls: [],
       AmbientalLigth: AmbientalLigth,
       DirectionalLigth: DirectionalLigth,
-      material: material,
+      rect: {},
+      el: {},
+      prevX: prevX,
+      prevY: prevY,
+      material: material
     };
   },
 
@@ -75,7 +83,7 @@ export default {
   mounted() {
     this.$refs.canvas.appendChild(this.renderer.domElement);
     this.animate();
-    // console.log(this.sphere);
+    this.el = this.$refs.one;
   },
 
   methods: {
@@ -84,13 +92,56 @@ export default {
       requestAnimationFrame(this.animate);
       this.controls.update();
     },
+    mousedown(e) {
+      this.rect = this.el.getBoundingClientRect();
+      console.log(this.rect);
+
+      window.addEventListener("mousemove", this.mousemove);
+      window.addEventListener("mouseup", this.mouseup);
+      this.prevX = e.clientX;
+      this.prevY = e.clientY;
+    },
+    mousemove(e) {
+      let newX = this.prevX - e.clientX;
+      let newY = this.prevY - e.clientY;
+      console.log({ newX });
+
+      // document
+      //   .getElementsByClassName("id")[0]
+      //   .setAttribute("style", `top:${this.rect.top - newY}px`);
+      // document
+      //   .getElementsByClassName("id")[0]
+      //   .setAttribute("style", `left:${this.rect.left - newX}px`);
+
+      this.el.style.left = this.rect.left - newX + "px";
+      this.el.style.top = this.rect.top - newY + "px";
+
+      // console.log(e.clientX);
+
+      // this.prevX = e.clientX;
+      // this.prevY = e.clientY;
+    },
+    mouseup() {},
   },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .contenedor3D {
   width: 100%;
   height: 100vh;
+}
+.main {
+  background-color: #f0f0f0;
+  position: absolute;
+}
+.id {
+  cursor: move;
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: red;
+  z-index: 1000;
 }
 </style>

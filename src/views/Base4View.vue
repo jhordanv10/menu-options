@@ -4,8 +4,6 @@
     <div
       @click="onClick"
       @mousemove="onPointer"
-      @event="changeEvent = $event"
-      @start="drawer = $event"
       ref="canvas"
       class="contenedor3D"
     ></div>
@@ -154,7 +152,7 @@ export default {
       try {
         switch (this.meshCurrentClick.name) {
           case "Torus 1":
-            return console.log("Torus 1 - click");
+            return alert('Torus 1')
           default:
             return null;
         }
@@ -173,10 +171,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.contenedor3D {
-  width: 100%;
-  height: 100vh;
-}
-</style>
