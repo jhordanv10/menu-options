@@ -175,7 +175,15 @@ export default {
     },
     onUpload() {
       // upload file
-      const formData = new FormData()
+      const formData = new FormData();
+
+      // let self = this;
+      // let reader = new FileReader();
+      // reader.onload = function (e) {
+      //   self.uploadedPhoto = e.target.result;
+      // }
+      // reader.readAsDataURL(e.target.files[0]);
+
       formData.append('myFile', this.file_select, this.file_select.name);
       axios.post('http://localhost:8080/file-upload/', formData, {
         headers: {
