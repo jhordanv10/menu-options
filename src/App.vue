@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <Bar />
-    <v-main>
+    <v-main class="px-0">
       <router-view />
     </v-main>
   </v-app>
@@ -16,4 +16,6 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss">
+
+</style>
