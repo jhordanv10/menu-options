@@ -1,6 +1,7 @@
 <template>
   <v-navigation-drawer v-model="drawer" app>
-    <v-row>
+    <div id="nav" class="nav" ref="one" @mousedown="mousedown"></div>
+    <v-row id="menu">
       <v-col cols="12" class="mt-2 ml-2 text-center">
         <h1 class="mt-1">Propiedades</h1>
       </v-col>
@@ -61,7 +62,6 @@ import Material from "../components/Atoms/Material.vue";
 import Rotation from "../components/Atoms/Rotation.vue";
 import Position from "../components/Atoms/Position.vue";
 import Scale from "../components/Atoms/Scale.vue";
-import * as THREE from "three";
 
 export default {
   props: {
@@ -70,7 +70,12 @@ export default {
     material: Object,
   },
   data() {
+    //Drags
+    let prevX = 0;
+    let prevY = 0;
+
     let getName = "";
+
     return {
       drawer: true,
       getName: getName,
@@ -80,6 +85,10 @@ export default {
         { id: 3, name: "Position", icon: "mdi-chart-ppf" },
         { id: 4, name: "Scale", icon: "mdi-relative-scale" },
       ],
+      rect: {},
+      el: {},
+      prevX: prevX,
+      prevY: prevY,
     };
   },
   components: {
@@ -90,18 +99,54 @@ export default {
     Position,
     Scale,
   },
+  created() {},
+  beforeCreate() {},
   methods: {
     sendData(name) {
       this.getName = name;
     },
+    mousedown(e) {
+      window.addEventListener("mousemove", this.mousemove);
+      window.addEventListener("mouseup", this.mouseup);
+      this.prevX = e.clientX;
+      this.prevY = e.clientY;
+    },
+    mousemove(e) {
+      this.el = document.querySelector(".nav");
+      this.rect = this.el.getBoundingClientRect();
+      console.log(this.el);
+      console.log(this.rect);
+
+      let newX = this.prevX - e.clientX;
+      let newY = this.prevY - e.clientY;
+      console.log({ newX, newY });
+      console.log(this.rect.left);
+
+      document
+        .getElementsByClassName("nav")[0]
+        .setAttribute(
+          "style",
+          `left:${this.rect.left - newX}px; top:${this.rect.top - newY}px`
+        );
+      // this.el.style.left = this.rect.left - newX + "px";
+      // this.el.style.top = this.rect.top - newY + "px";
+      // console.log(e.clientX);
+      this.prevX = e.clientX;
+      this.prevY = e.clientY;
+    },
+    mouseup() {},
   },
   mounted() {
-    console.log(this.info);
+    // console.log(this.info);
   },
 };
 </script>
 
 <style lang="scss" scoped>
+#nav {
+  position: absolute;
+  cursor: move;
+}
 .icon {
   width: 30px;
   height: 30px;
@@ -116,7 +161,6 @@ export default {
     text-align: center;
   }
 }
-
 .option {
   border: 1px solid grey;
   border-radius: 10px;
@@ -127,5 +171,14 @@ export default {
     transform: scale(1.05);
     background: #efefef;
   }
+}
+#nav {
+  cursor: move;
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: red;
+  z-index: 1000;
 }
 </style>

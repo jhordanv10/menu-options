@@ -133,7 +133,7 @@ export default {
           this.gsap.to(this.meshCurrent.material.color, {
             r: 0,
             g: 1,
-            b: 0,
+            b: 1,
             overwrite: true,
             duration: 0.3,
           });
@@ -152,7 +152,7 @@ export default {
       try {
         switch (this.meshCurrentClick.name) {
           case "Torus 1":
-            return alert('Torus 1')
+            return console.log('torus 1');
           default:
             return null;
         }

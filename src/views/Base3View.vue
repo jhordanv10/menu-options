@@ -35,7 +35,7 @@ export default {
     //Cone
     const geometry = new THREE.ConeGeometry(1.5, 2, 4);
 
-    const material = new THREE.MeshStandardMaterial({
+    const material = new THREE.MeshPhysicalMaterial({
       color: 0xff0000,
       flatShading: true,
       metalness: 1.0,
