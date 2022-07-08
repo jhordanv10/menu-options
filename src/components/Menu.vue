@@ -134,7 +134,10 @@ export default {
       this.prevX = e.clientX;
       this.prevY = e.clientY;
     },
-    mouseup() {},
+    mouseup() {
+      window.removeEventListener('mousemove', this.mousemove)
+      window.removeEventListener('mouseup', this.mouseup)
+    },
   },
   mounted() {
     // console.log(this.info);
