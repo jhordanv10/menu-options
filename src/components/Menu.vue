@@ -99,12 +99,8 @@ export default {
     Position,
     Scale,
   },
-  created() {
-    this.el = document.querySelector(".nav");
-    this.rect = this.el?.getBoundingClientRect();
-    console.log(this.el);
-    console.log(this.rect);
-  },
+  created() {},
+  beforeCreate() {},
   methods: {
     sendData(name) {
       this.getName = name;
@@ -116,6 +112,11 @@ export default {
       this.prevY = e.clientY;
     },
     mousemove(e) {
+      this.el = document.querySelector(".nav");
+      this.rect = this.el.getBoundingClientRect();
+      console.log(this.el);
+      console.log(this.rect);
+
       let newX = this.prevX - e.clientX;
       let newY = this.prevY - e.clientY;
       console.log({ newX, newY });
@@ -127,14 +128,11 @@ export default {
           "style",
           `left:${this.rect.left - newX}px; top:${this.rect.top - newY}px`
         );
-      // document
-      // .getElementsByClassName("nav")[0]
-      // .setAttribute("style", `background-color:blue`);
       // this.el.style.left = this.rect.left - newX + "px";
       // this.el.style.top = this.rect.top - newY + "px";
       // console.log(e.clientX);
-      // this.prevX = e.clientX;
-      // this.prevY = e.clientY;
+      this.prevX = e.clientX;
+      this.prevY = e.clientY;
     },
     mouseup() {},
   },
