@@ -16,7 +16,7 @@
           text
           grow
         >
-          <Icon :icon="icon" class="icon blue--text" />
+          <Icon :icon="icon" class="icon #869fb2--text" />
         </v-btn>
       </v-row>
     </v-app-bar>

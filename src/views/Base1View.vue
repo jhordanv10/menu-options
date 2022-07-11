@@ -1,7 +1,8 @@
 <template>
   <div class="main">
-    <Menu figure="sphere" :info="this.sphere" :material="this.material" />
+    <Menu @increase-by="(n) => console.log(count += n)" figure="sphere" :info="this.sphere" :material="this.material" />
     <div ref="canvas" class="contenedor3D"></div>
+    <Footer :scene="this.scene" />
   </div>
 </template>
 
@@ -9,10 +10,12 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Menu from "../components/Menu.vue";
+import Footer from "../components/Footer.vue";
 
 export default {
   components: {
     Menu,
+    Footer,
   },
   data() {
     //Scene
@@ -37,6 +40,21 @@ export default {
       flatShading: true,
     });
     let sphere = new THREE.Mesh(geometry, material);
+    sphere.name = "sphere"
+
+    //Cube
+    const geometry1 = new THREE.BoxBufferGeometry(1, 1, 1);
+    const material1 = new THREE.MeshBasicMaterial({
+      color: 0xE8AA42,
+    });
+    let cube = new THREE.Mesh(geometry1, material1);
+    cube.name = "cube"
+
+    //Sphere 2
+    const geometry2 = new THREE.SphereBufferGeometry(0.8, 16, 16);
+    const material2 = new THREE.MeshStandardMaterial({ color: 0xEB4747 });
+    let sphere2 = new THREE.Mesh(geometry2, material2);
+    sphere2.name = "sphere2"
 
     //Ligths
     const AmbientalLigth = new THREE.AmbientLight(0xffffff, 1);
@@ -47,6 +65,8 @@ export default {
       camera: camera,
       renderer: renderer,
       sphere: sphere,
+      cube: cube,
+      sphere2:sphere2,
       controls: [],
       AmbientalLigth: AmbientalLigth,
       DirectionalLigth: DirectionalLigth,
@@ -61,6 +81,14 @@ export default {
 
     //Sphere
     this.scene.add(this.sphere);
+
+    //Cube
+    this.cube.position.set(-2,-2,0)
+    this.scene.add(this.cube);
+
+    //Sphere 2
+    this.sphere2.position.set(2,2,0)
+    this.scene.add(this.sphere2);
 
     //Ligth
     this.scene.add(this.AmbientalLigth);
@@ -83,6 +111,9 @@ export default {
       requestAnimationFrame(this.animate);
       this.controls.update();
     },
+    sel() {
+      console.log(this.option.wireframe);
+    }
   },
 };
 </script>
@@ -90,7 +121,7 @@ export default {
 <style lang="scss">
 .contenedor3D {
   width: 100%;
-  height: 100vh;
+  height: 88vh;
 }
 .main {
   background-color: #f0f0f0;
