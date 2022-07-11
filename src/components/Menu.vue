@@ -12,7 +12,7 @@
           <p class="title">{{ name }}</p>
         </v-col>
       </v-col>
-      <v-col cols="7" class="mt-6">
+      <v-col cols="7" class="mt-6 principal">
         <!-- -------------------------------- Principal --------------------------------------->
         <Main v-if="getName === ''" />
 
@@ -129,6 +129,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.principal {
+  z-index: 8;
+}
 .icon {
   width: 30px;
   height: 30px;

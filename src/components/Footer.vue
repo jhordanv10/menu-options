@@ -1,17 +1,14 @@
 <template>
-  <v-footer color="primary lighten-1" padless>
-    <v-row
-      justify="center"
-      no-gutters 
-    >
+  <v-footer color="#374957" padless>
+    <v-row justify="center" no-gutters>
       <v-btn
-        v-for="childrens in this.scene.children"
+        v-for="childrens in optionsInfo"
         :key="childrens.id"
         color="white"
         text
         rounded
         class="my-2"
-        @click="$emit('increaseBy', 1)"
+        @click="selected(childrens)"
       >
         {{ childrens.name }}
       </v-btn>
@@ -25,21 +22,26 @@ export default {
     scene: Object,
   },
   data() {
-    let option = {}
+    let option = {};
     return {
-        option: option
-    }
+      option: option,
+    };
   },
   mounted() {
-    console.log(this.scene.children);
+    console.log(this.scene.children)
   },
   methods: {
-    // selected(children) {
-    //     this.option = children.material
-    //     console.log(children.material);
-    //     this.$emit('object', this.option)
-    // },
-  }
+    selected(children) {
+      this.option = children;
+      this.$emit("escucharHijo", this.option);
+      // console.log(this.option.material);
+    },
+  },
+  computed: {
+    optionsInfo() {
+      return this.scene.children.filter((i) => i.isMesh === true)
+    },
+  },
 };
 </script>
 

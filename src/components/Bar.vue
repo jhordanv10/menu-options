@@ -16,7 +16,7 @@
           text
           grow
         >
-          <Icon :icon="icon" class="icon #869fb2--text" />
+          <Icon :icon="icon" class="icon" />
         </v-btn>
       </v-row>
     </v-app-bar>
@@ -72,6 +72,7 @@ export default {
 .icon {
   width: 30px;
   height: 30px;
+  color: #869fb2;
 }
 .v-application {
   .title {

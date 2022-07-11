@@ -1,8 +1,8 @@
 <template>
-  <div class="main">
-    <Menu @increase-by="(n) => console.log(count += n)" figure="sphere" :info="this.sphere" :material="this.material" />
+  <div class="main" @changeOption="option => console.log(option)"> 
+    <Menu figure="sphere" :info="this.infoChildren" :material="this.material" />
     <div ref="canvas" class="contenedor3D"></div>
-    <Footer :scene="this.scene" />
+    <Footer @escucharHijo="infoHijo" :scene="this.scene" />
   </div>
 </template>
 
@@ -71,6 +71,8 @@ export default {
       AmbientalLigth: AmbientalLigth,
       DirectionalLigth: DirectionalLigth,
       material: material,
+      option: {},
+      infoChildren: {}
     };
   },
 
@@ -111,8 +113,9 @@ export default {
       requestAnimationFrame(this.animate);
       this.controls.update();
     },
-    sel() {
-      console.log(this.option.wireframe);
+    infoHijo(value) {
+      this.infoChildren = value
+      console.log(this.infoChildren);
     }
   },
 };
