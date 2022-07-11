@@ -100,6 +100,8 @@ export default {
     //Controls
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableDamping = true;
+
+    this.infoChildren = this.cube;
   },
 
   mounted() {
