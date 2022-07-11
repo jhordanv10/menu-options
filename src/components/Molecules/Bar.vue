@@ -1,11 +1,11 @@
 <template>
   <div>
-    <v-app-bar app color="#374957">
+    <v-app-bar app color="#374957" class="bar">
       <v-toolbar-title class="px-4">
         <v-img
           @click="pushRoute('/')"
           class="img"
-          src="../assets/FreepikLogo1.png"
+          src="../../assets/FreepikLogo1.png"
         ></v-img>
       </v-toolbar-title>
       <v-row justify="center">
@@ -61,7 +61,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.bar {
+  height: 10vh;
+}
 .img {
   width: 30px;
   height: 30px;

@@ -1,5 +1,5 @@
 <template>
-  <v-card-text class="pa-0 pt-16">
+  <v-card-text class="px-16 py-0">
     <h3>Scale X</h3>
     <v-slider
       v-model="valueX"
@@ -58,4 +58,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+h3 {
+  text-align: center;
+}
+</style>

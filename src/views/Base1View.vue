@@ -1,5 +1,5 @@
 <template>
-  <div class="main" @changeOption="option => console.log(option)"> 
+  <div class="main" @changeOption="(option) => console.log(option)">
     <Menu figure="sphere" :info="this.infoChildren" :material="this.material" />
     <div ref="canvas" class="contenedor3D"></div>
     <Footer @escucharHijo="infoHijo" :scene="this.scene" />
@@ -9,8 +9,8 @@
 <script>
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import Menu from "../components/Menu.vue";
-import Footer from "../components/Footer.vue";
+import Menu from "../components/Molecules/Menu.vue";
+import Footer from "../components/Molecules/Footer.vue";
 
 export default {
   components: {
@@ -40,21 +40,24 @@ export default {
       flatShading: true,
     });
     let sphere = new THREE.Mesh(geometry, material);
-    sphere.name = "sphere"
+    sphere.name = "sphere";
 
     //Cube
     const geometry1 = new THREE.BoxBufferGeometry(1, 1, 1);
     const material1 = new THREE.MeshBasicMaterial({
-      color: 0xE8AA42,
+      color: 0x68a7ad,
     });
     let cube = new THREE.Mesh(geometry1, material1);
-    cube.name = "cube"
+    cube.name = "cube";
 
-    //Sphere 2
-    const geometry2 = new THREE.SphereBufferGeometry(0.8, 16, 16);
-    const material2 = new THREE.MeshStandardMaterial({ color: 0xEB4747 });
-    let sphere2 = new THREE.Mesh(geometry2, material2);
-    sphere2.name = "sphere2"
+    //Cone
+    const geometry2 = new THREE.ConeGeometry(1.5, 2, 3);
+
+    const material2 = new THREE.MeshBasicMaterial({
+      color: 0xBE8C63,
+    });
+    let cone = new THREE.Mesh(geometry2, material2);
+    cone.name = "cone";
 
     //Ligths
     const AmbientalLigth = new THREE.AmbientLight(0xffffff, 1);
@@ -66,13 +69,13 @@ export default {
       renderer: renderer,
       sphere: sphere,
       cube: cube,
-      sphere2:sphere2,
+      cone: cone,
       controls: [],
       AmbientalLigth: AmbientalLigth,
       DirectionalLigth: DirectionalLigth,
       material: material,
       option: {},
-      infoChildren: {}
+      infoChildren: {},
     };
   },
 
@@ -85,16 +88,16 @@ export default {
     this.scene.add(this.sphere);
 
     //Cube
-    this.cube.position.set(-2,-2,0)
+    this.cube.position.set(-2, -2, 0);
     this.scene.add(this.cube);
 
-    //Sphere 2
-    this.sphere2.position.set(2,2,0)
-    this.scene.add(this.sphere2);
+    //Cone
+    this.cone.position.set(3,3 , -2);
+    this.scene.add(this.cone);
 
     //Ligth
     this.scene.add(this.AmbientalLigth);
-    this.DirectionalLigth.position.set(5, 5, 5);
+    this.DirectionalLigth.position.set(3, 3, 3);
     this.scene.add(this.DirectionalLigth);
 
     //Controls
@@ -114,9 +117,9 @@ export default {
       this.controls.update();
     },
     infoHijo(value) {
-      this.infoChildren = value
+      this.infoChildren = value;
       console.log(this.infoChildren);
-    }
+    },
   },
 };
 </script>
@@ -124,7 +127,7 @@ export default {
 <style lang="scss">
 .contenedor3D {
   width: 100%;
-  height: 88vh;
+  height: 82vh;
 }
 .main {
   background-color: #f0f0f0;

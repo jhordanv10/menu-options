@@ -1,32 +1,52 @@
 <template>
-  <div id="nav" class="nav" ref="one" @mousedown="mousedown">
-    <v-row id="menu">
-      <v-col cols="12" class="mt-2 ml-2 text-center">
-        <h1 class="mt-1">Propiedades</h1>
+  <div id="nav" class="nav rounded-lg" ref="one" @mousedown="mousedown">
+    <v-row id="menu" class="py-6 px-4">
+      <!-- Options -->
+      <v-col cols="12" class="pt-2 pb-8 px-0 d-flex justify-center">
+        <v-btn-toggle v-model="text" tile color="bluecolor accent-3" group>
+          <v-btn
+            class="rounded-lg"
+            v-for="{ id, name } in properties"
+            :key="id"
+            @click="sendData(name)"
+          >
+            {{ name }}
+          </v-btn>
+        </v-btn-toggle>
       </v-col>
-      <v-col cols="4" class="mt-2">
-        <v-col class="option mx-3 my-4 py-0" v-for="{ id, icon, name } in properties" :key="id" @click="sendData(name)">
-          <v-avatar size="30" class="d-block text-center mx-auto my-1">
-            <Icon :icon="icon" class="icon grey--text"> </Icon>
-          </v-avatar>
-          <p class="title">{{ name }}</p>
-        </v-col>
-      </v-col>
-      <v-col cols="7" class="mt-6 principal">
+
+      <v-col cols="12" class="pa-0">
         <!-- -------------------------------- Principal --------------------------------------->
         <Main v-if="getName === ''" />
 
         <!-- -------------------------------- Material --------------------------------------->
-        <Material v-if="getName === 'Material'" :material_info="info.material" :figure="figure" :material="material" />
+        <Material
+          v-if="getName === 'Material'"
+          :material_info="info.material"
+          :figure="figure"
+          :material="material"
+        />
 
         <!-- -------------------------------- Rotation --------------------------------------->
-        <Rotation v-if="getName === 'Rotation'" :rotation="info.rotation" :figure="figure" />
+        <Rotation
+          v-if="getName === 'Rotation'"
+          :rotation="info.rotation"
+          :figure="figure"
+        />
 
         <!-- -------------------------------- Position --------------------------------------->
-        <Position v-if="getName === 'Position'" :position="info.position" :figure="figure" />
+        <Position
+          v-if="getName === 'Position'"
+          :position="info.position"
+          :figure="figure"
+        />
 
         <!-- -------------------------------- Scale --------------------------------------->
-        <Scale v-if="getName === 'Scale'" :scale="info.scale" :figure="figure" />
+        <Scale
+          v-if="getName === 'Scale'"
+          :scale="info.scale"
+          :figure="figure"
+        />
       </v-col>
     </v-row>
   </div>
@@ -34,11 +54,11 @@
 
 <script>
 import { Icon } from "@iconify/vue2";
-import Main from "../components/Atoms/Main.vue";
-import Material from "../components/Atoms/Material.vue";
-import Rotation from "../components/Atoms/Rotation.vue";
-import Position from "../components/Atoms/Position.vue";
-import Scale from "../components/Atoms/Scale.vue";
+import Main from "../Atoms/Main.vue";
+import Material from "../Atoms/Material.vue";
+import Rotation from "../Atoms/Rotation.vue";
+import Position from "../Atoms/Position.vue";
+import Scale from "../Atoms/Scale.vue";
 
 export default {
   props: {
@@ -48,7 +68,10 @@ export default {
   },
   data() {
     //Drags
-    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    let pos1 = 0,
+      pos2 = 0,
+      pos3 = 0,
+      pos4 = 0;
 
     let getName = "";
 
@@ -77,8 +100,6 @@ export default {
     Position,
     Scale,
   },
-  created() { },
-  beforeCreate() { },
   methods: {
     sendData(name) {
       this.getName = name;
@@ -95,7 +116,6 @@ export default {
 
       window.addEventListener("mousemove", this.mousemove);
       window.addEventListener("mouseup", this.mouseup);
-
     },
     mousemove(e) {
       this.el = document.getElementById("nav");
@@ -111,12 +131,12 @@ export default {
       this.pos4 = e.clientY;
 
       // set the element's new position:
-      this.el.style.top = (this.el.offsetTop - this.pos2) + "px";
-      this.el.style.left = (this.el.offsetLeft - this.pos1) + "px";
+      this.el.style.top = this.el.offsetTop - this.pos2 + "px";
+      this.el.style.left = this.el.offsetLeft - this.pos1 + "px";
     },
     mouseup() {
-      window.removeEventListener('mousemove', this.mousemove);
-      window.removeEventListener('mouseup', this.mouseup);
+      window.removeEventListener("mousemove", this.mousemove);
+      window.removeEventListener("mouseup", this.mouseup);
       /* stop moving when mouse button is released:*/
       document.onmouseup = null;
       document.onmousemove = null;
@@ -129,43 +149,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.principal {
-  z-index: 8;
-}
 .icon {
   width: 30px;
   height: 30px;
 }
-
-.v-application {
-  .title {
-    font-size: 0.8rem !important;
-    font-weight: 500;
-    line-height: 1rem;
-    letter-spacing: 0.0125em !important;
-    font-family: "Roboto", sans-serif !important;
-    text-align: center;
-  }
-}
-
-.option {
-  border: 1px solid grey;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.8s all ease;
-
-  &:hover {
-    transform: scale(1.05);
-    background: #efefef;
-  }
-}
-
 #nav {
   position: absolute;
   background-color: #f1f1f1;
   border: 1px solid #d3d3d3;
-  padding: 10px;
-  cursor: move;
   z-index: 10;
+  width: 450px;
+  height: 450px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 </style>

@@ -15,7 +15,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { gsap } from "gsap";
 
-import Menu from "../components/Menu.vue";
+import Menu from "../components/Molecules/Menu.vue";
 
 export default {
   components: {

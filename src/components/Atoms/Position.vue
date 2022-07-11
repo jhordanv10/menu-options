@@ -1,7 +1,8 @@
 <template>
-  <v-card-text class="pa-0 pt-16">
+  <v-card-text class="px-16 py-0">
     <h3>Position X</h3>
     <v-slider
+      class="slider"
       v-model="valueX"
       step="0.1"
       min="-10"

@@ -1,5 +1,5 @@
 <template>
-  <v-footer color="#374957" padless>
+  <v-footer color="#374957" class="footer" padless>
     <v-row justify="center" no-gutters>
       <v-btn
         v-for="childrens in optionsInfo"
@@ -45,4 +45,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.footer {
+  height: 10vh;
+}
+</style>

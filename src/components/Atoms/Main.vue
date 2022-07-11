@@ -1,5 +1,5 @@
 <template>
-  <h1 class="pt-12 text-center">Hola!</h1>
+  <h2 class=" text-center">Edita las figuras!</h2>
 </template>
 
 <script>

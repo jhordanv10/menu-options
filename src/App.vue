@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="app">
     <Bar />
     <v-main class="px-0">
       <router-view />
@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Bar from "./components/Bar.vue";
+import Bar from "./components/Molecules/Bar.vue";
 export default {
   name: "App",
   components: {
@@ -17,5 +17,8 @@ export default {
 };
 </script>
 <style lang="scss">
-
+.app {
+  height: 100vh;
+  overflow: hidden;
+}
 </style>
