@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="main">
+    <Menu figure="cube" :info="this.cube" :material="this.material"/>
     <div ref="canvas" class="contenedor3D"></div>
-    <Menu figure="cube" :info="this.cube" />
   </div>
 </template>
 
@@ -49,6 +49,7 @@ export default {
       controls: [],
       AmbientalLigth: AmbientalLigth,
       DirectionalLigth: DirectionalLigth,
+      material: material,
     };
   },
 
@@ -84,18 +85,7 @@ export default {
       this.renderer.render(this.scene, this.camera);
       requestAnimationFrame(this.animate);
       this.controls.update();
-    },
-    async sendData() {
-      let datos = { name: "cube" };
-      this.$emit("onClickMaterial", datos);
-    },
+    }
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.contenedor3D {
-  width: 100%;
-  height: 100vh;
-}
-</style>

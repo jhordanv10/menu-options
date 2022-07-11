@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <Menu figure="sphere" :info="this.sphere" />
+  <div class="main">
+    <Menu figure="sphere" :info="this.sphere" :material="this.material" />
     <div ref="canvas" class="contenedor3D"></div>
   </div>
 </template>
@@ -50,6 +50,7 @@ export default {
       controls: [],
       AmbientalLigth: AmbientalLigth,
       DirectionalLigth: DirectionalLigth,
+      material: material,
     };
   },
 
@@ -74,7 +75,6 @@ export default {
   mounted() {
     this.$refs.canvas.appendChild(this.renderer.domElement);
     this.animate();
-    // console.log(this.sphere);
   },
 
   methods: {
@@ -87,9 +87,13 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .contenedor3D {
   width: 100%;
   height: 100vh;
+}
+.main {
+  background-color: #f0f0f0;
+  position: absolute;
 }
 </style>
