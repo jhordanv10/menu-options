@@ -1,17 +1,12 @@
 <template>
   <v-footer color="#374957" padless>
     <v-row justify="center" no-gutters>
-      <v-btn
-        v-for="childrens in optionsInfo"
-        :key="childrens.id"
-        color="white"
-        text
-        rounded
-        class="my-2"
-        @click="selected(childrens)"
-      >
-        {{ childrens.name }}
-      </v-btn>
+      <v-bottom-navigation v-model="value">
+        <v-btn v-for="childrens in optionsInfo" :key="childrens.id" color="white" text rounded :value="childrens.name"
+          @click="selected(childrens)">
+          {{ childrens.name }}
+        </v-btn>
+      </v-bottom-navigation>
     </v-row>
   </v-footer>
 </template>
@@ -25,6 +20,7 @@ export default {
     let option = {};
     return {
       option: option,
+      value: 'cube',
     };
   },
   mounted() {
@@ -45,4 +41,19 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+
+button.v-btn.v-btn--rounded.v-btn--text.theme--light.v-size--default.white--text {
+    height: auto;
+}
+
+button.v-btn.v-btn--active.v-btn--rounded.v-btn--text.theme--light.v-size--default.white--text {
+    background: #395265;
+    height: auto;
+}
+
+.v-bottom-navigation.v-item-group.theme--light {
+  background: #ccc;
+  height: auto;
+}
+</style>

@@ -17,5 +17,11 @@ export default {
 };
 </script>
 <style lang="scss">
-
+.theme--light.v-bottom-navigation {
+    background-color: #395265;
+    color: #fff;
+}
+button.v-btn.v-btn--active.v-btn--text.theme--light.v-size--default {
+    background: #263845;
+}
 </style>
