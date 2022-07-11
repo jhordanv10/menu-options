@@ -1,8 +1,8 @@
 <template>
-  <v-container class="container">
+  <div class="main">
     <Menu figure="sphere" :info="this.sphere" :material="this.material" />
     <div ref="canvas" class="contenedor3D"></div>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -87,12 +87,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.container {
-  background-color: #f0f0f0;
-  position: absolute;
-  z-index: 9;
-}
+<style lang="scss">
 .contenedor3D {
   width: 100%;
   height: 100vh;

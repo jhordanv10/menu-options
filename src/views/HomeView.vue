@@ -1,13 +1,13 @@
 <template>
   <div class="home">
-    <v-container class="progressive">
+    <div class="progressive">
       <v-row justify="center">
         <img class="img" src="../assets/FreepikLogo.png" alt="" />
       </v-row>
       <v-row justify="center">
         <Icon color="#4881cb" class="icon" icon="mdi-rotate-3d" />
       </v-row>
-    </v-container>
+    </div>
   </div>
 </template>
 
@@ -35,6 +35,7 @@ export default {
     width: 300px;
     height: 300px;
   }
+  
   .icon {
     margin-top: -70px;
     width: 50px;

@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <div class="main">
     <Menu figure="torus" :info="this.torus" :material="this.material"/>
     <div
       @click="onClick"
@@ -7,7 +7,7 @@
       ref="canvas"
       class="contenedor3D"
     ></div>
-  </v-container>
+  </div>
 </template>
 
 <script>

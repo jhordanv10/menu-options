@@ -1,8 +1,8 @@
 <template>
-  <v-container class="main">
-    <div ref="canvas" class="contenedor3D"></div>
+  <div class="main">
     <Menu figure="cube" :info="this.cube" :material="this.material"/>
-  </v-container>
+    <div ref="canvas" class="contenedor3D"></div>
+  </div>
 </template>
 
 <script>

@@ -1,8 +1,8 @@
 <template>
-  <v-container class="main">
-    <div ref="canvas" class="contenedor3D"></div>
+  <div class="main">
     <Menu figure="cone" :info="this.cone" :material="this.material"></Menu>
-  </v-container>
+    <div ref="canvas" class="contenedor3D"></div>
+  </div>
 </template>
 
 <script>
@@ -11,7 +11,6 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Menu from "../components/Menu.vue";
 
 export default {
-
   components: {
     Menu,
   },
@@ -87,12 +86,11 @@ export default {
   },
 
   methods: {
-
     animate() {
       this.renderer.render(this.scene, this.camera);
       requestAnimationFrame(this.animate);
       this.controls.update();
-    }
+    },
   },
 };
 </script>

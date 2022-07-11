@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar app>
+    <v-app-bar app color="#374957">
       <v-toolbar-title class="px-4">
         <v-img
           @click="pushRoute('/')"
@@ -16,7 +16,7 @@
           text
           grow
         >
-          <Icon :icon="icon" class="icon grey--text" />
+          <Icon :icon="icon" class="icon blue--text" />
         </v-btn>
       </v-row>
     </v-app-bar>
@@ -38,7 +38,8 @@ export default {
         { id: 2, name: "Base 1", path: "/base1", icon: "mdi-sphere" },
         { id: 3, name: "Base 2", path: "/base2", icon: "mdi-cube" },
         { id: 4, name: "Base 3", path: "/base3", icon: "mdi-cone" },
-        { id: 5, name: "Base 4", path: "/base4", icon: "mdi-record-circle-outline" },
+        { id: 5, name: "Base 4", path: "/base4", icon: "mdi-record-circle-outline",
+        },
       ],
       properties: [
         { id: 1, name: "Material", icon: "mdi-palette-swatch" },
@@ -60,6 +61,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .img {
   width: 30px;
   height: 30px;
@@ -90,7 +92,7 @@ export default {
 
   &:hover {
     transform: scale(1.05);
-    background: #EFEFEF;
+    background: #efefef;
   }
 }
 </style>
