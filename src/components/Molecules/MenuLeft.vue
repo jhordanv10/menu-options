@@ -7,23 +7,23 @@
           {{ childrens.name }}
         </v-btn>
       </v-btn-toggle>
-      <v-btn color="bluedark" class="ma-auto" dark fab center @click="dialog2 = true">
+      <v-btn color="bluedark" class="ma-auto" dark fab center @click="createFigure = true">
         <v-icon>mdi-plus</v-icon>
       </v-btn>
-      <v-dialog v-model="dialog2" max-width="500px">
+      <v-dialog v-model="createFigure" max-width="500px">
         <v-card>
           <v-card-title>
-            Dialog 2
+            Agregar
           </v-card-title>
           <v-card-text>
-            <v-btn color="primary" dark @click="dialog3 = !dialog3">
-              Open Dialog 3
-            </v-btn>
-            <v-select :items="select" label="A Select List" item-value="text"></v-select>
+            <v-input>
+              Nombre
+            </v-input>
+            <v-select :items="select" v-model="selectedItem" label="Selecciona tipo de figura" item-value="text"></v-select>
           </v-card-text>
           <v-card-actions>
-            <v-btn color="primary" text @click="dialog2 = false">
-              Close
+            <v-btn color="primary" text @click="createFigure">
+              Crear
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -43,6 +43,12 @@ export default {
       option: option,
       value: "cube",
       text: "cube",
+      createFigure: false,
+      select: [
+        { text: 'Circulo' },
+        { text: 'Cono' },
+        { text: 'Cubo' },
+      ],
     };
   },
   mounted() {
@@ -54,6 +60,9 @@ export default {
       this.$emit("escucharHijo", this.option);
       // console.log(this.option.material);
     },
+    createFigure(){
+      console.log(this.selectedItem);
+    }
   },
   computed: {
     optionsInfo() {
