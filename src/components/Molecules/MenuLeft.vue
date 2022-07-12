@@ -1,7 +1,6 @@
 <template>
   <v-footer color="#fff" class="menuLeft pa-0" padless>
-    <ul justify="center" no-gutters>
-      <li>
+    <v-col cols="12" class="mx-0 my-0" justify="center" no-gutters>
         <v-btn-toggle v-model="text" tile color="bluedark accent-3" group>
           <v-btn
             class="rounded-lg"
@@ -13,8 +12,7 @@
             {{ childrens.name }}
           </v-btn>
         </v-btn-toggle>
-      </li>
-    </ul>
+    </v-col>
   </v-footer>
 </template>
 
@@ -54,6 +52,8 @@ export default {
   height: 100vh;
 }
 .v-item-group {
-  display: block;
+  display: grid;
+  aling-items: center;
 }
+
 </style>
