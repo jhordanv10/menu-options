@@ -47,10 +47,11 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .menuLeft {
   height: 100vh;
 }
+
 .v-item-group {
   display: grid;
   aling-items: center;
