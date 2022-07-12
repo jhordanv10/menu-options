@@ -8,8 +8,8 @@
       step="any"
       min="-10"
       ref="input"
-      v-model.number="number"
-      v-model="valueX"
+      v-model.number="position.x"
+      v-model="position.x"
       @change="changePosition"
     >
     </v-text-field>
@@ -22,8 +22,8 @@
       step="any"
       min="-10"
       ref="input"
-      v-model.number="number"
-      v-model="valueY"
+      v-model.number="position.y"
+      v-model="position.y"
       @change="changePosition"
     >
     </v-text-field>
@@ -36,8 +36,8 @@
       step="any"
       min="-10"
       ref="input"
-      v-model.number="number"
-      v-model="valueZ"
+      v-model.number="position.z"
+      v-model="position.z"
       @change="changePosition"
     >
     </v-text-field>
@@ -47,15 +47,8 @@
 <script>
 export default {
   data() {
-    let valueX = this.position.x;
-    let valueY = this.position.y;
-    let valueZ = this.position.z;
-
     return {
-      valueX: valueX,
-      valueY: valueY,
-      valueZ: valueZ,
-      number: 0,
+
     };
   },
   props: {
@@ -64,7 +57,7 @@ export default {
   },
   methods: {
     changePosition() {
-      this.position.set(this.valueX, this.valueY, this.valueZ);
+      this.position.set(this.position.x, this.position.y, this.position.z);
     },
   },
 };
