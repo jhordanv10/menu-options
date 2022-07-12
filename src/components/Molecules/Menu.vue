@@ -48,7 +48,6 @@
           :figure="figure"
         />
       </v-col>
-      <button @click="infor()">Hoal</button>
     </v-row>
   </div>
 </template>
@@ -144,9 +143,6 @@ export default {
       document.onmouseup = null;
       document.onmousemove = null;
     },
-    infor() {
-      console.log(this.scene);
-    }
   },
   mounted() {
     console.log(this.info);

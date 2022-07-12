@@ -1,6 +1,11 @@
 <template>
   <div class="main">
-    <Menu figure="torus" :info="this.torus" :scene="this.scene.children" :material="this.material" />
+    <Menu
+      figure="torus"
+      :info="this.torus"
+      :scene="this.scene.children"
+      :material="this.material"
+    />
     <div
       @click="onClick"
       @mousemove="onPointer"
@@ -52,11 +57,6 @@ export default {
     let torus = new THREE.Mesh(geometry, material);
     torus.name = "Torus 1";
 
-    const geometry1 = new THREE.BoxGeometry(1, 1, 1);
-    const material1 = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-    let cube = new THREE.Mesh(geometry1, material1);
-    
-
     //Ligths
     const AmbientalLigth = new THREE.AmbientLight(0xffffff, 1);
     const DirectionalLigth = new THREE.DirectionalLight(0xffffff, 2);
@@ -79,7 +79,6 @@ export default {
       pointer: pointer,
       gsap: gsap,
       material: material,
-      cube:cube,
     };
   },
 
@@ -90,10 +89,6 @@ export default {
 
     //Torus1
     this.scene.add(this.torus);
-
-    //Cube
-    this.cube.position.x= 5
-    this.scene.add(this.cube)
 
     //Ligth
     this.scene.add(this.AmbientalLigth);
