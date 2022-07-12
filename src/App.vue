@@ -17,9 +17,13 @@ export default {
 };
 </script>
 <style lang="scss">
+
+html {
+  overflow: hidden;
+}
 .app {
   height: 100vh;
-  overflow: hidden;
+  
 }
 .theme--light.v-bottom-navigation {
     background-color: #395265;
