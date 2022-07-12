@@ -18,6 +18,7 @@ export default new Vuetify({
         success: '#4CAF50',
         warning: '#FFC107',
         bluecolor: '#869fb2',
+        bluedark: '#374957',
         redcolor: '#A20A0A',
         greencolor: '#799351',
       },

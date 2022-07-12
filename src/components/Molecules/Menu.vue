@@ -5,7 +5,7 @@
       <v-col cols="12" class="pt-2 pb-8 px-0 d-flex justify-center">
         <v-btn-toggle v-model="text" tile color="bluecolor accent-3" group>
           <v-btn
-            class="rounded-lg"
+            class="rounded-lg px-2  mx-0"
             v-for="{ id, name } in properties"
             :key="id"
             @click="sendData(name)"
@@ -158,8 +158,8 @@ export default {
   background-color: #f1f1f1;
   border: 1px solid #d3d3d3;
   z-index: 10;
-  width: 450px;
-  height: 450px;
+  width: 400px;
+  height: 430px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 </style>

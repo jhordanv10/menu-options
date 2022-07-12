@@ -1,5 +1,5 @@
 <template>
-  <v-footer color="#374957" class="footer" padless>
+  <v-footer color="#f0f0f0" class="footer" padless>
     <v-row justify="center" no-gutters>
       <v-btn
         v-for="childrens in optionsInfo"
@@ -7,7 +7,7 @@
         color="white"
         text
         rounded
-        class="my-2"
+        class="my-2 bluedark--text"
         @click="selected(childrens)"
       >
         {{ childrens.name }}
