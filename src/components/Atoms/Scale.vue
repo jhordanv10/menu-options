@@ -8,8 +8,8 @@
       step="any"
       min="0"
       ref="input"
-      v-model.number="number"
-      v-model="valueX"
+      v-model.number="scale.x"
+      v-model="scale.x"
       @change="changeScale"
     >
     </v-text-field>
@@ -22,8 +22,8 @@
       step="any"
       min="0"
       ref="input"
-      v-model.number="number"
-      v-model="valueY"
+      v-model.number="scale.y"
+      v-model="scale.y"
       @change="changeScale"
     >
     </v-text-field>
@@ -36,8 +36,8 @@
       step="any"
       min="0"
       ref="input"
-      v-model.number="number"
-      v-model="valueZ"
+      v-model.number="scale.z"
+      v-model="scale.z"
       @change="changeScale"
     >
     </v-text-field>
@@ -47,14 +47,9 @@
 <script>
 export default {
   data() {
-    let valueX = this.scale.x;
-    let valueY = this.scale.y;
-    let valueZ = this.scale.z;
+   
     return {
-      valueX: valueX,
-      valueY: valueY,
-      valueZ: valueZ,
-      number: 0,
+      
     };
   },
   props: {
@@ -63,7 +58,7 @@ export default {
   },
   methods: {
     changeScale() {
-      this.scale.set(this.valueX, this.valueY, this.valueZ);
+      this.scale.set(this.scale.x, this.scale.y, this.scale.z);
     },
   },
 };
