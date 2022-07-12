@@ -64,9 +64,9 @@ export default {
   },
   data() {
     return {
-      rotationx: false,
-      rotationy: false,
-      rotationz: false,
+      rotationx: this.rotation.x,
+      rotationy: this.rotation.y,
+      rotationz: this.rotation.z,
     };
   },
   methods: {
