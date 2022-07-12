@@ -1,8 +1,15 @@
 <template>
   <div class="main">
     <Menu figure="sphere" :info="this.infoChildren" :material="this.material" />
-    <div ref="canvas" class="contenedor3D"></div>
-    <Footer @escucharHijo="infoHijo" :scene="this.scene" />
+    <v-row>
+      <v-col cols="10">
+        <div ref="canvas" class="contenedor3D"></div>
+      </v-col>
+
+      <v-col cols="2" class="pa-0">
+        <MenuLeft @escucharHijo="infoHijo" :scene="this.scene" />
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -10,12 +17,12 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Menu from "../components/Molecules/Menu.vue";
-import Footer from "../components/Molecules/Footer.vue";
+import MenuLeft from "../components/Molecules/MenuLeft.vue";
 
 export default {
   components: {
     Menu,
-    Footer,
+    MenuLeft,
   },
   data() {
     //Scene
@@ -54,7 +61,7 @@ export default {
     const geometry2 = new THREE.ConeGeometry(1.5, 2, 3);
 
     const material2 = new THREE.MeshBasicMaterial({
-      color: 0xBE8C63,
+      color: 0xbe8c63,
     });
     let cone = new THREE.Mesh(geometry2, material2);
     cone.name = "cone";
@@ -92,7 +99,7 @@ export default {
     this.scene.add(this.cube);
 
     //Cone
-    this.cone.position.set(3,3 , -2);
+    this.cone.position.set(3, 3, -2);
     this.scene.add(this.cone);
 
     //Ligth
@@ -129,7 +136,7 @@ export default {
 <style lang="scss">
 .contenedor3D {
   width: 100%;
-  height: 82vh;
+  height: 92vh;
 }
 .main {
   background-color: #f0f0f0;

@@ -11,6 +11,7 @@
         </v-toolbar-title>
         <v-row justify="center">
           <v-btn
+            class="rounded-lg"
             @click="pushRoute(path)"
             v-for="{ id, path, icon } in routes"
             :key="id"
@@ -50,7 +51,7 @@ export default {
         { id: 3, name: "Position", icon: "mdi-chart-ppf" },
         { id: 4, name: "Scale", icon: "mdi-relative-scale" },
       ],
-      value: "/",
+      value: this.$router.currentRoute.path,
     };
   },
   components: {
