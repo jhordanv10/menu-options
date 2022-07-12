@@ -1,5 +1,5 @@
 <template>
-  <div class="main" @changeOption="(option) => console.log(option)">
+  <div class="main">
     <Menu figure="sphere" :info="this.infoChildren" :material="this.material" />
     <div ref="canvas" class="contenedor3D"></div>
     <Footer @escucharHijo="infoHijo" :scene="this.scene" />
@@ -103,6 +103,8 @@ export default {
     //Controls
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableDamping = true;
+
+    this.infoChildren = this.cube;
   },
 
   mounted() {

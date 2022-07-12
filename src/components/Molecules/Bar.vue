@@ -1,29 +1,28 @@
 <template>
   <div>
-    <v-app-bar app color="#374957" class="bar">
-      <v-toolbar-title class="px-4">
-        <v-img
-          @click="pushRoute('/')"
-          class="img"
-          src="../../assets/FreepikLogo1.png"
-        ></v-img>
-      </v-toolbar-title>
-      <v-row justify="center">
-        <v-btn
-          @click="pushRoute(path)"
-          v-for="{ id, path, icon } in routes"
-          :key="id"
-          text
-          grow
-        >
-          <Icon :icon="icon" class="icon" />
-        </v-btn>
-      </v-row>
-    </v-app-bar>
-
-    <v-main class="py-0 px-0">
-      <!--  -->
-    </v-main>
+    <v-bottom-navigation v-model="value">
+      <v-app-bar app color="#374957">
+        <v-toolbar-title class="px-4">
+          <v-img
+            @click="pushRoute('/')"
+            class="img"
+            src="../../assets/FreepikLogo1.png"
+          ></v-img>
+        </v-toolbar-title>
+        <v-row justify="center">
+          <v-btn
+            @click="pushRoute(path)"
+            v-for="{ id, path, icon } in routes"
+            :key="id"
+            text
+            grow
+            :value="path"
+          >
+            <Icon :icon="icon" class="icon" />
+          </v-btn>
+        </v-row>
+      </v-app-bar>
+    </v-bottom-navigation>
   </div>
 </template>
 
@@ -38,7 +37,11 @@ export default {
         { id: 2, name: "Base 1", path: "/base1", icon: "mdi-sphere" },
         { id: 3, name: "Base 2", path: "/base2", icon: "mdi-cube" },
         { id: 4, name: "Base 3", path: "/base3", icon: "mdi-cone" },
-        { id: 5, name: "Base 4", path: "/base4", icon: "mdi-record-circle-outline",
+        {
+          id: 5,
+          name: "Base 4",
+          path: "/base4",
+          icon: "mdi-record-circle-outline",
         },
       ],
       properties: [
@@ -47,6 +50,7 @@ export default {
         { id: 3, name: "Position", icon: "mdi-chart-ppf" },
         { id: 4, name: "Scale", icon: "mdi-relative-scale" },
       ],
+      value: "/",
     };
   },
   components: {
@@ -76,6 +80,7 @@ export default {
   height: 30px;
   color: #869fb2;
 }
+
 .v-application {
   .title {
     font-size: 0.8rem !important;

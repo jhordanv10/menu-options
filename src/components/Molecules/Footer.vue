@@ -1,17 +1,19 @@
 <template>
   <v-footer color="#f0f0f0" class="footer" padless>
-    <v-row justify="center" no-gutters>
-      <v-btn
-        v-for="childrens in optionsInfo"
-        :key="childrens.id"
-        color="white"
-        text
-        rounded
-        class="my-2 bluedark--text"
-        @click="selected(childrens)"
-      >
-        {{ childrens.name }}
-      </v-btn>
+    <v-row justify="center"  no-gutters>
+      <v-bottom-navigation v-model="value">
+        <v-btn
+          :value="childrens.name"
+          v-for="childrens in optionsInfo"
+          :key="childrens.id"
+          color="#f0f0f0" 
+          size="24"
+          class="mx-6 rounded-xl pa-6 bluedark-text"
+          @click="selected(childrens)"
+        >
+          {{ childrens.name }}
+        </v-btn>
+      </v-bottom-navigation>
     </v-row>
   </v-footer>
 </template>
@@ -25,10 +27,11 @@ export default {
     let option = {};
     return {
       option: option,
+      value: "cube",
     };
   },
   mounted() {
-    console.log(this.scene.children)
+    console.log(this.scene.children);
   },
   methods: {
     selected(children) {
@@ -39,7 +42,7 @@ export default {
   },
   computed: {
     optionsInfo() {
-      return this.scene.children.filter((i) => i.isMesh === true)
+      return this.scene.children.filter((i) => i.isMesh === true);
     },
   },
 };
@@ -48,5 +51,14 @@ export default {
 <style>
 .footer {
   height: 10vh;
+}
+
+.v-bottom-navigation.v-item-group.theme--light {
+  background: #f0f0f0;
+  height: auto;
+  border: none;
+} 
+.v-item-group.v-bottom-navigation {
+  box-shadow: none;
 }
 </style>

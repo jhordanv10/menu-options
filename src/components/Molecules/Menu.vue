@@ -90,6 +90,7 @@ export default {
       pos2: pos2,
       pos3: pos3,
       pos4: pos4,
+      text: 'center',
     };
   },
   components: {

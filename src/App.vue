@@ -1,7 +1,7 @@
 <template>
   <v-app class="app">
     <Bar />
-    <v-main class="px-0">
+    <v-main class="px-0 py-0">
       <router-view />
     </v-main>
   </v-app>
@@ -20,5 +20,12 @@ export default {
 .app {
   height: 100vh;
   overflow: hidden;
+}
+.theme--light.v-bottom-navigation {
+    background-color: #395265;
+    color: #fff;
+}
+button.v-btn.v-btn--active.v-btn--text.theme--light.v-size--default {
+    background: #263845;
 }
 </style>
