@@ -1,60 +1,55 @@
 <template>
   <v-card-text class="px-16 py-0">
+    <!-- Posición x -->
     <h3>Position X</h3>
     <v-text-field
+      class="px-16"
       type="number"
       step="any"
       min="-10"
       ref="input"
       v-model.number="number"
-      @click:append-outer="increment"
-      @click:prepend="decrement"
+      v-model="valueX"
+      @change="changePosition"
     >
-      > >
     </v-text-field>
 
-    <v-slider
-      class="slider"
-      v-model="valueX"
-      step="0.1"
-      min="-10"
-      max="10"
-      thumb-label
-      ticks
-      @change="changePosition"
-    >
-    </v-slider>
+    <!-- Posición y -->
     <h3>Position Y</h3>
-    <v-slider
+    <v-text-field
+      class="px-16"
+      type="number"
+      step="any"
+      min="-10"
+      ref="input"
+      v-model.number="number"
       v-model="valueY"
-      step="0.1"
-      min="-10"
-      max="10"
-      thumb-label
-      ticks
       @change="changePosition"
     >
-    </v-slider>
+    </v-text-field>
+
+    <!-- Posición z -->
     <h3>Position Z</h3>
-    <v-slider
-      v-model="valueZ"
-      step="0.1"
+    <v-text-field
+      class="px-16"
+      type="number"
+      step="any"
       min="-10"
-      max="10"
-      thumb-label
-      ticks
+      ref="input"
+      v-model.number="number"
+      v-model="valueZ"
       @change="changePosition"
     >
-    </v-slider>
+    </v-text-field>
   </v-card-text>
 </template>
 
 <script>
 export default {
   data() {
-    let valueX = 0;
-    let valueY = 0;
-    let valueZ = 0;
+    let valueX = this.position.x;
+    let valueY = this.position.y;
+    let valueZ = this.position.z;
 
     return {
       valueX: valueX,
@@ -70,14 +65,6 @@ export default {
   methods: {
     changePosition() {
       this.position.set(this.valueX, this.valueY, this.valueZ);
-    },
-    methods: {
-      increment() {
-        this.number = parseInt(this.number, 10) + 1;
-      },
-      decrement() {
-        this.number = parseInt(this.number, 10) - 1;
-      },
     },
   },
 };
