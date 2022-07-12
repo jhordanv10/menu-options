@@ -1,19 +1,17 @@
 <template>
   <v-footer color="#f0f0f0" class="footer" padless>
-    <v-row justify="center"  no-gutters>
-      <v-bottom-navigation v-model="value">
+    <v-row justify="center" no-gutters>
+      <v-btn-toggle  v-model="text" tile color="bluedark accent-3" group>
         <v-btn
-          :value="childrens.name"
+          class="rounded-lg"
           v-for="childrens in optionsInfo"
           :key="childrens.id"
-          color="#f0f0f0" 
-          size="24"
-          class="mx-6 rounded-xl pa-6 bluedark-text"
           @click="selected(childrens)"
+          :value="childrens.name"
         >
           {{ childrens.name }}
         </v-btn>
-      </v-bottom-navigation>
+      </v-btn-toggle>
     </v-row>
   </v-footer>
 </template>
@@ -28,6 +26,7 @@ export default {
     return {
       option: option,
       value: "cube",
+      text: 'cube',
     };
   },
   mounted() {
@@ -57,7 +56,7 @@ export default {
   background: #f0f0f0;
   height: auto;
   border: none;
-} 
+}
 .v-item-group.v-bottom-navigation {
   box-shadow: none;
 }

@@ -1,6 +1,18 @@
 <template>
   <v-card-text class="px-16 py-0">
     <h3>Position X</h3>
+    <v-text-field
+      type="number"
+      step="any"
+      min="-10"
+      ref="input"
+      v-model.number="number"
+      @click:append-outer="increment"
+      @click:prepend="decrement"
+    >
+      > >
+    </v-text-field>
+
     <v-slider
       class="slider"
       v-model="valueX"
@@ -48,6 +60,7 @@ export default {
       valueX: valueX,
       valueY: valueY,
       valueZ: valueZ,
+      number: 0,
     };
   },
   props: {
@@ -57,6 +70,14 @@ export default {
   methods: {
     changePosition() {
       this.position.set(this.valueX, this.valueY, this.valueZ);
+    },
+    methods: {
+      increment() {
+        this.number = parseInt(this.number, 10) + 1;
+      },
+      decrement() {
+        this.number = parseInt(this.number, 10) - 1;
+      },
     },
   },
 };
