@@ -82,10 +82,7 @@ export default {
 
 .v-item-group {
   display: grid;
-<<<<<<< HEAD
   align-items: center;
-=======
-  aling-items: center;
 }
 
 button.ma-auto.v-btn {
@@ -93,6 +90,5 @@ button.ma-auto.v-btn {
   position: absolute;
   left: 0;
   right: 0;
->>>>>>> DevelopDaniela
 }
 </style>
