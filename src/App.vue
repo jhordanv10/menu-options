@@ -17,15 +17,20 @@ export default {
 };
 </script>
 <style lang="scss">
-.app {
-  height: 100vh;
+html {
   overflow: hidden;
 }
-.theme--light.v-bottom-navigation {
-    background-color: #395265;
-    color: #fff;
+
+.app {
+  height: 100vh;
 }
+
+.theme--light.v-bottom-navigation {
+  background-color: #395265;
+  color: #fff;
+}
+
 button.v-btn.v-btn--active.v-btn--text.theme--light.v-size--default {
-    background: #263845;
+  background: #263845;
 }
 </style>

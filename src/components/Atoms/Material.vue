@@ -1,15 +1,32 @@
 <template>
   <div class="px-16 py-0">
     <!-- Wireframe -->
-    <v-container >
+    <v-container>
       <v-row class="justify-center">
-        <label :class="wireframe === true ? 'greencolor--text' : 'redcolor--text'">{{
-            wireframe === true ? "Wireframe true" : "Wireframe false"
-        }}</label>
+        <label
+          :class="
+            material_info.wireframe === true
+              ? 'greencolor--text'
+              : 'redcolor--text'
+          "
+          >{{
+            material_info.wireframe === true
+              ? "Wireframe true"
+              : "Wireframe false"
+          }}</label
+        >
       </v-row>
       <v-row class="justify-center">
-        <v-switch :class="wireframe === true ? 'text--greencolor my-0' : 'text--redcolor my-0'" @click="changeWireframe"
-          v-model="wireframe" :color="wireframe === true ? 'green' : 'red'" hide-details></v-switch>
+        <v-switch
+          :class="
+            material_info.wireframe === true
+              ? 'text--greencolor my-0'
+              : 'text--redcolor my-0'
+          "
+          v-model="material_info.wireframe"
+          :color="material_info.wireframe === true ? 'green' : 'red'"
+          hide-details
+        ></v-switch>
       </v-row>
     </v-container>
 
@@ -17,7 +34,12 @@
     <v-container>
       <v-row>
         <v-col class="d-flex px-16" cols="12">
-          <v-select v-model="side" @change="changeSide" :items="items" label="Side"></v-select>
+          <v-select
+            v-model="material_info.side"
+            @change="changeSide"
+            :items="items"
+            :label="material_info.side === 0 ? 'Font' : 'Back'"
+          ></v-select>
         </v-col>
       </v-row>
     </v-container>
@@ -26,13 +48,19 @@
     <v-container class="pa-0 color" v-if="this.material_info.color">
       <v-row>
         <v-col class="d-flex px-0 mx-0 justify-center" cols="12">
-          <span class="colorPicker">Color
+          <span class="colorPicker"
+            >Color
             <div class="div-color">
-              <input class="color" :id="figure + '-color'" type="color" :value="color" @change="changeColor" />
+              <input
+                class="color"
+                :id="figure + '-color'"
+                type="color"
+                :value="color"
+                @change="changeColor"
+              />
             </div>
           </span>
         </v-col>
-        
       </v-row>
     </v-container>
 
@@ -40,12 +68,21 @@
     <v-container justify="center">
       <v-row>
         <v-col class="d-flex px-0 mx-0 justify-center" cols="12">
-          <v-btn v-model="visible" @click="changeVisible" class="mx-2 mt-6" fab dark
-            :color="visible === true ? 'redcolor' : 'greencolor'">
+          <v-btn
+            v-model="material_info.visible"
+            @click="changeVisible"
+            class="mx-2 mt-6"
+            fab
+            dark
+            :color="material_info.visible === true ? 'redcolor' : 'greencolor'"
+          >
             <v-icon dark>
               {{
-                  visible === true ? "mdi-eye-off-outline" : "mdi-eye-outline"
-              }}</v-icon>
+                material_info.visible === true
+                  ? "mdi-eye-off-outline"
+                  : "mdi-eye-outline"
+              }}</v-icon
+            >
           </v-btn>
         </v-col>
       </v-row>
@@ -60,34 +97,29 @@
         <v-btn elevation="2" @click="onUpload">Upload!</v-btn>
       </v-row>
     </v-container> -->
-
   </div>
 </template>
 
 <script>
 import * as THREE from "three";
-import axios from 'axios';
+import axios from "axios";
 
 export default {
-
   data() {
-    let color = '#007BFF';
+    let color = "#CCCCCC";
 
     // instantiate a texture loader
     const textureToShow = 0;
 
     const arr = [
-      'https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_gates.jpg',
-      'https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate1.jpg',
-      'https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate2.jpg'
+      "https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_gates.jpg",
+      "https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate1.jpg",
+      "https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate2.jpg",
     ];
 
     let file_select;
 
     return {
-      wireframe: false,
-      side: null,
-      visible: true,
       color: color,
       items: [
         { value: "0", text: "Font" },
@@ -98,7 +130,10 @@ export default {
       textureToShow: textureToShow,
       selectedFile: null,
       rules: [
-        value => !value || value.size < 2000000 || 'Avatar size should be less than 2 MB!',
+        (value) =>
+          !value ||
+          value.size < 2000000 ||
+          "Avatar size should be less than 2 MB!",
       ],
       file_select: file_select,
     };
@@ -106,34 +141,23 @@ export default {
   props: {
     material_info: Object,
     figure: String,
-    material: Object
+    material: Object,
   },
   mounted() {
-    this.changeTexture()
+    this.changeTexture();
   },
   methods: {
-    changeWireframe() {
-      if (this.wireframe === true) {
-        this.material_info.wireframe = true;
-      } else {
-        this.material_info.wireframe = false;
-      }
-    },
     changeSide() {
-      if (this.side === "0") {
+      console.log(this.material_info.side);
+
+      if (this.material_info.side === "0") {
         this.material_info.side = 0;
-      } else if (this.side === "1") {
+      } else if (this.material_info.side === "1") {
         this.material_info.side = 1;
       }
     },
     changeVisible() {
-      this.visible = !this.visible;
-
-      if (this.visible === true) {
-        this.material_info.visible = true;
-      } else {
-        this.material_info.visible = false;
-      }
+      this.material_info.visible = !this.material_info.visible;
     },
     changeColor() {
       this.color = document.getElementById(`${this.figure}-color`).value;
@@ -149,7 +173,7 @@ export default {
         //LOAD TEXTURE and on completion apply it on SPHERE
         new THREE.TextureLoader().load(
           arr[textureToShow],
-          texture => {
+          (texture) => {
             //Update Texture
             material.map = texture;
             material.needsUpdate = true;
@@ -160,11 +184,11 @@ export default {
               textureToShow = 0;
             }
           },
-          xhr => {
+          (xhr) => {
             //Download Progress
             console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
           },
-          error => {
+          (error) => {
             //Error CallBack
             console.log("An error happened" + error);
           }
@@ -185,23 +209,28 @@ export default {
       // }
       // reader.readAsDataURL(e.target.files[0]);
 
-      formData.append('myFile', this.file_select, this.file_select.name);
-      axios.post('http://localhost:8080/file-upload/', formData, {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-          "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token"
-        }
-      }).then(res => {
-        console.log(res);
-      }).catch(err => {
-        console.log(err.response);
-      });
+      formData.append("myFile", this.file_select, this.file_select.name);
+      axios
+        .post("http://localhost:8080/file-upload/", formData, {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods":
+              "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+            "Access-Control-Allow-Headers":
+              "Origin, Content-Type, X-Auth-Token",
+          },
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
 
-      console.log('file::', formData);
+      console.log("file::", formData);
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>
