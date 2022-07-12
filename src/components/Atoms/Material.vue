@@ -1,14 +1,14 @@
 <template>
-  <div class="pt-16">
+  <div class="px-16 py-0">
     <!-- Wireframe -->
-    <v-container>
+    <v-container >
       <v-row class="justify-center">
-        <label :class="wireframe === true ? 'green--text' : 'red--text'">{{
+        <label :class="wireframe === true ? 'greencolor--text' : 'redcolor--text'">{{
             wireframe === true ? "Wireframe true" : "Wireframe false"
         }}</label>
       </v-row>
       <v-row class="justify-center">
-        <v-switch :class="wireframe === true ? 'text--green my-0' : 'text--red my-0'" @click="changeWireframe"
+        <v-switch :class="wireframe === true ? 'text--greencolor my-0' : 'text--redcolor my-0'" @click="changeWireframe"
           v-model="wireframe" :color="wireframe === true ? 'green' : 'red'" hide-details></v-switch>
       </v-row>
     </v-container>
@@ -16,7 +16,7 @@
     <!-- Side -->
     <v-container>
       <v-row>
-        <v-col class="d-flex px-0" cols="12">
+        <v-col class="d-flex px-16" cols="12">
           <v-select v-model="side" @change="changeSide" :items="items" label="Side"></v-select>
         </v-col>
       </v-row>
@@ -32,6 +32,7 @@
             </div>
           </span>
         </v-col>
+        
       </v-row>
     </v-container>
 
@@ -40,7 +41,7 @@
       <v-row>
         <v-col class="d-flex px-0 mx-0 justify-center" cols="12">
           <v-btn v-model="visible" @click="changeVisible" class="mx-2 mt-6" fab dark
-            :color="visible === true ? 'red' : 'green'">
+            :color="visible === true ? 'redcolor' : 'greencolor'">
             <v-icon dark>
               {{
                   visible === true ? "mdi-eye-off-outline" : "mdi-eye-outline"
@@ -51,14 +52,14 @@
     </v-container>
 
     <!-- Texture -->
-    <v-container justify="center">
+    <!-- <v-container justify="center">
       <v-row>
         <v-file-input v-model="file_select" :rules="rules" accept="image/png, image/jpeg, image/bmp"
           placeholder="Pick an avatar" prepend-icon="mdi-camera" label="Avatar" truncate-length="10"></v-file-input>
 
         <v-btn elevation="2" @click="onUpload">Upload!</v-btn>
       </v-row>
-    </v-container>
+    </v-container> -->
 
   </div>
 </template>

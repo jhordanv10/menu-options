@@ -1,18 +1,21 @@
 <template>
   <div class="main">
-    <Menu figure="sphere" :info="this.sphere" :material="this.material" />
+    <Menu figure="sphere" :info="this.infoChildren" :material="this.material" />
     <div ref="canvas" class="contenedor3D"></div>
+    <Footer @escucharHijo="infoHijo" :scene="this.scene" />
   </div>
 </template>
 
 <script>
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import Menu from "../components/Menu.vue";
+import Menu from "../components/Molecules/Menu.vue";
+import Footer from "../components/Molecules/Footer.vue";
 
 export default {
   components: {
     Menu,
+    Footer,
   },
   data() {
     //Scene
@@ -37,6 +40,24 @@ export default {
       flatShading: true,
     });
     let sphere = new THREE.Mesh(geometry, material);
+    sphere.name = "sphere";
+
+    //Cube
+    const geometry1 = new THREE.BoxBufferGeometry(1, 1, 1);
+    const material1 = new THREE.MeshBasicMaterial({
+      color: 0x68a7ad,
+    });
+    let cube = new THREE.Mesh(geometry1, material1);
+    cube.name = "cube";
+
+    //Cone
+    const geometry2 = new THREE.ConeGeometry(1.5, 2, 3);
+
+    const material2 = new THREE.MeshBasicMaterial({
+      color: 0xBE8C63,
+    });
+    let cone = new THREE.Mesh(geometry2, material2);
+    cone.name = "cone";
 
     //Ligths
     const AmbientalLigth = new THREE.AmbientLight(0xffffff, 1);
@@ -47,10 +68,14 @@ export default {
       camera: camera,
       renderer: renderer,
       sphere: sphere,
+      cube: cube,
+      cone: cone,
       controls: [],
       AmbientalLigth: AmbientalLigth,
       DirectionalLigth: DirectionalLigth,
       material: material,
+      option: {},
+      infoChildren: {},
     };
   },
 
@@ -62,14 +87,24 @@ export default {
     //Sphere
     this.scene.add(this.sphere);
 
+    //Cube
+    this.cube.position.set(-2, -2, 0);
+    this.scene.add(this.cube);
+
+    //Cone
+    this.cone.position.set(3,3 , -2);
+    this.scene.add(this.cone);
+
     //Ligth
     this.scene.add(this.AmbientalLigth);
-    this.DirectionalLigth.position.set(5, 5, 5);
+    this.DirectionalLigth.position.set(3, 3, 3);
     this.scene.add(this.DirectionalLigth);
 
     //Controls
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableDamping = true;
+
+    this.infoChildren = this.cube;
   },
 
   mounted() {
@@ -83,6 +118,10 @@ export default {
       requestAnimationFrame(this.animate);
       this.controls.update();
     },
+    infoHijo(value) {
+      this.infoChildren = value;
+      console.log(this.infoChildren);
+    },
   },
 };
 </script>
@@ -90,7 +129,7 @@ export default {
 <style lang="scss">
 .contenedor3D {
   width: 100%;
-  height: 100vh;
+  height: 82vh;
 }
 .main {
   background-color: #f0f0f0;

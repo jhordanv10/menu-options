@@ -1,18 +1,18 @@
 <template>
-  <div>
+  <div class="px-16 py-0">
     <!-- x -->
-    <v-container class="mb-8 pt-16">
+    <v-container class="mb-8">
       <v-row class="justify-center">
-        <label :class="rotationx === true ? 'green--text' : 'red--text'">{{
+        <label :class="rotationx === true ? 'greencolor--text' : 'redcolor--text'">{{
           rotationx === true ? "Rotation x true" : "Rotation x false"
         }}</label>
       </v-row>
       <v-row class="justify-center">
         <v-switch
-          :class="rotationx === true ? 'text--green my-0' : 'text--red my-0'"
+          :class="rotationx === true ? 'text--greencolor my-0' : 'text--redcolor my-0'"
           v-model="rotationx"
           @click="changeRotation(rotationx)"
-          :color="rotationx === true ? 'green' : 'red'"
+          :color="rotationx === true ? 'greencolor' : 'redcolor'"
           hide-details
         ></v-switch>
       </v-row>
@@ -21,7 +21,7 @@
     <!-- y -->
     <v-container class="mb-8">
       <v-row class="justify-center">
-        <label :class="rotationy === true ? 'green--text' : 'red--text'">{{
+        <label :class="rotationy === true ? 'greencolor--text' : 'redcolor--text'">{{
           rotationy === true ? "Rotation y true" : "Rotation y false"
         }}</label>
       </v-row>
@@ -30,7 +30,7 @@
           :class="rotationy === true ? 'text--green my-0' : 'text--red my-0'"
           v-model="rotationy"
           @click="changeRotation(rotationy)"
-          :color="rotationy === true ? 'green' : 'red'"
+          :color="rotationy === true ? 'greencolor' : 'redcolor'"
           hide-details
         ></v-switch>
       </v-row>
@@ -39,16 +39,16 @@
     <!-- z -->
     <v-container class="mb-8">
       <v-row class="justify-center">
-        <label :class="rotationz === true ? 'green--text' : 'red--text'">{{
+        <label :class="rotationz === true ? 'greencolor--text' : 'redcolor--text'">{{
           rotationz === true ? "Rotation z true" : "Rotation z false"
         }}</label>
       </v-row>
       <v-row class="justify-center">
         <v-switch
-          :class="rotationz === true ? 'text--green my-0' : 'text--red my-0'"
+          :class="rotationz === true ? 'text--greencolor my-0' : 'text--redcolor my-0'"
           v-model="rotationz"
           @click="changeRotation(rotationz)"
-          :color="rotationz === true ? 'green' : 'red'"
+          :color="rotationz === true ? 'greencolor' : 'redcolor'"
           hide-details
         ></v-switch>
       </v-row>
