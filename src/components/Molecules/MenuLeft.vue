@@ -99,7 +99,7 @@ export default {
 
 .v-item-group {
   display: grid;
-  aling-items: center;
+  align-items: center;
 }
 
 button.ma-auto.v-btn {
