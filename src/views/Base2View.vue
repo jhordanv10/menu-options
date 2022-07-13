@@ -1,7 +1,23 @@
 <template>
   <div class="main">
-    <Menu figure="cube" :info="this.cube" :material="this.material"/>
-    <div ref="canvas" class="contenedor3D"></div>
+    <Menu
+      v-if="item === 'Mesh'"
+      figure="cube"
+      :info="this.infoChildren"
+      :material="this.material"
+    />
+    <v-row>
+      <v-col cols="9">
+        <div ref="canvas" class="contenedor3D"></div>
+      </v-col>
+      <v-col cols="3" class="pa-0">
+        <MenuLeft
+          @listenChildren="meshChildren"
+          @escucharHijo="infoHijo"
+          :scene="this.scene"
+        />
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -9,9 +25,12 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Menu from "../components/Molecules/Menu.vue";
+import MenuLeft from "../components/Molecules/MenuLeft.vue";
+
 export default {
   components: {
     Menu,
+    MenuLeft,
   },
   data() {
     //Scene
@@ -25,6 +44,7 @@ export default {
       0.1,
       1000
     );
+    camera.name = 'Persective'
 
     //Renderer
     const renderer = new THREE.WebGLRenderer();
@@ -36,10 +56,13 @@ export default {
       color: 0xb25068,
     });
     let cube = new THREE.Mesh(geometry, material);
+    cube.name = "cube";
 
     //Ligths
     const AmbientalLigth = new THREE.AmbientLight(0xffffff, 1);
+    AmbientalLigth.name = 'Ambiental'
     const DirectionalLigth = new THREE.DirectionalLight(0xffffff, 2);
+    DirectionalLigth.name = 'Directional'
 
     return {
       scene: scene,
@@ -50,6 +73,9 @@ export default {
       AmbientalLigth: AmbientalLigth,
       DirectionalLigth: DirectionalLigth,
       material: material,
+      option: {},
+      infoChildren: {},
+      item: "Mesh",
     };
   },
 
@@ -59,7 +85,6 @@ export default {
     this.scene.add(this.camera);
 
     //Cube
-    this.cube.rotation.set(0.5, 1, 0);
     this.scene.add(this.cube);
 
     //Ligth
@@ -85,7 +110,15 @@ export default {
       this.renderer.render(this.scene, this.camera);
       requestAnimationFrame(this.animate);
       this.controls.update();
-    }
+    },
+    infoHijo(value) {
+      this.infoChildren = value;
+      // console.log(this.infoChildren);
+    },
+    meshChildren(value) {
+      this.item = value;
+      // console.log(this.item);
+    },
   },
 };
 </script>

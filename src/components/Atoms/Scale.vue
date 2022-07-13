@@ -1,8 +1,9 @@
 <template>
   <v-card-text class="px-16 py-0">
     <!-- Scale x -->
-    <h3>Scale X</h3>
+    <h3 class="text-center">Scale X</h3>
     <v-text-field
+      :color="scale.x <= 0 ? 'redcolor' : 'greencolor'"
       class="px-16"
       type="number"
       step="any"
@@ -15,9 +16,10 @@
     </v-text-field>
 
     <!-- Scale y -->
-    <h3>Scale Y</h3>
+    <h3 class="text-center">Scale Y</h3>
     <v-text-field
       class="px-16"
+      :color="scale.y <= 0 ? 'redcolor' : 'greencolor'"
       type="number"
       step="any"
       min="0"
@@ -29,9 +31,10 @@
     </v-text-field>
 
     <!-- Scale z -->
-    <h3>Scale Z</h3>
+    <h3 class="text-center">Scale Z</h3>
     <v-text-field
       class="px-16"
+      :color="scale.z <= 0 ? 'redcolor' : 'greencolor'"
       type="number"
       step="any"
       min="0"
@@ -65,7 +68,5 @@ export default {
 </script>
 
 <style>
-h3 {
-  text-align: center;
-}
+
 </style>

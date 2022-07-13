@@ -1,20 +1,20 @@
 <template>
   <v-col>
     <v-btn
-      color="bluedark"
+      color="greencolor"
       class="ma-auto"
       dark
       fab
       center
       @click="openDialog = true"
     >
-      <v-icon>mdi-plus</v-icon>
+      <Icon  icon="mdi-plus" class="white--text" width="24" />
     </v-btn>
     <v-dialog v-model="openDialog" max-width="500px">
       <v-card>
         <v-card-actions>
           <v-btn color="bluedark" text @click="closeDialog" class="btn-close">
-            <v-icon>mdi-close </v-icon>
+            <Icon icon="mdi-close" width="24" />
           </v-btn>
         </v-card-actions>
         <v-card-title class="justify-center"> Agregar </v-card-title>
@@ -37,7 +37,7 @@
           </v-card-text>
         </v-form>
         <v-card-actions>
-          <v-btn color="primary" text @click="createFigure"> Crear </v-btn>
+          <v-btn color="bluedark" text @click="createFigure"> Crear </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -46,6 +46,7 @@
 
 <script>
 import * as THREE from "three";
+import { Icon } from "@iconify/vue2";
 export default {
   props: {
     scene: Object,
@@ -67,6 +68,9 @@ export default {
           }).length || "El nombre ya existe",
       ],
     };
+  },
+  components: {
+    Icon
   },
   methods: {
     createFigure() {
@@ -121,7 +125,7 @@ export default {
 
 <style scoped>
 button.ma-auto.v-btn {
-  bottom: 53px;
+  top: 55px;
   position: absolute;
   left: 0;
   right: 0;

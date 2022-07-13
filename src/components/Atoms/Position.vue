@@ -1,9 +1,10 @@
 <template>
   <v-card-text class="px-16 py-0">
     <!-- Posición x -->
-    <h3>Position X</h3>
+    <h3 class="text-center">Position X</h3>
     <v-text-field
       class="px-16"
+      :color="x >= 0 ? 'greencolor' : 'redcolor'"
       type="number"
       step="any"
       min="-10"
@@ -15,9 +16,10 @@
     </v-text-field>
 
     <!-- Posición y -->
-    <h3>Position Y</h3>
+    <h3 class="text-center">Position Y</h3>
     <v-text-field
       class="px-16"
+      :color="y >= 0 ? 'greencolor' : 'redcolor'"
       type="number"
       step="any"
       min="-10"
@@ -29,9 +31,10 @@
     </v-text-field>
 
     <!-- Posición z -->
-    <h3>Position Z</h3>
+    <h3 class="text-center">Position Z</h3>
     <v-text-field
       class="px-16"
+      :color="z >= 0 ? 'greencolor' : 'redcolor'"
       type="number"
       step="any"
       min="-10"
@@ -69,7 +72,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h3 {
-  text-align: center;
-}
 </style>
