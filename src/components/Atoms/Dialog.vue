@@ -59,12 +59,12 @@ export default {
       select: [{ text: "Circulo" }, { text: "Cono" }, { text: "Cubo" }],
       selectedItem: "Circulo",
       nameRules: [
-        (v) => !!v || "Name is required",
-        (v) => (v && v.length <= 15) || "Name must be less than 15 characters",
+        (v) => !!v || "Nombre es requirido",
+        (v) => (v && v.length <= 15) || "Nombre debe tener 15 caracteres",
         (v) =>
           !this.isMesh.filter(function (elem) {
             if (elem.name.toLowerCase() == v.toLowerCase()) return 1;
-          }).length || "El nombre ya existe",
+          }).length || "Nombre ya existe",
       ],
     };
   },
