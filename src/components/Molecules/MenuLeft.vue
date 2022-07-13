@@ -22,7 +22,7 @@
     </v-col>
 
     <!-- Add Mesh -->
-    <Dialog :scene="scene" />
+    <Dialog :scene="scene" :isMesh="isMesh" />
 
     <!-- Isnot Mesh -->
 
