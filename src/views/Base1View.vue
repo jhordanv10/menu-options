@@ -1,13 +1,21 @@
 <template>
   <div class="main">
-    <Menu figure="sphere" :info="this.infoChildren" :material="this.material" />
+    <Menu
+      v-if="item === 'Mesh'"
+      figure="sphere"
+      :info="this.infoChildren"
+      :material="this.material"
+    />
     <v-row>
-      <v-col cols="10">
+      <v-col cols="9">
         <div ref="canvas" class="contenedor3D"></div>
       </v-col>
-
-      <v-col cols="2" class="pa-0">
-        <MenuLeft @escucharHijo="infoHijo" :scene="this.scene" />
+      <v-col cols="3" class="pa-0">
+        <MenuLeft
+          @listenChildren="meshChildren"
+          @escucharHijo="infoHijo"
+          :scene="this.scene"
+        />
       </v-col>
     </v-row>
   </div>
@@ -36,6 +44,7 @@ export default {
       0.1,
       1000
     );
+    camera.name = "Perspective";
 
     //Renderer
     const renderer = new THREE.WebGLRenderer();
@@ -52,23 +61,24 @@ export default {
     //Cube
     const geometry1 = new THREE.BoxBufferGeometry(1, 1, 1);
     const material1 = new THREE.MeshBasicMaterial({
-      color: 0x68a7ad,
+      color: 0xff0000,
     });
     let cube = new THREE.Mesh(geometry1, material1);
     cube.name = "cube";
 
     //Cone
     const geometry2 = new THREE.ConeGeometry(1.5, 2, 3);
-
     const material2 = new THREE.MeshBasicMaterial({
-      color: 0xbe8c63,
+      color: 0x018adf,
     });
     let cone = new THREE.Mesh(geometry2, material2);
     cone.name = "cone";
 
     //Ligths
     const AmbientalLigth = new THREE.AmbientLight(0xffffff, 1);
+    AmbientalLigth.name = "Ambiental";
     const DirectionalLigth = new THREE.DirectionalLight(0xffffff, 2);
+    DirectionalLigth.name = "Directional";
 
     return {
       scene: scene,
@@ -83,6 +93,7 @@ export default {
       material: material,
       option: {},
       infoChildren: {},
+      item: "Mesh",
     };
   },
 
@@ -127,7 +138,11 @@ export default {
     },
     infoHijo(value) {
       this.infoChildren = value;
-      console.log(this.infoChildren);
+      // console.log(this.infoChildren);
+    },
+    meshChildren(value) {
+      this.item = value;
+      // console.log(this.item);
     },
   },
 };

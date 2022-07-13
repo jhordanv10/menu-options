@@ -17,8 +17,12 @@ export default {
 };
 </script>
 <style lang="scss">
+
 html {
   overflow: hidden;
+}
+.app {
+  height: 100vh;
 }
 
 .app {

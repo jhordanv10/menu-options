@@ -1,17 +1,23 @@
 <template>
   <div class="main">
     <Menu
+      v-if="item === 'Mesh'"
       figure="torus"
-      :info="this.torus"
-      :scene="this.scene.children"
+      :info="this.infoChildren"
       :material="this.material"
     />
-    <div
-      @click="onClick"
-      @mousemove="onPointer"
-      ref="canvas"
-      class="contenedor3D"
-    ></div>
+    <v-row>
+      <v-col cols="9">
+        <div ref="canvas" class="contenedor3D"></div>
+      </v-col>
+      <v-col cols="3" class="pa-0">
+        <MenuLeft
+          @listenChildren="meshChildren"
+          @escucharHijo="infoHijo"
+          :scene="this.scene"
+        />
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -19,12 +25,14 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { gsap } from "gsap";
-
 import Menu from "../components/Molecules/Menu.vue";
+import MenuLeft from "../components/Molecules/MenuLeft.vue";
+
 
 export default {
   components: {
     Menu,
+    MenuLeft,
   },
   data() {
     //Emit
@@ -44,6 +52,7 @@ export default {
       0.1,
       1000
     );
+    camera.name = "Perspective";
 
     //Renderer
     const renderer = new THREE.WebGLRenderer();
@@ -55,11 +64,13 @@ export default {
       color: 0xffffff,
     });
     let torus = new THREE.Mesh(geometry, material);
-    torus.name = "Torus 1";
+    torus.name = "torus";
 
     //Ligths
     const AmbientalLigth = new THREE.AmbientLight(0xffffff, 1);
+    AmbientalLigth.name = "Ambiental";
     const DirectionalLigth = new THREE.DirectionalLight(0xffffff, 2);
+    DirectionalLigth.name = "Directional";
 
     //Raycaster
     const raycaster = new THREE.Raycaster();
@@ -79,6 +90,9 @@ export default {
       pointer: pointer,
       gsap: gsap,
       material: material,
+      option: {},
+      infoChildren: {},
+      item: "Mesh",
     };
   },
 
@@ -172,6 +186,14 @@ export default {
       this.renderer.render(this.scene, this.camera);
       requestAnimationFrame(this.animate);
       this.controls.update();
+    },
+    infoHijo(value) {
+      this.infoChildren = value;
+      // console.log(this.infoChildren);
+    },
+    meshChildren(value) {
+      this.item = value;
+      // console.log(this.item);
     },
   },
 };

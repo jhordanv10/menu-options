@@ -1,23 +1,22 @@
 <template>
   <div class="home">
-    <div class="progressive">
+    <v-col>
       <v-row justify="center">
-        <img class="img" src="../assets/FreepikLogo.png" alt="" />
+        <figure class="img">
+          <img src="../assets/FreepikLogo.png" alt="" />
+        </figure>
       </v-row>
-      <v-row justify="center">
-        <Icon color="#4881cb" class="icon" icon="mdi-rotate-3d" />
-      </v-row>
-    </div>
+    </v-col>
   </div>
 </template>
 
 <script>
-import { Icon } from '@iconify/vue2';
+import { Icon } from "@iconify/vue2";
 
 export default {
   name: "Home",
-   components: {
-    Icon
+  components: {
+    Icon,
   },
 };
 </script>
@@ -28,18 +27,15 @@ export default {
   height: 100vh;
   margin-right: 0px;
   margin-left: 0px;
-  display: flex;
-  justify-content: center;
 
-  img {
+  .img {
     width: 300px;
     height: 300px;
-  }
-  
-  .icon {
-    margin-top: -70px;
-    width: 50px;
-    height: 50px;
+
+    img {
+      width: inherit;
+      height: inherit;
+    }
   }
 }
 </style>
