@@ -23,7 +23,7 @@
             <v-text-field
               v-model="name"
               :rules="nameRules"
-              label="Name"
+              label="Nombre"
               required
             ></v-text-field>
             <v-select
