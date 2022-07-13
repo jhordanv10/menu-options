@@ -52,16 +52,15 @@ export default {
     //Cube
     const geometry1 = new THREE.BoxBufferGeometry(1, 1, 1);
     const material1 = new THREE.MeshBasicMaterial({
-      color: 0x68a7ad,
+      color: 0xff0000,
     });
     let cube = new THREE.Mesh(geometry1, material1);
     cube.name = "cube";
 
     //Cone
     const geometry2 = new THREE.ConeGeometry(1.5, 2, 3);
-
     const material2 = new THREE.MeshBasicMaterial({
-      color: 0xbe8c63,
+      color: 0x018adf,
     });
     let cone = new THREE.Mesh(geometry2, material2);
     cone.name = "cone";
