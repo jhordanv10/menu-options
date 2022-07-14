@@ -1,13 +1,21 @@
 <template>
   <div class="main">
-    <Menu figure="sphere" :info="this.infoChildren" :material="this.material" />
+    <Menu
+      v-if="item === 'Mesh'"
+      figure="sphere"
+      :info="this.infoChildren"
+      :material="this.material"
+    />
     <v-row>
-      <v-col cols="10">
+      <v-col cols="9">
         <div ref="canvas" class="contenedor3D"></div>
       </v-col>
-
-      <v-col cols="2" class="pa-0">
-        <MenuLeft @escucharHijo="infoHijo" :scene="this.scene" />
+      <v-col cols="3" class="pa-0">
+        <MenuLeft
+          @listenChildren="meshChildren"
+          @escucharHijo="infoHijo"
+          :scene="this.scene"
+        />
       </v-col>
     </v-row>
   </div>
@@ -36,6 +44,7 @@ export default {
       0.1,
       1000
     );
+    camera.name = "Perspective";
 
     //Renderer
     const renderer = new THREE.WebGLRenderer();
@@ -67,7 +76,9 @@ export default {
 
     //Ligths
     const AmbientalLigth = new THREE.AmbientLight(0xffffff, 1);
+    AmbientalLigth.name = "Ambiental";
     const DirectionalLigth = new THREE.DirectionalLight(0xffffff, 2);
+    DirectionalLigth.name = "Directional";
 
     return {
       scene: scene,
@@ -82,6 +93,7 @@ export default {
       material: material,
       option: {},
       infoChildren: this.$store.state.childrens,
+      item: "Mesh",
     };
   },
 
@@ -127,6 +139,10 @@ export default {
       this.infoChildren =  JSON.stringify(this.$store.state.childrens) === undefined ? value : this.$store.state.childrens;
       console.log(this.infoChildren);
     },
+    meshChildren(value) {
+      this.item = value;
+      // console.log(this.item);
+    }
   },
 };
 </script>

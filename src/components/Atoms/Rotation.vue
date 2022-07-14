@@ -60,7 +60,6 @@
 export default {
   props: {
     rotation: Object,
-    figure: String,
   },
   data() {
     return {
