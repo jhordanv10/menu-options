@@ -81,7 +81,7 @@ export default {
       DirectionalLigth: DirectionalLigth,
       material: material,
       option: {},
-      infoChildren: {},
+      infoChildren: this.$store.state.childrens,
     };
   },
 
@@ -109,8 +109,7 @@ export default {
     //Controls
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableDamping = true;
-
-    this.infoChildren = this.cube;
+    this.infoChildren= JSON.stringify(this.$store.state.childrens) === undefined ? this.cube : this.$store.state.childrens;
   },
 
   mounted() {
@@ -125,7 +124,7 @@ export default {
       this.controls.update();
     },
     infoHijo(value) {
-      this.infoChildren = value;
+      this.infoChildren =  JSON.stringify(this.$store.state.childrens) === undefined ? value : this.$store.state.childrens;
       console.log(this.infoChildren);
     },
   },

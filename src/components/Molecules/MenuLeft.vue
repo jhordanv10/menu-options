@@ -25,7 +25,7 @@
     <Dialog :scene="scene" :isMesh="isMesh" />
 
     <!-- Isnot Mesh -->
-
+    
   </v-footer>
 </template>
 
@@ -41,18 +41,20 @@ export default {
   },
   data() {
     let option = {};
+    let name = JSON.stringify(this.$store.state.childrens) === undefined  ? 'cube' :this.$store.state.childrens.name;
     return {
       valid: true,
       name: "",
       option: option,
-      value: "cube",
-      text: "cube",
+      value: name,
+      text: name,
     };
   },
   mounted() {},
   methods: {
     selected(children) {
-      this.option = children;
+      this.$store.commit("ADD_CHILDREN", children);
+      this.option = JSON.stringify(this.$store.state.childrens) === undefined  ?  children : this.$store.state.childrens;
       this.$emit("escucharHijo", this.option);
     },
   },

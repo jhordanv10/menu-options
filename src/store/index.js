@@ -3,15 +3,13 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
-  state: {
-  },
-  getters: {
-  },
+const store = new Vuex.Store({
+  state: { childrens: Array},
   mutations: {
-  },
-  actions: {
-  },
-  modules: {
+    ADD_CHILDREN(state, children) {
+      state.childrens = children;
+    }
   }
 })
+
+export default store
