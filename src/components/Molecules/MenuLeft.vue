@@ -11,10 +11,6 @@
         </v-tab>
       </v-tabs>
 
-      <!-- Button add mesh -->
-      <Dialog v-if="this.item === 'Mesh'" :scene="scene" :isMesh="isMesh" />
-
-      <!-- ------------------------------------------------- -->
       <!-- Meshes -->
       <v-col
         cols="12"
@@ -40,6 +36,10 @@
             {{ childrens.name }}
           </v-btn>
         </v-btn-toggle>
+
+        <!-- Button add mesh -->
+        <Dialog v-if="this.item === 'Mesh'" :scene="scene" :isMesh="isMesh" />
+        <!-- ------------------------------------------------- -->
       </v-col>
 
       <!-- Ligth -->
@@ -75,7 +75,7 @@
         class="px-16 py-12 mx-0 my-0"
         justify="center"
         no-gutters
-        v-if="this.item ==='Camera'"
+        v-if="this.item === 'Camera'"
       >
         <v-btn-toggle
           class="px-16 py-4"
@@ -95,7 +95,6 @@
           </v-btn>
         </v-btn-toggle>
       </v-col>
-
     </v-main>
   </div>
 </template>
@@ -114,7 +113,10 @@ export default {
   },
   data() {
     let option = {};
-    let name = JSON.stringify(this.$store.state.childrens) === undefined  ? 'cube' :this.$store.state.childrens.name;
+    let name =
+      JSON.stringify(this.$store.state.childrens) === undefined
+        ? "cube"
+        : this.$store.state.childrens.name;
     return {
       item: "Mesh",
       valid: true,
@@ -122,7 +124,7 @@ export default {
       option: option,
       value: name,
       text: name,
-       items: [
+      items: [
         { id: 1, name: "Mesh", icon: "mdi-playlist-check" },
         { id: 2, name: "Light", icon: "mdi-lightbulb-on-80" },
         { id: 3, name: "Camera", icon: "mdi-video-outline" },
@@ -135,7 +137,10 @@ export default {
   methods: {
     selected(children) {
       this.$store.commit("ADD_CHILDREN", children);
-      this.option = JSON.stringify(this.$store.state.childrens) === undefined  ?  children : this.$store.state.childrens;
+      this.option =
+        JSON.stringify(this.$store.state.childrens) === undefined
+          ? children
+          : this.$store.state.childrens;
       this.$emit("escucharHijo", this.option);
     },
     getItem(name) {
@@ -173,4 +178,5 @@ export default {
   display: flex;
   justify-content: center;
 }
+
 </style>

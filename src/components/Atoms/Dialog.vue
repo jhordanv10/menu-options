@@ -8,7 +8,7 @@
       center
       @click="openDialog = true"
     >
-      <Icon  icon="mdi-plus" class="white--text" width="24" />
+      <Icon icon="mdi-plus" class="white--text" width="24" />
     </v-btn>
     <v-dialog v-model="openDialog" max-width="500px">
       <v-card>
@@ -70,7 +70,7 @@ export default {
     };
   },
   components: {
-    Icon
+    Icon,
   },
   methods: {
     createFigure() {
@@ -125,10 +125,9 @@ export default {
 
 <style scoped>
 button.ma-auto.v-btn {
-  top: 55px;
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 68%;
+  bottom: 45px;
 }
 
 button.btn-close {
