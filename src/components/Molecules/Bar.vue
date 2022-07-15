@@ -38,12 +38,8 @@ export default {
         { id: 2, name: "Base 1", path: "/base1", icon: "mdi-sphere" },
         { id: 3, name: "Base 2", path: "/base2", icon: "mdi-cube" },
         { id: 4, name: "Base 3", path: "/base3", icon: "mdi-cone" },
-        {
-          id: 5,
-          name: "Base 4",
-          path: "/base4",
-          icon: "mdi-record-circle-outline",
-        },
+        { id: 5, name: "Base 4", path: "/base4", icon: "mdi-record-circle-outline",},
+        { id: 6, name: "Collada", path: "/collada", icon: "mdi-plus",},
       ],
       properties: [
         { id: 1, name: "Material", icon: "mdi-palette-swatch" },

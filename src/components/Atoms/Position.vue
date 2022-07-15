@@ -4,13 +4,13 @@
     <h3 class="text-center">Position X</h3>
     <v-text-field
       class="px-16"
-      :color="x >= 0 ? 'greencolor' : 'redcolor'"
+      :color="position.x >= 0 ? 'greencolor' : 'redcolor'"
       type="number"
       step="any"
       min="-10"
       ref="input"
       v-model.number="position.x"
-      v-model="x"
+      v-model="position.x"
       @change="changePosition"
     >
     </v-text-field>
@@ -19,13 +19,13 @@
     <h3 class="text-center">Position Y</h3>
     <v-text-field
       class="px-16"
-      :color="y >= 0 ? 'greencolor' : 'redcolor'"
+      :color="position.y >= 0 ? 'greencolor' : 'redcolor'"
       type="number"
       step="any"
       min="-10"
       ref="input"
       v-model.number="position.y"
-      v-model="y"
+      v-model="position.y"
       @change="changePosition"
     >
     </v-text-field>
@@ -34,13 +34,13 @@
     <h3 class="text-center">Position Z</h3>
     <v-text-field
       class="px-16"
-      :color="z >= 0 ? 'greencolor' : 'redcolor'"
+      :color="position.z >= 0 ? 'greencolor' : 'redcolor'"
       type="number"
       step="any"
       min="-10"
       ref="input"
       v-model.number="position.z"
-      v-model="z"
+      v-model="position.z"
       @change="changePosition"
     >
     </v-text-field>
@@ -67,6 +67,9 @@ export default {
     changePosition() {
       this.position.set(this.x, this.y, this.z);
     },
+    mounted(){
+      console.log(this.position);
+    }
   },
 };
 </script>
