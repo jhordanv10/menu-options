@@ -15,6 +15,7 @@
           @listenChildren="meshChildren"
           @escucharHijo="infoHijo"
           :scene="this.scene"
+          :children="this.children"
         />
       </v-col>
     </v-row>
@@ -68,6 +69,7 @@ export default {
       controls: [],
       item: "Mesh",
       infoChildren: {},
+      children:[],
       material: {},
       mockup: {},
     };
@@ -87,7 +89,7 @@ export default {
   async mounted() {
     this.$refs.canvas.appendChild(this.renderer.domElement);
     this.animate();
-    // console.log("Children", this.infoChildren);
+    console.log("Children", this.infoChildren);
   },
 
   methods: {
@@ -107,7 +109,7 @@ export default {
     },
     meshChildren(value) {
       this.item = value;
-      console.log(this.item);
+      // console.log(this.item);
     },
     colladaRender() {
       const texture = new THREE.TextureLoader().load(
@@ -160,7 +162,8 @@ export default {
         // console.log(this.scene)
         // console.log(this.camera)
         this.infoChildren = this.scene.children[3].children[1]
-        console.log(this.infoChildren);
+        this.children = this.scene.children[3].children
+        // console.log(this.infoChildren);
         this.camera = this.scene.children[4];
       }, 500);
       // console.log("Camera 2")

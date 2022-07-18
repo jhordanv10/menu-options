@@ -110,6 +110,7 @@ export default {
   },
   props: {
     scene: Object,
+    children: Array,
   },
   data() {
     let option = {};
@@ -150,7 +151,7 @@ export default {
   },
   computed: {
     isMesh() {
-      return this.scene.children.filter((i) => i.isMesh === true);
+      return this.children ? this.children.filter((i) => i.isMesh === true) : this.scene.children.filter((i) => i.isMesh === true);
     },
     isLight() {
       return this.scene.children.filter((i) => i.isLight === true);

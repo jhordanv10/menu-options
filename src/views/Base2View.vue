@@ -103,9 +103,6 @@ export default {
   },
 
   methods: {
-    info() {
-      const info = this.cube;
-    },
     animate() {
       this.renderer.render(this.scene, this.camera);
       requestAnimationFrame(this.animate);
