@@ -8,7 +8,7 @@
       center
       @click="openDialog = true"
     >
-      <Icon  icon="mdi-plus" class="white--text" width="24" />
+      <Icon icon="mdi-plus" class="white--text" width="24" />
     </v-btn>
     <v-dialog v-model="openDialog" max-width="500px">
       <v-card>
@@ -23,7 +23,7 @@
             <v-text-field
               v-model="name"
               :rules="nameRules"
-              label="Name"
+              label="Nombre"
               required
             ></v-text-field>
             <v-select
@@ -60,17 +60,17 @@ export default {
       select: [{ text: "Circulo" }, { text: "Cono" }, { text: "Cubo" }],
       selectedItem: "Circulo",
       nameRules: [
-        (v) => !!v || "Name is required",
-        (v) => (v && v.length <= 15) || "Name must be less than 15 characters",
+        (v) => !!v || "Nombre es requirido",
+        (v) => (v && v.length <= 15) || "Nombre debe tener 15 caracteres",
         (v) =>
           !this.isMesh.filter(function (elem) {
             if (elem.name.toLowerCase() == v.toLowerCase()) return 1;
-          }).length || "El nombre ya existe",
+          }).length || "Nombre ya existe",
       ],
     };
   },
   components: {
-    Icon
+    Icon,
   },
   methods: {
     createFigure() {
@@ -125,10 +125,9 @@ export default {
 
 <style scoped>
 button.ma-auto.v-btn {
-  top: 55px;
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 68%;
+  bottom: 45px;
 }
 
 button.btn-close {

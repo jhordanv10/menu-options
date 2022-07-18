@@ -2,11 +2,16 @@
   <div>
     <v-bottom-navigation v-model="value">
       <v-app-bar app color="#374957">
-        <v-toolbar-title class="px-4">
+        <v-toolbar-title class="px-4 d-flex justify-center">
+          <v-img
+            @click="pushRoute('/')"
+            class="img mx-4"
+            src="../../assets/FreepikLogo1.png"
+          ></v-img>
           <v-img
             @click="pushRoute('/')"
             class="img"
-            src="../../assets/FreepikLogo1.png"
+            src="../../assets/graphicMarket.png"
           ></v-img>
         </v-toolbar-title>
         <v-row justify="center">
@@ -44,6 +49,7 @@ export default {
           path: "/base4",
           icon: "mdi-record-circle-outline",
         },
+        { id: 6, name: "Model", path: "/model", icon: "mdi-plus" },
       ],
       properties: [
         { id: 1, name: "Material", icon: "mdi-palette-swatch" },
@@ -77,8 +83,8 @@ export default {
 }
 
 .icon {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   color: #869fb2;
 }
 

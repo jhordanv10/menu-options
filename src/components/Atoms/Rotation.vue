@@ -3,16 +3,14 @@
     <!-- x -->
     <v-container class="mb-8">
       <v-row class="justify-center">
-        <label :class="rotationx === true ? 'greencolor--text' : 'redcolor--text'">{{
-          rotationx === true ? "Rotation x true" : "Rotation x false"
-        }}</label>
+        <label :class="rotationx ? 'greencolor--text' : 'redcolor--text'">Rotation x</label>
       </v-row>
       <v-row class="justify-center">
         <v-switch
-          :class="rotationx === true ? 'text--greencolor my-0' : 'text--redcolor my-0'"
+          :class="rotationx ? 'text--greencolor my-0' : 'text--redcolor my-0'"
           v-model="rotationx"
           @click="changeRotation(rotationx)"
-          :color="rotationx === true ? 'greencolor' : 'redcolor'"
+          :color="rotationx ? 'greencolor' : 'redcolor'"
           hide-details
         ></v-switch>
       </v-row>
@@ -21,16 +19,14 @@
     <!-- y -->
     <v-container class="mb-8">
       <v-row class="justify-center">
-        <label :class="rotationy === true ? 'greencolor--text' : 'redcolor--text'">{{
-          rotationy === true ? "Rotation y true" : "Rotation y false"
-        }}</label>
+        <label :class="rotationy ? 'greencolor--text' : 'redcolor--text'">Rotación y</label>
       </v-row>
       <v-row class="justify-center">
         <v-switch
-          :class="rotationy === true ? 'text--green my-0' : 'text--red my-0'"
+          :class="rotationy ? 'text--green my-0' : 'text--red my-0'"
           v-model="rotationy"
           @click="changeRotation(rotationy)"
-          :color="rotationy === true ? 'greencolor' : 'redcolor'"
+          :color="rotationy ? 'greencolor' : 'redcolor'"
           hide-details
         ></v-switch>
       </v-row>
@@ -39,16 +35,14 @@
     <!-- z -->
     <v-container class="mb-8">
       <v-row class="justify-center">
-        <label :class="rotationz === true ? 'greencolor--text' : 'redcolor--text'">{{
-          rotationz === true ? "Rotation z true" : "Rotation z false"
-        }}</label>
+        <label :class="rotationz ? 'greencolor--text' : 'redcolor--text'">Rotation z</label>
       </v-row>
       <v-row class="justify-center">
         <v-switch
-          :class="rotationz === true ? 'text--greencolor my-0' : 'text--redcolor my-0'"
+          :class="rotationz ? 'text--greencolor my-0' : 'text--redcolor my-0'"
           v-model="rotationz"
           @click="changeRotation(rotationz)"
-          :color="rotationz === true ? 'greencolor' : 'redcolor'"
+          :color="rotationz ? 'greencolor' : 'redcolor'"
           hide-details
         ></v-switch>
       </v-row>
@@ -61,16 +55,20 @@ export default {
   props: {
     rotation: Object,
   },
+  mounted() {
+    console.log(this.rotation.x);
+  },
   data() {
+
     return {
-      rotationx: this.rotation.x,
-      rotationy: this.rotation.y,
-      rotationz: this.rotation.z,
+      rotationx: 0,
+      rotationy: 0,
+      rotationz: 0,
     };
   },
   methods: {
     changeRotation(rot) {
-      if (rot === true) {
+      if (rot) {
         this.animatex();
         this.animatey();
         this.animatez();
@@ -78,19 +76,19 @@ export default {
     },
 
     animatex() {
-      if (this.rotationx === true) {
+      if (this.rotationx) {
         this.rotation.x += 0.003;
         requestAnimationFrame(this.animatex);
       }
     },
     animatey() {
-      if (this.rotationy === true) {
+      if (this.rotationy) {
         this.rotation.y += 0.003;
         requestAnimationFrame(this.animatey);
       }
     },
     animatez() {
-      if (this.rotationz === true) {
+      if (this.rotationz) {
         this.rotation.z += 0.003;
         requestAnimationFrame(this.animatez);
       }

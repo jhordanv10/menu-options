@@ -11,10 +11,6 @@
         </v-tab>
       </v-tabs>
 
-      <!-- Button add mesh -->
-      <Dialog v-if="this.item === 'Mesh'" :scene="scene" :isMesh="isMesh" />
-
-      <!-- ------------------------------------------------- -->
       <!-- Meshes -->
       <v-col
         cols="12"
@@ -40,6 +36,10 @@
             {{ childrens.name }}
           </v-btn>
         </v-btn-toggle>
+
+        <!-- Button add mesh -->
+        <Dialog v-if="this.item === 'Mesh'" :scene="scene" :isMesh="isMesh" />
+        <!-- ------------------------------------------------- -->
       </v-col>
 
       <!-- Ligth -->
@@ -75,7 +75,7 @@
         class="px-16 py-12 mx-0 my-0"
         justify="center"
         no-gutters
-        v-if="this.item ==='Camera'"
+        v-if="this.item === 'Camera'"
       >
         <v-btn-toggle
           class="px-16 py-4"
@@ -95,7 +95,6 @@
           </v-btn>
         </v-btn-toggle>
       </v-col>
-
     </v-main>
   </div>
 </template>
@@ -111,16 +110,21 @@ export default {
   },
   props: {
     scene: Object,
+    children: Array,
   },
   data() {
     let option = {};
+    let name =
+      JSON.stringify(this.$store.state.childrens) === undefined
+        ? ""
+        : this.$store.state.childrens.name;
     return {
       item: "Mesh",
       valid: true,
       name: "",
       option: option,
-      value: "cube",
-      text: "cube",
+      value: name,
+      text: name,
       items: [
         { id: 1, name: "Mesh", icon: "mdi-playlist-check" },
         { id: 2, name: "Light", icon: "mdi-lightbulb-on-80" },
@@ -133,7 +137,11 @@ export default {
   },
   methods: {
     selected(children) {
-      this.option = children;
+      this.$store.commit("ADD_CHILDREN", children);
+      this.option =
+        JSON.stringify(this.$store.state.childrens) === undefined
+          ? children
+          : this.$store.state.childrens;
       this.$emit("escucharHijo", this.option);
     },
     getItem(name) {
@@ -143,7 +151,7 @@ export default {
   },
   computed: {
     isMesh() {
-      return this.scene.children.filter((i) => i.isMesh === true);
+      return this.children ? this.children.filter((i) => i.isMesh === true) : this.scene.children.filter((i) => i.isMesh === true);
     },
     isLight() {
       return this.scene.children.filter((i) => i.isLight === true);
@@ -171,4 +179,5 @@ export default {
   display: flex;
   justify-content: center;
 }
+
 </style>

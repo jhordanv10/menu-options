@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <Menu
-      v-if="item === 'Mesh'"
+      v-if="this.option !== ''"
       figure="torus"
       :info="this.infoChildren"
       :material="this.material"
@@ -30,6 +30,7 @@ import MenuLeft from "../components/Molecules/MenuLeft.vue";
 
 
 export default {
+  name: "Base 4",
   components: {
     Menu,
     MenuLeft,
@@ -90,7 +91,7 @@ export default {
       pointer: pointer,
       gsap: gsap,
       material: material,
-      option: {},
+      option: '',
       infoChildren: {},
       item: "Mesh",
     };
@@ -188,6 +189,7 @@ export default {
       this.controls.update();
     },
     infoHijo(value) {
+      this.option = value;
       this.infoChildren = value;
       // console.log(this.infoChildren);
     },

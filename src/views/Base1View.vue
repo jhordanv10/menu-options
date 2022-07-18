@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <Menu
-      v-if="item === 'Mesh'"
+      v-if="this.option !== ''"
       figure="sphere"
       :info="this.infoChildren"
       :material="this.material"
@@ -28,6 +28,7 @@ import Menu from "../components/Molecules/Menu.vue";
 import MenuLeft from "../components/Molecules/MenuLeft.vue";
 
 export default {
+  name: "Base 1",
   components: {
     Menu,
     MenuLeft,
@@ -91,8 +92,8 @@ export default {
       AmbientalLigth: AmbientalLigth,
       DirectionalLigth: DirectionalLigth,
       material: material,
-      option: {},
-      infoChildren: {},
+      option: '',
+      infoChildren: this.$store.state.childrens,
       item: "Mesh",
     };
   },
@@ -121,8 +122,7 @@ export default {
     //Controls
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableDamping = true;
-
-    this.infoChildren = this.cube;
+    this.infoChildren= JSON.stringify(this.$store.state.childrens) === undefined ? '' : this.$store.state.childrens;
   },
 
   mounted() {
@@ -137,13 +137,14 @@ export default {
       this.controls.update();
     },
     infoHijo(value) {
-      this.infoChildren = value;
-      // console.log(this.infoChildren);
+      this.option = value
+      this.infoChildren =  JSON.stringify(this.$store.state.childrens) === undefined ? value : this.$store.state.childrens;
+      console.log(this.infoChildren);
     },
     meshChildren(value) {
       this.item = value;
-      // console.log(this.item);
-    },
+      console.log(this.item);
+    }
   },
 };
 </script>

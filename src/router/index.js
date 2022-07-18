@@ -5,6 +5,7 @@ import Base1View from '../views/Base1View.vue'
 import Base2View from '../views/Base2View.vue'
 import Base3View from '../views/Base3View.vue'
 import Base4View from '../views/Base4View.vue'
+import ColladaView from '../views/ColladaView.vue'
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/base4',
     name: 'base4',
     component: Base4View,
+  },
+  {
+    path: '/model',
+    name: 'model',
+    component: ColladaView,
   },
 ]
 const router = new VueRouter({
