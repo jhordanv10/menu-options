@@ -36,8 +36,8 @@ const routes = [
     component: Base4View,
   },
   {
-    path: '/collada',
-    name: 'collada',
+    path: '/model',
+    name: 'model',
     component: ColladaView,
   },
 ]

@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <Menu
-      v-if="item === 'Mesh'"
+      v-if="this.option !== ''"
       figure=""
       :info="this.infoChildren"
       :material="this.material"
@@ -30,6 +30,7 @@ import MenuLeft from "../components/Molecules/MenuLeft.vue";
 import { ColladaLoader } from "three/examples/jsm/loaders/ColladaLoader";
 
 export default {
+  name: "Model",
   components: {
     Menu,
     MenuLeft,
@@ -72,6 +73,7 @@ export default {
       children:[],
       material: {},
       mockup: {},
+      option:'',
     };
   },
 
@@ -101,10 +103,8 @@ export default {
       this.controls.update();
     },
     infoHijo(value) {
-      this.infoChildren =
-        JSON.stringify(this.$store.state.childrens) === undefined
-          ? value
-          : this.$store.state.childrens;
+      this.option = value;
+      this.infoChildren = value;
       console.log('InfoChildren',this.infoChildren);
     },
     meshChildren(value) {
