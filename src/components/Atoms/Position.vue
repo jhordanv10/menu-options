@@ -6,10 +6,8 @@
       class="px-16"
       :color="position.x >= 0 ? 'greencolor' : 'redcolor'"
       type="number"
-      step="any"
+      step="0.01"
       min="-10"
-      ref="input"
-      v-model.number="position.x"
       v-model="position.x"
       @change="changePosition"
     >
@@ -21,10 +19,8 @@
       class="px-16"
       :color="position.y >= 0 ? 'greencolor' : 'redcolor'"
       type="number"
-      step="any"
+      step="0.01"
       min="-10"
-      ref="input"
-      v-model.number="position.y"
       v-model="position.y"
       @change="changePosition"
     >
@@ -36,10 +32,8 @@
       class="px-16"
       :color="position.z >= 0 ? 'greencolor' : 'redcolor'"
       type="number"
-      step="any"
+      step="0.01"
       min="-10"
-      ref="input"
-      v-model.number="position.z"
       v-model="position.z"
       @change="changePosition"
     >
@@ -50,13 +44,10 @@
 <script>
 export default {
   data() {
-    let x = Math.round(this.position.x)
-    let y = Math.round(this.position.y)
-    let z = Math.round(this.position.z)
     return {
-      x:x,
-      y:y,
-      z:z,
+      x:Math.round(this.position.x),
+      y:Math.round(this.position.y),
+      z:Math.round(this.position.z),
     };
   },
   props: {
