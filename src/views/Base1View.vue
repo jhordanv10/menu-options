@@ -141,7 +141,7 @@ export default {
     },
     meshChildren(value) {
       this.item = value;
-      // console.log(this.item);
+      console.log(this.item);
     }
   },
 };
