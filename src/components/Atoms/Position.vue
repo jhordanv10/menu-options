@@ -55,7 +55,7 @@ export default {
     figure: String,
   },
   methods: {
-    changePosition() {
+    changePosition(e) {
       let char = String.fromCharCode(e.keyCode); 
       if (/^[0-9A-Za-z]+$/.test(char)) {
         this.position.set(this.x, this.y, this.z);
