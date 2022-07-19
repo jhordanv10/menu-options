@@ -4,7 +4,7 @@
       <v-app-bar app color="#374957">
         <v-toolbar-title class="px-4 d-flex justify-center">
           <v-img class="img mx-4" src="../../assets/FreepikLogo1.png"></v-img>
-          <v-img class="img" src="../../assets/graphicMarket.png"></v-img>
+          <v-img class="imgGraphic" src="../../assets/graphicMarket.png"></v-img>
         </v-toolbar-title>
         <v-row justify="center">
           <v-btn
@@ -36,10 +36,10 @@ export default {
         { id: 3, name: "Base 2", path: "/base2", icon: "mdi-cube" },
         { id: 4, name: "Base 3", path: "/base3", icon: "mdi-cone" },
         { id: 5, name: "Base 4", path: "/base4", icon: "mdi-record-circle-outline" },
-        { id: 6, name: "Pet", path: "/models/pet", icon: "mdi-plus" },
-        { id: 7, name: "Gloves", path: "/models/gloves", icon: "mdi-mixed-martial-arts" },
-        { id: 8, name: "Hoddie", path: "/models/hoddie", icon: "mdi-hanger" },
-        { id: 9, name: "Eyeliner", path: "/models/eyeliner", icon: "mdi-eye" },
+        { id: 6, name: "Pet", path: "/pet", icon: "mdi-plus" },
+        { id: 7, name: "Gloves", path: "/gloves", icon: "mdi-mixed-martial-arts" },
+        { id: 8, name: "Hoddie", path: "/hoddie", icon: "mdi-hanger" },
+        { id: 9, name: "Eyeliner", path: "/eyeliner", icon: "mdi-eye" },
       ],
       properties: [
         { id: 1, name: "Material", icon: "mdi-palette-swatch" },
@@ -69,6 +69,12 @@ export default {
   width: 30px;
   height: 30px;
   align-items: center;
+}
+.imgGraphic {
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  opacity: 50%;
 }
 
 .icon {
