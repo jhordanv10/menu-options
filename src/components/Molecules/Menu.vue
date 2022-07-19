@@ -145,11 +145,7 @@ export default {
     },
   },
   mounted() {
-<<<<<<< HEAD
-    console.log(this.info);
-=======
     // console.log('Menu.info', this.info);
->>>>>>> develop-jhordan
   },
 };
 </script>
