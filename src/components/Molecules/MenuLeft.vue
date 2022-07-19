@@ -28,7 +28,17 @@
         >
           <v-btn
             class="rounded-lg"
-            v-for="childrens in isMesh"
+            v-for="childrens in isMeshGeometry"
+            :key="childrens.id"
+            @click="selected(childrens)"
+            :value="childrens.name"
+          >
+          
+            {{ childrens.name }}
+          </v-btn>
+          <v-btn
+            class="rounded-lg"
+            v-for="childrens in isMeshModel"
             :key="childrens.id"
             @click="selected(childrens)"
             :value="childrens.name"
@@ -38,7 +48,11 @@
         </v-btn-toggle>
 
         <!-- Button add mesh -->
-        <Dialog v-if="this.item === 'Mesh'" :scene="scene" :isMesh="isMesh" />
+        <Dialog
+          v-if="this.item === 'Mesh'"
+          :scene="scene"
+          :isMeshGeometry="isMeshGeometry"
+        />
         <!-- ------------------------------------------------- -->
       </v-col>
 
@@ -150,8 +164,15 @@ export default {
     },
   },
   computed: {
-    isMesh() {
-      return this.children ? this.children.filter((i) => i.isMesh === true) : this.scene.children.filter((i) => i.isMesh === true);
+    isMeshModel() {
+      return this.children
+        ? this.children.filter((i) => i.isMesh === true)
+        : [];
+    },
+    isMeshGeometry() {
+      return this.scene
+        ? this.scene.children.filter((i) => i.isMesh === true)
+        : {};
     },
     isLight() {
       return this.scene.children.filter((i) => i.isLight === true);
@@ -179,5 +200,4 @@ export default {
   display: flex;
   justify-content: center;
 }
-
 </style>

@@ -28,7 +28,7 @@ import Menu from "../components/Molecules/Menu.vue";
 import MenuLeft from "../components/Molecules/MenuLeft.vue";
 
 export default {
-  name: "Base 2",
+  name: "Base2",
   components: {
     Menu,
     MenuLeft,
