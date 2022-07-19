@@ -5,7 +5,10 @@ import Base1View from '../views/Base1View.vue'
 import Base2View from '../views/Base2View.vue'
 import Base3View from '../views/Base3View.vue'
 import Base4View from '../views/Base4View.vue'
-import ColladaView from '../views/ColladaView.vue'
+import PetView from '../views/PetView.vue'
+import GlovesView from '../views/GlovesView.vue'
+import EyelinerView from '../views/EyelinerView.vue'
+import HoddieView from '../views/HoddieView.vue'
 
 Vue.use(VueRouter)
 
@@ -36,9 +39,24 @@ const routes = [
     component: Base4View,
   },
   {
-    path: '/model',
-    name: 'model',
-    component: ColladaView,
+    path: '/models/pet',
+    name: 'models',
+    component: PetView,
+  },
+  {
+    path: '/models/gloves',
+    name: 'gloves',
+    component: GlovesView,
+  },
+  {
+    path: '/models/eyeliner',
+    name: 'eyeliner',
+    component: EyelinerView,
+  },
+  {
+    path: '/models/hoddie',
+    name: 'hoddie',
+    component: HoddieView,
   },
 ]
 const router = new VueRouter({

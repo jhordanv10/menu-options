@@ -30,7 +30,7 @@ import MenuLeft from "../components/Molecules/MenuLeft.vue";
 
 
 export default {
-  name: "Base 4",
+  name: "Base4",
   components: {
     Menu,
     MenuLeft,
