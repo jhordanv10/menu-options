@@ -9,7 +9,7 @@
       step="0.01"
       min="-10"
       v-model="position.x"
-      @change="changePosition"
+      @keypress="changePosition($event)"
     >
     </v-text-field>
 
@@ -22,7 +22,7 @@
       step="0.01"
       min="-10"
       v-model="position.y"
-      @change="changePosition"
+      @keypress="changePosition($event)"
     >
     </v-text-field>
 
@@ -35,7 +35,7 @@
       step="0.01"
       min="-10"
       v-model="position.z"
-      @change="changePosition"
+      @keypress="changePosition($event)"
     >
     </v-text-field>
   </v-card-text>
@@ -45,9 +45,9 @@
 export default {
   data() {
     return {
-      x:Math.round(this.position.x),
-      y:Math.round(this.position.y),
-      z:Math.round(this.position.z),
+      x: Math.round(this.position.x),
+      y: Math.round(this.position.y),
+      z: Math.round(this.position.z),
     };
   },
   props: {
@@ -56,14 +56,17 @@ export default {
   },
   methods: {
     changePosition() {
-      this.position.set(this.x, this.y, this.z);
+      let char = String.fromCharCode(e.keyCode); 
+      if (/^[0-9A-Za-z]+$/.test(char)) {
+        this.position.set(this.x, this.y, this.z);
+        return true; 
+      } else e.preventDefault(); 
     },
-    mounted(){
+    mounted() {
       console.log(this.position);
-    }
+    },
   },
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
