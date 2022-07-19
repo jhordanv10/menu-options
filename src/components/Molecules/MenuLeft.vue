@@ -116,7 +116,7 @@ export default {
     let option = {};
     let name =
       JSON.stringify(this.$store.state.childrens) === undefined
-        ? "cube"
+        ? ""
         : this.$store.state.childrens.name;
     return {
       item: "Mesh",
