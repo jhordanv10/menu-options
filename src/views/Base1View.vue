@@ -81,6 +81,9 @@ export default {
     const DirectionalLigth = new THREE.DirectionalLight(0xffffff, 2);
     DirectionalLigth.name = "Directional";
 
+    var raycaster = new THREE.Raycaster();
+    var mouse = new THREE.Vector2();
+
     return {
       scene: scene,
       camera: camera,
@@ -92,9 +95,14 @@ export default {
       AmbientalLigth: AmbientalLigth,
       DirectionalLigth: DirectionalLigth,
       material: material,
-      option: '',
+      option: "",
       infoChildren: this.$store.state.childrens,
       item: "Mesh",
+      raycaster: raycaster,
+      mouse: mouse,
+      objects: this.isMesh,
+      intersects: [],
+      selected: sphere,
     };
   },
 
@@ -122,12 +130,19 @@ export default {
     //Controls
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableDamping = true;
-    this.infoChildren= JSON.stringify(this.$store.state.childrens) === undefined ? '' : this.$store.state.childrens;
+
+    this.infoChildren =
+      JSON.stringify(this.$store.state.childrens) === undefined
+        ? ""
+        : this.$store.state.childrens;
   },
 
   mounted() {
     this.$refs.canvas.appendChild(this.renderer.domElement);
     this.animate();
+    console.log(this.isMesh);
+
+    this.renderer.domElement.addEventListener("click", this.onClick);
   },
 
   methods: {
@@ -137,15 +152,32 @@ export default {
       this.controls.update();
     },
     infoHijo(value) {
-      this.option = value
-      this.infoChildren =  JSON.stringify(this.$store.state.childrens) === undefined ? value : this.$store.state.childrens;
-      console.log(this.infoChildren);
+      this.option = value;
+      this.infoChildren =
+        JSON.stringify(this.$store.state.childrens) === undefined
+          ? value
+          : this.$store.state.childrens;
     },
     meshChildren(value) {
       this.item = value;
       console.log(this.item);
-    }
+    },
+    onClick(event) {
+      this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+      this.raycaster.setFromCamera(this.mouse, this.camera);
+      this.intersects = this.raycaster.intersectObjects(this.objects);
+      if (this.intersects.length > 0) {
+        this.infoChildren = this.intersects[0].object;
+      }
+    },
   },
+  computed: {
+    isMesh() {
+      return this.scene.children.filter((i) => i.isMesh === true);
+    },
+  }
 };
 </script>
 
