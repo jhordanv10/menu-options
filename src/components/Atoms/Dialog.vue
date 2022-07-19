@@ -50,7 +50,7 @@ import { Icon } from "@iconify/vue2";
 export default {
   props: {
     scene: Object,
-    isMesh: Array,
+    isMeshGeometry: Array,
   },
   data() {
     return {
@@ -63,7 +63,7 @@ export default {
         (v) => !!v || "Nombre es requirido",
         (v) => (v && v.length <= 15) || "Nombre debe tener 15 caracteres",
         (v) =>
-          !this.isMesh.filter(function (elem) {
+          !this.isMeshGeometry.filter(function (elem) {
             if (elem.name.toLowerCase() == v.toLowerCase()) return 1;
           }).length || "Nombre ya existe",
       ],
