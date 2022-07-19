@@ -39,22 +39,22 @@ const routes = [
     component: Base4View,
   },
   {
-    path: '/models/pet',
-    name: 'models',
+    path: '/pet',
+    name: 'pet',
     component: PetView,
   },
   {
-    path: '/models/gloves',
+    path: '/gloves',
     name: 'gloves',
     component: GlovesView,
   },
   {
-    path: '/models/eyeliner',
+    path: '/eyeliner',
     name: 'eyeliner',
     component: EyelinerView,
   },
   {
-    path: '/models/hoddie',
+    path: '/hoddie',
     name: 'hoddie',
     component: HoddieView,
   },
