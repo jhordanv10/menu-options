@@ -151,11 +151,11 @@ export default {
       ],
       file_select: file_select,
       blendings : [
-					{ text: 'No', constant: THREE.NoBlending, },
-					{ text: 'Normal', constant: THREE.NormalBlending },
-					{ text: 'Additive', constant: THREE.AdditiveBlending },
-					{ text: 'Subtractive', constant: THREE.SubtractiveBlending },
-					{ text: 'Multiply', constant: THREE.MultiplyBlending }
+					{ text: 'No', value: THREE.NoBlending, },
+					{ text: 'Normal', value: THREE.NormalBlending },
+					{ text: 'Additive', value: THREE.AdditiveBlending },
+					{ text: 'Subtractive', value: THREE.SubtractiveBlending },
+					{ text: 'Multiply', value: THREE.MultiplyBlending }
 				],
     };
   },
@@ -179,11 +179,11 @@ export default {
     },
     changeBlending1() {
       if(blendings.name === 'No') {
-        material_info.blending =  0
+        material_info.blending =  blendings.value
       } else if (blendings.name === 'Normal') {
-        material_info.blending =  1
+        material_info.blending =  blendings.value
       }  else if (blendings.name === 'Additive') {
-        material_info.blending =  2
+        material_info.blending =  blendings.value
       }
     },
     changeVisible() {
