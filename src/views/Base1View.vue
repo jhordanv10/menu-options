@@ -8,7 +8,7 @@
     />
     <v-row>
       <v-col cols="9">
-        <div ref="canvas" class="contenedor3D"></div>
+        <div ref="canvas" class="contenedor3D" @click="onClick"></div>
       </v-col>
       <v-col cols="3" class="pa-0">
         <MenuLeft
@@ -83,6 +83,15 @@ export default {
 
     var raycaster = new THREE.Raycaster();
     var mouse = new THREE.Vector2();
+    var objects = this.isMesh;
+    // instantiate a texture loader
+    const textureToShow = 0;
+
+    const arr = [
+      "https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_gates.jpg",
+      "https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate1.jpg",
+      "https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate2.jpg",
+    ];
 
     return {
       scene: scene,
@@ -100,9 +109,12 @@ export default {
       item: "Mesh",
       raycaster: raycaster,
       mouse: mouse,
-      objects: this.isMesh,
+      objects: objects,
       intersects: [],
       selected: sphere,
+      // The textures to use
+      arr: arr,
+      textureToShow: textureToShow,
     };
   },
 
@@ -140,9 +152,6 @@ export default {
   mounted() {
     this.$refs.canvas.appendChild(this.renderer.domElement);
     this.animate();
-    console.log(this.isMesh);
-
-    this.renderer.domElement.addEventListener("click", this.onClick);
   },
 
   methods: {
@@ -167,9 +176,32 @@ export default {
       this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
       this.raycaster.setFromCamera(this.mouse, this.camera);
-      this.intersects = this.raycaster.intersectObjects(this.objects);
-      if (this.intersects.length > 0) {
+      this.intersects = this.raycaster.intersectObjects(this.isMesh, true);
+      if (this.intersects.length) {
         this.infoChildren = this.intersects[0].object;
+        //LOAD TEXTURE and on completion apply it on SPHERE
+        new THREE.TextureLoader().load(
+          this.arr[this.textureToShow],
+          (texture) => {
+            //Update Texture
+            this.infoChildren.material.map = texture;
+            this.infoChildren.material.needsUpdate = true;
+            // Update the next texture to show
+            this.textureToShow++;
+            // Have we got to the end of the textures array
+            if (this.textureToShow > this.arr.length - 1) {
+              this.textureToShow = 0;
+            }
+          },
+          (xhr) => {
+            //Download Progress
+            console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+          },
+          (error) => {
+            //Error CallBack
+            console.log("An error happened" + error);
+          }
+        );
       }
     },
   },
@@ -177,7 +209,7 @@ export default {
     isMesh() {
       return this.scene.children.filter((i) => i.isMesh === true);
     },
-  }
+  },
 };
 </script>
 

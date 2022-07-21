@@ -8,7 +8,7 @@
     />
     <v-row>
       <v-col cols="9">
-        <div ref="canvas" class="contenedor3D"></div>
+        <div ref="canvas" class="contenedor3D" @mousemove="onPointer"></div>
       </v-col>
       <v-col cols="3" class="pa-0">
         <MenuLeft
@@ -27,7 +27,6 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { gsap } from "gsap";
 import Menu from "../components/Molecules/Menu.vue";
 import MenuLeft from "../components/Molecules/MenuLeft.vue";
-
 
 export default {
   name: "Base4",
@@ -91,7 +90,7 @@ export default {
       pointer: pointer,
       gsap: gsap,
       material: material,
-      option: '',
+      option: "",
       infoChildren: {},
       item: "Mesh",
     };
@@ -172,7 +171,7 @@ export default {
       try {
         switch (this.meshCurrentClick.name) {
           case "Torus 1":
-            return console.log('torus 1');
+            return console.log("torus 1");
           default:
             return null;
         }
