@@ -120,7 +120,7 @@ export default {
       let scene = this.scene;
       let camera = this.camera;
       let mockup = this.mockup;
-      loader.load("./pet.dae", function (collada) {
+      loader.load("./models/pet.dae", function (collada) {
         mockup = collada.scene;
         mockup.traverse(async function (node) {
           if (node.isMesh) {
