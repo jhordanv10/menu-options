@@ -33,7 +33,7 @@
     <!-- Side -->
     <v-container>
       <v-row>
-        <v-col class="d-flex px-16" cols="12">
+        <v-col class="d-flex px-16 py-0" cols="12">
           <v-select
             v-model="material_info.side"
             @change="changeSide"
@@ -47,7 +47,7 @@
     <!-- Blending -->
     <v-container>
       <v-row>
-        <v-col class="d-flex px-16" cols="12">
+        <v-col class="d-flex px-16 py-0" cols="12">
           <v-select
             v-model="material_info.blending"
             @change="changeBlending"
