@@ -38,7 +38,21 @@
             v-model="material_info.side"
             @change="changeSide"
             :items="items"
-            :label="material_info.side === 0 ? 'Font' : 'Back'"
+            :label="material_info.side === 0 ? 'Front' : 'Back'"
+          ></v-select>
+        </v-col>
+      </v-row>
+    </v-container>
+
+    <!-- Blending -->
+    <v-container>
+      <v-row>
+        <v-col class="d-flex px-16" cols="12">
+          <v-select
+            v-model="material_info.blending"
+            @change="changeBlending"
+            :items="blendings"
+            label="Blending"
           ></v-select>
         </v-col>
       </v-row>
@@ -122,7 +136,7 @@ export default {
     return {
       color: color,
       items: [
-        { value: "0", text: "Font" },
+        { value: "0", text: "Front" },
         { value: "1", text: "Back" },
       ],
       // The textures to use
@@ -136,6 +150,13 @@ export default {
           "Avatar size should be less than 2 MB!",
       ],
       file_select: file_select,
+      blendings : [
+					{ text: 'No', constant: THREE.NoBlending, },
+					{ text: 'Normal', constant: THREE.NormalBlending },
+					{ text: 'Additive', constant: THREE.AdditiveBlending },
+					{ text: 'Subtractive', constant: THREE.SubtractiveBlending },
+					{ text: 'Multiply', constant: THREE.MultiplyBlending }
+				],
     };
   },
   props: {
@@ -154,6 +175,15 @@ export default {
         this.material_info.side = 0;
       } else if (this.material_info.side === "1") {
         this.material_info.side = 1;
+      }
+    },
+    changeBlending1() {
+      if(blendings.name === 'No') {
+        material_info.blending =  0
+      } else if (blendings.name === 'Normal') {
+        material_info.blending =  1
+      }  else if (blendings.name === 'Additive') {
+        material_info.blending =  2
       }
     },
     changeVisible() {
