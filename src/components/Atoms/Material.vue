@@ -52,7 +52,7 @@
             v-model="material_info.blending"
             @change="changeBlending"
             :items="blendings"
-            label="Blending"
+            :label="blendings.text"
           ></v-select>
         </v-col>
       </v-row>
@@ -136,8 +136,8 @@ export default {
     return {
       color: color,
       items: [
-        { value: "0", text: "Front" },
-        { value: "1", text: "Back" },
+        { value: THREE.FrontSide, text: "Front" },
+        { value: THREE.BackSide, text: "Back" },
       ],
       // The textures to use
       arr: arr,
@@ -169,22 +169,10 @@ export default {
   },
   methods: {
     changeSide() {
-      console.log(this.material_info.side);
-
-      if (this.material_info.side === "0") {
-        this.material_info.side = 0;
-      } else if (this.material_info.side === "1") {
-        this.material_info.side = 1;
-      }
+        this.material_info.side = items.value;
     },
     changeBlending1() {
-      if(blendings.name === 'No') {
-        material_info.blending =  blendings.value
-      } else if (blendings.name === 'Normal') {
-        material_info.blending =  blendings.value
-      }  else if (blendings.name === 'Additive') {
-        material_info.blending =  blendings.value
-      }
+        material_info.blending =  blendings.value;
     },
     changeVisible() {
       this.material_info.visible = !this.material_info.visible;
