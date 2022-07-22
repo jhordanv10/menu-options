@@ -182,7 +182,7 @@ export default {
       if (this.intersects.length) {
         this.infoChildren = this.intersects[0].object;
         this.option = this.infoChildren;
-        // console.log(this.infoChildren.name);
+        this.$store.commit("ADD_CHILDREN", this.infoChildren);
       }
     },
   },

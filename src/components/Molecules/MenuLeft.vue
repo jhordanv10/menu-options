@@ -130,13 +130,13 @@ export default {
     let option = {};
     let name =
       JSON.stringify(this.$store.state.childrens) === undefined
-        ? ""
+        ? ''
         : this.$store.state.childrens.name;
 
     return {
       item: "Mesh",
       valid: true,
-      name: "",
+      name: name,
       option: option,
       value: name,
       items: [
