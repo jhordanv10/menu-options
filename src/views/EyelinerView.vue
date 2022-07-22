@@ -9,7 +9,7 @@
     />
     <v-row>
       <v-col cols="9">
-        <div ref="canvas" class="contenedor3D"></div>
+        <div ref="canvas" class="contenedor3D" @click="onClick"></div>
       </v-col>
       <v-col cols="3" class="pa-0">
         <MenuLeft
@@ -17,6 +17,7 @@
           @escucharHijo="infoHijo"
           :scene="this.scene"
           :children="this.children"
+          :active="this.infoChildren.name"
         />
       </v-col>
     </v-row>
@@ -66,6 +67,10 @@ export default {
     directionalLight.position.set(1, 1, 0).normalize();
     scene.add(directionalLight);
 
+    var raycaster = new THREE.Raycaster();
+    var mouse = new THREE.Vector2();
+    var objects = this.children;
+
     return {
       scene: scene,
       camera: camera,
@@ -77,6 +82,10 @@ export default {
       material: {},
       mockup: {},
       option:'',
+      raycaster: raycaster,
+      mouse: mouse,
+      objects: objects,
+      intersects: [],
     };
   },
 
@@ -161,15 +170,22 @@ export default {
         scene.add(camera2);
       });
       setTimeout(() => {
-        // console.log(camera2)
-        // console.log(this.scene)
-        // console.log(this.camera)
         this.infoChildren = this.scene.children[3].children[1]
         this.children = this.scene.children[3].children
-        // console.log(this.infoChildren);
         this.camera = this.scene.children[4];
       }, 500);
-      // console.log("Camera 2")
+    },
+    onClick(event) {
+      this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+      this.raycaster.setFromCamera(this.mouse, this.camera);
+      this.intersects = this.raycaster.intersectObjects(this.children, true);
+      if (this.intersects.length) {
+        this.infoChildren = this.intersects[0].object;
+        this.option = this.infoChildren;
+        this.$store.commit("ADD_CHILDREN", this.infoChildren);
+      }
     },
   },
 };
