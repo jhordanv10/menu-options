@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+    <Loading v-if="!this.scene" />
     <Menu
       v-if="this.option !== ''"
       figure="torus"
@@ -27,12 +28,14 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { gsap } from "gsap";
 import Menu from "../components/Molecules/Menu.vue";
 import MenuLeft from "../components/Molecules/MenuLeft.vue";
+import Loading from '../components/Atoms/Loafing.vue'
 
 export default {
   name: "Base4",
   components: {
     Menu,
     MenuLeft,
+    Loading,
   },
   data() {
     //Emit
