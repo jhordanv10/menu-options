@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+    <Loading v-if="!this.$refs.canvas"/>
     <Menu
       v-if="this.option !== ''"
       figure=""
@@ -28,12 +29,14 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Menu from "../components/Molecules/Menu.vue";
 import MenuLeft from "../components/Molecules/MenuLeft.vue";
 import { ColladaLoader } from "three/examples/jsm/loaders/ColladaLoader";
+import Loading from '../components/Atoms/Loafing.vue'
 
 export default {
   name: "Hoddies",
   components: {
     Menu,
     MenuLeft,
+    Loading
   },
   data() {
     //Scene
