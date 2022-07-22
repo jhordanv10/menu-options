@@ -1,5 +1,5 @@
 <template>
-  <div color="#fff" class="menuLeft pa-0" padless>
+  <div color="#fff" class="menuRight pa-0" padless>
     <v-main class="pt-6">
       <v-tabs class="tab" color="bluecolor">
         <v-tab
@@ -190,7 +190,7 @@ export default {
 </script>
 
 <style scoped>
-.menuLeft {
+.menuRight {
   height: 100vh;
 }
 
