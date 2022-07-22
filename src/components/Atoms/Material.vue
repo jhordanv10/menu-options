@@ -38,7 +38,7 @@
             v-model="material_info.side"
             @change="changeSide"
             :items="items"
-            :label="material_info.side === 0 ? 'Front' : 'Back'"
+            :label="!!items ? 'Side' : items.text"
           ></v-select>
         </v-col>
       </v-row>
@@ -52,7 +52,7 @@
             v-model="material_info.blending"
             @change="changeBlending"
             :items="blendings"
-            :label="blendings.text"
+            :label="!!blendings ? 'Blending' : blendings.text"
           ></v-select>
         </v-col>
       </v-row>
@@ -119,6 +119,11 @@ import * as THREE from "three";
 import axios from "axios";
 
 export default {
+  props: {
+    material_info: Object,
+    figure: String,
+    material: Object,
+  },
   data() {
     let color = "#CCCCCC";
 
@@ -131,7 +136,7 @@ export default {
       "https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate2.jpg",
     ];
 
-    let file_select;
+    let file_select
 
     return {
       color: color,
@@ -150,29 +155,24 @@ export default {
           "Avatar size should be less than 2 MB!",
       ],
       file_select: file_select,
-      blendings : [
-					{ text: 'No', value: THREE.NoBlending, },
-					{ text: 'Normal', value: THREE.NormalBlending },
-					{ text: 'Additive', value: THREE.AdditiveBlending },
-					{ text: 'Subtractive', value: THREE.SubtractiveBlending },
-					{ text: 'Multiply', value: THREE.MultiplyBlending }
-				],
+      blendings: [
+        { text: "No", value: THREE.NoBlending },
+        { text: "Normal", value: THREE.NormalBlending },
+        { text: "Additive", value: THREE.AdditiveBlending },
+        { text: "Subtractive", value: THREE.SubtractiveBlending },
+        { text: "Multiply", value: THREE.MultiplyBlending },
+      ],
     };
-  },
-  props: {
-    material_info: Object,
-    figure: String,
-    material: Object,
   },
   mounted() {
     this.changeTexture();
   },
   methods: {
     changeSide() {
-        this.material_info.side = items.value;
+      this.items.value = this.material_info.side
     },
-    changeBlending1() {
-        material_info.blending =  blendings.value;
+    changeBlending() {
+      this.blendings.value = this.material_info.blending 
     },
     changeVisible() {
       this.material_info.visible = !this.material_info.visible;

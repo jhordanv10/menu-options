@@ -21,7 +21,7 @@
       >
         <v-btn-toggle
           class="px-16 py-4"
-          v-model="text"
+          v-model="isActive"
           tile
           color="bluedark accent-3"
           group
@@ -33,7 +33,6 @@
             @click="selected(childrens)"
             :value="childrens.name"
           >
-          
             {{ childrens.name }}
           </v-btn>
           <v-btn
@@ -56,7 +55,7 @@
         <!-- ------------------------------------------------- -->
       </v-col>
 
-      <!-- Ligth -->
+      <!-- isLigth -->
       <v-col
         cols="12"
         class="px-16 py-12 mx-0 my-0"
@@ -125,6 +124,7 @@ export default {
   props: {
     scene: Object,
     children: Array,
+    active: String,
   },
   data() {
     let option = {};
@@ -132,6 +132,7 @@ export default {
       JSON.stringify(this.$store.state.childrens) === undefined
         ? ""
         : this.$store.state.childrens.name;
+
     return {
       item: "Mesh",
       valid: true,
@@ -145,9 +146,6 @@ export default {
         { id: 3, name: "Camera", icon: "mdi-video-outline" },
       ],
     };
-  },
-  mounted() {
-    console.log(this.scene.children);
   },
   methods: {
     selected(children) {
@@ -179,6 +177,9 @@ export default {
     },
     isCamera() {
       return this.scene.children.filter((i) => i.isCamera === true);
+    },
+    isActive() {
+      return this.active ? this.active : this.text;
     },
   },
 };

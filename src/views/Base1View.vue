@@ -15,6 +15,7 @@
           @listenChildren="meshChildren"
           @escucharHijo="infoHijo"
           :scene="this.scene"
+          :active="this.infoChildren.name"
         />
       </v-col>
     </v-row>
@@ -115,6 +116,7 @@ export default {
       // The textures to use
       arr: arr,
       textureToShow: textureToShow,
+      children: {},
     };
   },
 
@@ -179,29 +181,8 @@ export default {
       this.intersects = this.raycaster.intersectObjects(this.isMesh, true);
       if (this.intersects.length) {
         this.infoChildren = this.intersects[0].object;
-        //LOAD TEXTURE and on completion apply it on SPHERE
-        new THREE.TextureLoader().load(
-          this.arr[this.textureToShow],
-          (texture) => {
-            //Update Texture
-            this.infoChildren.material.map = texture;
-            this.infoChildren.material.needsUpdate = true;
-            // Update the next texture to show
-            this.textureToShow++;
-            // Have we got to the end of the textures array
-            if (this.textureToShow > this.arr.length - 1) {
-              this.textureToShow = 0;
-            }
-          },
-          (xhr) => {
-            //Download Progress
-            console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-          },
-          (error) => {
-            //Error CallBack
-            console.log("An error happened" + error);
-          }
-        );
+        this.option = this.infoChildren;
+        // console.log(this.infoChildren.name);
       }
     },
   },
@@ -223,3 +204,13 @@ export default {
   position: absolute;
 }
 </style>
+
+//LOAD TEXTURE and on completion apply it on SPHERE new
+THREE.TextureLoader().load( this.arr[this.textureToShow], (texture) => {
+//Update Texture this.infoChildren.material.map = texture;
+this.infoChildren.material.needsUpdate = true; // Update the next texture to
+show this.textureToShow++; // Have we got to the end of the textures array if
+(this.textureToShow > this.arr.length - 1) { this.textureToShow = 0; } }, (xhr)
+=> { //Download Progress console.log((xhr.loaded / xhr.total) * 100 + "%
+loaded"); }, (error) => { //Error CallBack console.log("An error happened" +
+error); } );
