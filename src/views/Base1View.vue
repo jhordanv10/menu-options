@@ -3,7 +3,7 @@
     <Loading v-if="!this.scene" />
     <Menu
       v-if="this.option !== ''"
-      figure="sphere"
+      :figure="this.infoChildren.name"
       :info="this.infoChildren"
       :material="this.material"
     />
@@ -108,7 +108,7 @@ export default {
       AmbientalLigth: AmbientalLigth,
       DirectionalLigth: DirectionalLigth,
       material: material,
-      option: "",
+      option: this.$store.state.optionBase1,
       infoChildren: this.$store.state.childrens,
       item: "Mesh",
       raycaster: raycaster,
@@ -152,6 +152,10 @@ export default {
       JSON.stringify(this.$store.state.childrens) === undefined
         ? ""
         : this.$store.state.childrens;
+    this.option =
+      JSON.stringify(this.$store.state.optionBase1) === undefined
+        ? ""
+        : this.$store.state.optionBase1;
   },
 
   mounted() {
@@ -166,7 +170,11 @@ export default {
       this.controls.update();
     },
     infoHijo(value) {
-      this.option = value;
+      this.option =
+      JSON.stringify(this.$store.state.optionBase1) === undefined
+          ? value
+          : this.$store.state.optionBase1;
+
       this.infoChildren =
         JSON.stringify(this.$store.state.childrens) === undefined
           ? value
@@ -186,6 +194,7 @@ export default {
         this.infoChildren = this.intersects[0].object;
         this.option = this.infoChildren;
         this.$store.commit("ADD_CHILDREN", this.infoChildren);
+        this.$store.commit("ADD_OPTION_BASE1", this.option);
       }
     },
   },
@@ -207,13 +216,3 @@ export default {
   position: absolute;
 }
 </style>
-
-//LOAD TEXTURE and on completion apply it on SPHERE new
-THREE.TextureLoader().load( this.arr[this.textureToShow], (texture) => {
-//Update Texture this.infoChildren.material.map = texture;
-this.infoChildren.material.needsUpdate = true; // Update the next texture to
-show this.textureToShow++; // Have we got to the end of the textures array if
-(this.textureToShow > this.arr.length - 1) { this.textureToShow = 0; } }, (xhr)
-=> { //Download Progress console.log((xhr.loaded / xhr.total) * 100 + "%
-loaded"); }, (error) => { //Error CallBack console.log("An error happened" +
-error); } );

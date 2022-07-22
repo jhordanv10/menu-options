@@ -30,7 +30,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Menu from "../components/Molecules/Menu.vue";
 import MenuRight from "../components/Molecules/MenuRight.vue";
 import { ColladaLoader } from "three/examples/jsm/loaders/ColladaLoader";
-import Loading from '../components/Atoms/Loafing.vue'
+import Loading from "../components/Atoms/Loafing.vue";
 
 export default {
   name: "Eyeliner",
@@ -78,10 +78,10 @@ export default {
       controls: [],
       item: "Mesh",
       infoChildren: {},
-      children:[],
+      children: [],
       material: {},
       mockup: {},
-      option:'',
+      option: this.$store.state.optionEye,
       raycaster: raycaster,
       mouse: mouse,
       objects: objects,
@@ -117,7 +117,7 @@ export default {
     infoHijo(value) {
       this.option = value;
       this.infoChildren = value;
-      console.log('InfoChildren',this.infoChildren);
+      console.log("InfoChildren", this.infoChildren);
     },
     meshChildren(value) {
       this.item = value;
@@ -137,13 +137,13 @@ export default {
         mockup.traverse(async function (node) {
           if (node.isMesh) {
             // console.log(node)
-            node.material.color = new THREE.Color(0xBF9742);
+            node.material.color = new THREE.Color(0xbf9742);
             node.material.blending = THREE.NoBlending;
             node.material.alphaTest = 0.5;
             node.material.transparent = false;
             // node.material.side = THREE.DoubleSide; // Enable back-faces
             if (node.material.name == "base_design") {
-            //   node.material.map = texture;
+              //   node.material.map = texture;
             }
           }
         });
@@ -170,8 +170,8 @@ export default {
         scene.add(camera2);
       });
       setTimeout(() => {
-        this.infoChildren = this.scene.children[3].children[1]
-        this.children = this.scene.children[3].children
+        this.infoChildren = this.scene.children[3].children[1];
+        this.children = this.scene.children[3].children;
         this.camera = this.scene.children[4];
       }, 500);
     },
@@ -185,6 +185,7 @@ export default {
         this.infoChildren = this.intersects[0].object;
         this.option = this.infoChildren;
         this.$store.commit("ADD_CHILDREN", this.infoChildren);
+        this.$store.commit("ADD_OPTION_EYE", this.option);
       }
     },
   },

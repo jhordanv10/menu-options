@@ -144,7 +144,7 @@ export default {
     },
   },
   mounted() {
-    // console.log('Menu.info', this.info);
+    console.log('info::', this.info);
   },
 };
 </script>
