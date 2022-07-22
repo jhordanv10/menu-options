@@ -12,7 +12,7 @@
         <div ref="canvas" class="contenedor3D"></div>
       </v-col>
       <v-col cols="3" class="pa-0">
-        <MenuLeft
+        <MenuRight
           @listenChildren="meshChildren"
           @escucharHijo="infoHijo"
           :scene="this.scene"
@@ -26,14 +26,14 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Menu from "../components/Molecules/Menu.vue";
-import MenuLeft from "../components/Molecules/MenuLeft.vue";
+import MenuRight from "../components/Molecules/MenuRight.vue";
 import Loading from "../components/Atoms/Loafing.vue";
 
 export default {
   name: "Base3",
   components: {
     Menu,
-    MenuLeft,
+    MenuRight,
     Loading,
   },
   data: function () {
