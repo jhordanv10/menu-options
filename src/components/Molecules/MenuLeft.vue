@@ -65,7 +65,7 @@
       >
         <v-btn-toggle
           class="px-16 py-4"
-          v-model="text"
+          v-model="name"
           tile
           color="bluedark accent-3"
           group
@@ -92,7 +92,7 @@
       >
         <v-btn-toggle
           class="px-16 py-4"
-          v-model="text"
+          v-model="name"
           tile
           color="bluedark accent-3"
           group
@@ -139,7 +139,6 @@ export default {
       name: "",
       option: option,
       value: name,
-      text: name,
       items: [
         { id: 1, name: "Mesh", icon: "mdi-playlist-check" },
         { id: 2, name: "Light", icon: "mdi-lightbulb-on-80" },
