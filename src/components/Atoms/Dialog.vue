@@ -57,7 +57,7 @@ export default {
       openDialog: false,
       valid: true,
       name: "",
-      select: [{ text: "Circulo" }, { text: "Cono" }, { text: "Cubo" }],
+      select: [{ text: "Circulo" }, { text: "Cono" }, { text: "Cubo" }, { text: "Torus" }],
       selectedItem: "Circulo",
       nameRules: [
         (v) => !!v || "Nombre es requirido",
@@ -110,6 +110,15 @@ export default {
           cone.position.set(maxX, maxY, maxZ);
           cone.name = this.name;
           this.scene.add(cone);
+        }
+        //Torus
+        else if (this.selectedItem == "Torus") {
+          const geometry3 = new THREE.TorusGeometry(1.1, 0.5, 20, 100);
+          const material3 = new THREE.MeshMatcapMaterial({ color: color });
+          let torus = new THREE.Mesh(geometry3, material3);
+          torus.position.set(maxX, maxY, maxZ);
+          torus.name = this.name;
+          this.scene.add(torus);
         }
 
         this.closeDialog();

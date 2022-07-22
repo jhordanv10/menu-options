@@ -9,7 +9,7 @@
     />
     <v-row>
       <v-col cols="9">
-        <div ref="canvas" class="contenedor3D"></div>
+        <div ref="canvas" class="contenedor3D" @click="onClick"></div>
       </v-col>
       <v-col cols="3" class="pa-0">
         <MenuLeft
@@ -17,6 +17,7 @@
           @escucharHijo="infoHijo"
           :scene="this.scene"
           :children="this.children"
+          :active="this.infoChildren.name"
         />
       </v-col>
     </v-row>
@@ -66,6 +67,10 @@ export default {
     directionalLight.position.set(1, 1, 0).normalize();
     scene.add(directionalLight);
 
+    var raycaster = new THREE.Raycaster();
+    var mouse = new THREE.Vector2();
+    var objects = this.isMesh ;
+
     return {
       scene: scene,
       camera: camera,
@@ -77,6 +82,10 @@ export default {
       material: {},
       mockup: {},
       option:'',
+      raycaster: raycaster,
+      mouse: mouse,
+      objects: objects,
+      intersects: [],
     };
   },
 
@@ -114,10 +123,23 @@ export default {
       this.item = value;
       // console.log(this.item);
     },
+    onClick(event) {
+      this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+      this.raycaster.setFromCamera(this.mouse, this.camera);
+      this.intersects = this.raycaster.intersectObjects(this.isMesh, true);
+      if (this.intersects.length) {
+        this.infoChildren = this.intersects[0].object;
+        this.option = this.infoChildren;
+        this.$store.commit("ADD_CHILDREN", this.infoChildren);
+      }
+    },
     colladaRender() {
       const texture = new THREE.TextureLoader().load(
         require("../assets/texture.png")
       );
+      
       const loader = new ColladaLoader();
       let camera2 = null;
       let scene = this.scene;
@@ -170,6 +192,11 @@ export default {
         this.camera = this.scene.children[4];
       }, 500);
       // console.log("Camera 2")
+    },
+  },
+  computed: {
+    isMesh() {
+      return this.children.filter((i) => i.isMesh === true);
     },
   },
 };

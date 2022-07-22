@@ -143,6 +143,7 @@ export default {
       items: [
         { value: THREE.FrontSide, text: "Front" },
         { value: THREE.BackSide, text: "Back" },
+        { value: THREE.DoubleSide, text: "Double" },
       ],
       // The textures to use
       arr: arr,
