@@ -178,8 +178,13 @@ export default {
     isCamera() {
       return this.scene.children.filter((i) => i.isCamera === true);
     },
-    isActive() {
-      return this.active ? this.active : this.text;
+    isActive: {
+      get() {
+        return this.active;
+      },
+      set(value) {
+        this.value = value;
+      },
     },
   },
 };
