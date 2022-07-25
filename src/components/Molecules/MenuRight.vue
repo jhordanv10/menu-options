@@ -127,10 +127,13 @@ export default {
     active: String,
   },
   data() {
-    let option = {};
+    let option =
+      JSON.stringify(this.$store.state.optionBase1) === undefined
+        ? {}
+        : this.$store.state.optionBase1;
     let name =
       JSON.stringify(this.$store.state.childrens) === undefined
-        ? ''
+        ? ""
         : this.$store.state.childrens.name;
 
     return {
@@ -145,6 +148,9 @@ export default {
         { id: 3, name: "Camera", icon: "mdi-video-outline" },
       ],
     };
+  },
+  created() {
+    this.$emit("escucharHijo", this.option);
   },
   methods: {
     selected(children) {
