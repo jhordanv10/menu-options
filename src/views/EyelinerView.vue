@@ -30,7 +30,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Menu from "../components/Molecules/Menu.vue";
 import MenuRight from "../components/Molecules/MenuRight.vue";
 import { ColladaLoader } from "three/examples/jsm/loaders/ColladaLoader";
-import Loading from "../components/Atoms/Loafing.vue";
+import Loading from "../components/Atoms/Loading.vue";
 
 export default {
   name: "Eyeliner",

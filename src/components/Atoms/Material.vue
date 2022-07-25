@@ -30,10 +30,11 @@
       </v-row>
     </v-container>
 
-    <!-- Side -->
+    <!-- Side /Blending -->
     <v-container>
       <v-row>
-        <v-col class="d-flex px-16 py-0" cols="12">
+        <!-- Side -->
+        <v-col class="d-flex pa-4" cols="6">
           <v-select
             v-model="material_info.side"
             @change="changeSide"
@@ -41,18 +42,39 @@
             :label="!!items ? 'Side' : items.text"
           ></v-select>
         </v-col>
-      </v-row>
-    </v-container>
-
-    <!-- Blending -->
-    <v-container>
-      <v-row>
-        <v-col class="d-flex px-16 py-0" cols="12">
+        <!-- Blending -->
+        <v-col class="d-flex pa-4" cols="6">
           <v-select
             v-model="material_info.blending"
             @change="changeBlending"
             :items="blendings"
             :label="!!blendings ? 'Blending' : blendings.text"
+          ></v-select>
+        </v-col>
+      </v-row>
+    </v-container>
+
+    <!-- Equations -->
+    <v-container>
+      <v-row>
+        <!-- Src -->
+        <v-col class="d-flex px-4 py-0" cols="6">
+          <v-select
+            :disabled="disabled"
+            v-model="material_info.blendSrc"
+            @change="changeSrc"
+            :items="src"
+            :label="!!src ? 'Src' : src.text"
+          ></v-select>
+        </v-col>
+        <!-- Dts -->
+        <v-col class="d-flex px-4 py-0" cols="6">
+          <v-select
+            :disabled="disabled"
+            v-model="material_info.blendDst"
+            @change="changeDts"
+            :items="dts"
+            :label="!!dts ? 'Dts' : dts.text"
           ></v-select>
         </v-col>
       </v-row>
@@ -136,7 +158,7 @@ export default {
       "https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate2.jpg",
     ];
 
-    let file_select
+    let file_select;
 
     return {
       color: color,
@@ -162,6 +184,32 @@ export default {
         { text: "Additive", value: THREE.AdditiveBlending },
         { text: "Subtractive", value: THREE.SubtractiveBlending },
         { text: "Multiply", value: THREE.MultiplyBlending },
+        { text: "Custom", value: THREE.CustomBlending },
+      ],
+      src: [
+        { text: "Zero", value: THREE.ZeroFactor },
+        { text: "One", value: THREE.OneFactor },
+        { text: "SrcColor", value: THREE.SrcColorFactor },
+        { text: "OneMinusSrcColor", value: THREE.OneMinusSrcColorFactor },
+        { text: "SrcAlpha", value: THREE.SrcAlphaFactor },
+        { text: "OneMinusSrcAlpha", value: THREE.OneMinusSrcAlphaFactor },
+        { text: "DstAlpha", value: THREE.DstAlphaFactor },
+        { text: "OneMinusDstAlpha", value: THREE.OneMinusDstAlphaFactor },
+        { text: "DstColor", value: THREE.DstColorFactor },
+        { text: "OneMinusDstColor", value: THREE.OneMinusDstColorFactor },
+        { text: "SrcAlphaSaturate", value: THREE.SrcAlphaSaturateFactor },
+      ],
+      dts: [
+        { text: "Zero", value: THREE.ZeroFactor },
+        { text: "One", value: THREE.OneFactor },
+        { text: "SrcColor", value: THREE.SrcColorFactor },
+        { text: "OneMinusSrcColor", value: THREE.OneMinusSrcColorFactor },
+        { text: "SrcAlpha", value: THREE.SrcAlphaFactor },
+        { text: "OneMinusSrcAlpha", value: THREE.OneMinusSrcAlphaFactor },
+        { text: "DstAlpha", value: THREE.DstAlphaFactor },
+        { text: "OneMinusDstAlpha", value: THREE.OneMinusDstAlphaFactor },
+        { text: "DstColor", value: THREE.DstColorFactor },
+        { text: "OneMinusDstColor", value: THREE.OneMinusDstColorFactor },
       ],
     };
   },
@@ -170,10 +218,18 @@ export default {
   },
   methods: {
     changeSide() {
-      this.items.value = this.material_info.side
+      this.items.value = this.material_info.side;
     },
     changeBlending() {
-      this.blendings.value = this.material_info.blending 
+      this.blendings.value = this.material_info.blending;
+    },
+    changeSrc() {
+      this.material_info.blendEquation = THREE.AddEquation;
+      this.src.value = this.material_info.blendSrc;
+    },
+    changeDts() {
+      this.material_info.blendEquation = THREE.AddEquation;
+      this.dts.value = this.material_info.blendDst;
     },
     changeVisible() {
       this.material_info.visible = !this.material_info.visible;
@@ -249,6 +305,11 @@ export default {
       console.log("file::", formData);
     },
   },
+  computed: {
+    disabled() {
+      return this.material_info.blending !== THREE.CustomBlending
+    }
+  }
 };
 </script>
 

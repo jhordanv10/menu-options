@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
-  state: { childrens: Array, optionBase1: Object, optionEye: Object},
+  state: { childrens: Array, optionBase1: Object, optionEye: Object, optionPet: Object},
   mutations: {
     ADD_CHILDREN(state, children) {
       state.childrens = children;
@@ -14,6 +14,9 @@ const store = new Vuex.Store({
     },
     ADD_OPTION_EYE(state, optionEye){
       state.optionEye = optionEye;
+    },
+    ADD_OPTION_PET(state, optionPet){
+      state.optionPet = optionPet;
     }
   }
 })

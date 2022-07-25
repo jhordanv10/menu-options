@@ -28,7 +28,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Menu from "../components/Molecules/Menu.vue";
 import MenuRight from "../components/Molecules/MenuRight.vue";
-import Loading from "../components/Atoms/Loafing.vue";
+import Loading from "../components/Atoms/Loading.vue";
 
 export default {
   name: "Base1",
@@ -66,7 +66,7 @@ export default {
     //Cube
     const geometry1 = new THREE.BoxBufferGeometry(1, 1, 1);
     const material1 = new THREE.MeshBasicMaterial({
-      color: 0xff0000,
+      color: 0xA47E3B,
     });
     let cube = new THREE.Mesh(geometry1, material1);
     cube.name = "cube";
@@ -74,7 +74,7 @@ export default {
     //Cone
     const geometry2 = new THREE.ConeGeometry(1.5, 2, 3);
     const material2 = new THREE.MeshBasicMaterial({
-      color: 0x018adf,
+      color: 0xA47E3B,
     });
     let cone = new THREE.Mesh(geometry2, material2);
     cone.name = "cone";

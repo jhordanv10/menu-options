@@ -41,7 +41,7 @@
 
 <script>
 import { Icon } from "@iconify/vue2";
-import Loading from '../components/Atoms/Loafing.vue'
+import Loading from '../components/Atoms/Loading.vue'
 
 export default {
   name: "Home",

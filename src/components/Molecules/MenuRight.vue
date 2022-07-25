@@ -10,7 +10,6 @@
           <Icon :icon="icon" class="bluecolor--text" width="24" />
         </v-tab>
       </v-tabs>
-
       <!-- Meshes -->
       <v-col
         cols="12"
@@ -130,7 +129,7 @@ export default {
     let option = {};
     let name =
       JSON.stringify(this.$store.state.childrens) === undefined
-        ? ''
+        ? ""
         : this.$store.state.childrens.name;
 
     return {
@@ -149,6 +148,7 @@ export default {
   methods: {
     selected(children) {
       this.$store.commit("ADD_CHILDREN", children);
+      this.$store.commit("ADD_OPTION_BASE1", this.option);
       this.option =
         JSON.stringify(this.$store.state.childrens) === undefined
           ? children
