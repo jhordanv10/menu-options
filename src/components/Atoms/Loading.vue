@@ -13,7 +13,10 @@
 
 <style scoped>
 .loading {
-    padding-top: 30px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 30%;
     background-color: transparent;
 }
 .loading-figure {
@@ -21,16 +24,16 @@
   margin-bottom: 0px;
 }
 .loading-figure-img {
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 80px;
 }
 .loading-spinner {
   margin: 0 auto;
   padding-bottom: 20px;
   padding-top: 10px;
   border: 4px solid rgba(0, 0, 0, 0.1);
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   border-left-color: #7f9cdc;
   animation: spin 1s ease infinite;
@@ -43,4 +46,4 @@
     transform: rotate(360deg);
   }
 }
-</style>
+</style>%
