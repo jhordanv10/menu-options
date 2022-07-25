@@ -37,7 +37,7 @@ export default {
         // { id: 4, name: "Base 3", path: "/base3", icon: "mdi-cone" },
         { id: 5, name: "Base 4", path: "/base4", icon: "mdi-record-circle-outline" },
         { id: 6, name: "Pet", path: "/pet", icon: "mdi-plus" },
-        { id: 7, name: "Gloves", path: "/gloves", icon: "mdi-mixed-martial-arts" },
+        // { id: 7, name: "Gloves", path: "/gloves", icon: "mdi-mixed-martial-arts" },
         { id: 8, name: "Hoddie", path: "/hoddie", icon: "mdi-hanger" },
         { id: 9, name: "Eyeliner", path: "/eyeliner", icon: "mdi-eye" },
       ],
