@@ -81,9 +81,9 @@
     </v-container>
 
     <!-- color -->
-    <v-container class="pa-0 color" v-if="this.material_info.color">
+    <v-container class="color" v-if="this.material_info.color">
       <v-row>
-        <v-col class="d-flex px-0 mx-0 justify-center" cols="12">
+        <v-col class="d-flex px-4 py-0" cols="6">
           <span class="colorPicker"
             >Color
             <div class="div-color">
@@ -96,6 +96,16 @@
               />
             </div>
           </span>
+          
+        </v-col>
+        <!-- Texture -->
+        <v-col class="d-flex px-4 py-0" cols="6">
+          <v-select
+            v-model="textureSelected"
+            @change="changeTexture"
+            :items="this.arr"
+            :label="!!this.arr ? 'Texture' : this.arr.text"
+          ></v-select>
         </v-col>
       </v-row>
     </v-container>
@@ -103,7 +113,7 @@
     <!-- Visible -->
     <v-container justify="center">
       <v-row>
-        <v-col class="d-flex px-0 mx-0 justify-center" cols="12">
+        <v-col class="d-flex py-0 px-0 mx-0 justify-center" cols="12">
           <v-btn
             v-model="material_info.visible"
             @click="changeVisible"
@@ -153,9 +163,9 @@ export default {
     const textureToShow = 0;
 
     const arr = [
-      "https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_gates.jpg",
-      "https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate1.jpg",
-      "https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate2.jpg",
+      {value: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_gates.jpg", text: "Img 1"},
+      {value: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate1.jpg", text: "Img 2"},
+      {value:"https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate2.jpg", text: "Img 3"},
     ];
 
     let file_select;
@@ -213,9 +223,6 @@ export default {
       ],
     };
   },
-  mounted() {
-    this.changeTexture();
-  },
   methods: {
     changeSide() {
       this.items.value = this.material_info.side;
@@ -239,39 +246,24 @@ export default {
       this.material_info.color.set(this.color);
     },
     changeTexture() {
-      // Click interaction
-      var canvas = document.getElementsByTagName("canvas")[0];
-      var material = this.material;
-      var arr = this.arr;
-      var textureToShow = this.textureToShow;
-      canvas.addEventListener("click", function () {
-        //LOAD TEXTURE and on completion apply it on SPHERE
-        new THREE.TextureLoader().load(
-          arr[textureToShow],
-          (texture) => {
-            //Update Texture
-            material.map = texture;
-            material.needsUpdate = true;
-            // Update the next texture to show
-            textureToShow++;
-            // Have we got to the end of the textures array
-            if (textureToShow > arr.length - 1) {
-              textureToShow = 0;
-            }
-          },
-          (xhr) => {
-            //Download Progress
-            console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-          },
-          (error) => {
-            //Error CallBack
-            console.log("An error happened" + error);
-          }
-        );
-      });
 
-      this.material = material;
-      this.textureToShow = textureToShow;
+      //LOAD TEXTURE and on completion apply it on SPHERE
+      new THREE.TextureLoader().load(
+        this.textureSelected,
+        (texture) => {
+          //Update Texture
+          this.material_info.map = texture;
+          this.material_info.needsUpdate = true;
+        },
+        (xhr) => {
+          //Download Progress
+          console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+        },
+        (error) => {
+          //Error CallBack
+          console.log("An error happened" + error);
+        }
+      );
     },
     onUpload() {
       // upload file
@@ -307,9 +299,9 @@ export default {
   },
   computed: {
     disabled() {
-      return this.material_info.blending !== THREE.CustomBlending
-    }
-  }
+      return this.material_info.blending !== THREE.CustomBlending;
+    },
+  },
 };
 </script>
 

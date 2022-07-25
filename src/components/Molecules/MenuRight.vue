@@ -126,10 +126,7 @@ export default {
     active: String,
   },
   data() {
-    let option =
-      JSON.stringify(this.$store.state.optionBase1) === undefined
-        ? {}
-        : this.$store.state.optionBase1;
+    let option = {};
     let name =
       JSON.stringify(this.$store.state.childrens) === undefined
         ? ""
@@ -148,9 +145,9 @@ export default {
       ],
     };
   },
-  created() {
-    this.$emit("escucharHijo", this.option);
-  },
+  // created() {
+  //   this.$emit("escucharHijo", this.option);
+  // },
   methods: {
     selected(children) {
       this.$store.commit("ADD_CHILDREN", children);
