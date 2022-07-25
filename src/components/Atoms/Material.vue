@@ -163,6 +163,7 @@ export default {
     const textureToShow = 0;
 
     const arr = [
+      {value: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/9c64cfe3-bb3b-4ae8-b5a6-d2f39d21ff87/d3jme6i-8c702ad4-4b7a-4763-9901-99f8b4f038b0.png/v1/fill/w_600,h_400,strp/fondo_transparente_png_by_imsnowbieber_d3jme6i-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NDAwIiwicGF0aCI6IlwvZlwvOWM2NGNmZTMtYmIzYi00YWU4LWI1YTYtZDJmMzlkMjFmZjg3XC9kM2ptZTZpLThjNzAyYWQ0LTRiN2EtNDc2My05OTAxLTk5ZjhiNGYwMzhiMC5wbmciLCJ3aWR0aCI6Ijw9NjAwIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.Ymv-MHRcmXXpzmL3f0xZ0mCcyU85lCLnk0jbOnCO8Zg", text: "Ninguna"},
       {value: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_gates.jpg", text: "Img 1"},
       {value: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate1.jpg", text: "Img 2"},
       {value:"https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate2.jpg", text: "Img 3"},
@@ -221,6 +222,7 @@ export default {
         { text: "DstColor", value: THREE.DstColorFactor },
         { text: "OneMinusDstColor", value: THREE.OneMinusDstColorFactor },
       ],
+      textureSelected: [],
     };
   },
   methods: {
