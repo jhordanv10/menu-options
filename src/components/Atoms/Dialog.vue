@@ -1,8 +1,9 @@
 <template>
   <v-col>
+    <!-- Button Add -->
     <v-btn
       color="greencolor"
-      class="ma-auto"
+      class="ma-auto buttonAdd"
       dark
       fab
       center
@@ -10,6 +11,7 @@
     >
       <Icon icon="mdi-plus" class="white--text" width="24" />
     </v-btn>
+
     <v-dialog v-model="openDialog" max-width="500px">
       <v-card>
         <v-card-actions>
@@ -57,7 +59,12 @@ export default {
       openDialog: false,
       valid: true,
       name: "",
-      select: [{ text: "Circulo" }, { text: "Cono" }, { text: "Cubo" }],
+      select: [
+        { text: "Circulo" },
+        { text: "Cono" },
+        { text: "Cubo" },
+        { text: "Torus" },
+      ],
       selectedItem: "Circulo",
       nameRules: [
         (v) => !!v || "Nombre es requirido",
@@ -111,6 +118,15 @@ export default {
           cone.name = this.name;
           this.scene.add(cone);
         }
+        //Torus
+        else if (this.selectedItem == "Torus") {
+          const geometry3 = new THREE.TorusGeometry(1.1, 0.5, 20, 100);
+          const material3 = new THREE.MeshMatcapMaterial({ color: color });
+          let torus = new THREE.Mesh(geometry3, material3);
+          torus.position.set(maxX, maxY, maxZ);
+          torus.name = this.name;
+          this.scene.add(torus);
+        }
 
         this.closeDialog();
       }
@@ -124,7 +140,7 @@ export default {
 </script>
 
 <style scoped>
-button.ma-auto.v-btn {
+.buttonAdd {
   position: absolute;
   left: 68%;
   bottom: 45px;

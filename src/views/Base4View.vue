@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+    <Loading v-if="!this.scene" />
     <Menu
       v-if="this.option !== ''"
       figure="torus"
@@ -8,10 +9,10 @@
     />
     <v-row>
       <v-col cols="9">
-        <div ref="canvas" class="contenedor3D"></div>
+        <div ref="canvas" class="contenedor3D" @mousemove="onPointer"></div>
       </v-col>
       <v-col cols="3" class="pa-0">
-        <MenuLeft
+        <MenuRight
           @listenChildren="meshChildren"
           @escucharHijo="infoHijo"
           :scene="this.scene"
@@ -26,14 +27,15 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { gsap } from "gsap";
 import Menu from "../components/Molecules/Menu.vue";
-import MenuLeft from "../components/Molecules/MenuLeft.vue";
-
+import MenuRight from "../components/Molecules/MenuRight.vue";
+import Loading from '../components/Atoms/Loading.vue'
 
 export default {
   name: "Base4",
   components: {
     Menu,
-    MenuLeft,
+    MenuRight,
+    Loading,
   },
   data() {
     //Emit
@@ -91,7 +93,7 @@ export default {
       pointer: pointer,
       gsap: gsap,
       material: material,
-      option: '',
+      option: "",
       infoChildren: {},
       item: "Mesh",
     };

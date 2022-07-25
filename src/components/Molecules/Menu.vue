@@ -145,7 +145,7 @@ export default {
     },
   },
   mounted() {
-    // console.log('Menu.info', this.info);
+    console.log('info::', this.info);
   },
 };
 </script>
@@ -163,7 +163,7 @@ export default {
   border: 1px solid #d3d3d3;
   z-index: 10;
   width: 400px;
-  height: 430px;
+  height: 500px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 </style>

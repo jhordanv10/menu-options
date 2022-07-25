@@ -1,20 +1,22 @@
 <template>
   <div class="main">
+    <Loading v-if="!this.scene" />
     <Menu
       v-if="this.option !== ''"
-      figure="sphere"
+      :figure="this.infoChildren.name"
       :info="this.infoChildren"
       :material="this.material"
     />
     <v-row>
       <v-col cols="9">
-        <div ref="canvas" class="contenedor3D"></div>
+        <div ref="canvas" class="contenedor3D" @click="onClick"></div>
       </v-col>
       <v-col cols="3" class="pa-0">
-        <MenuLeft
+        <MenuRight
           @listenChildren="meshChildren"
           @escucharHijo="infoHijo"
           :scene="this.scene"
+          :active="this.infoChildren.name"
         />
       </v-col>
     </v-row>
@@ -25,13 +27,15 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Menu from "../components/Molecules/Menu.vue";
-import MenuLeft from "../components/Molecules/MenuLeft.vue";
+import MenuRight from "../components/Molecules/MenuRight.vue";
+import Loading from "../components/Atoms/Loading.vue";
 
 export default {
   name: "Base1",
   components: {
     Menu,
-    MenuLeft,
+    MenuRight,
+    Loading,
   },
   data() {
     //Scene
@@ -62,7 +66,7 @@ export default {
     //Cube
     const geometry1 = new THREE.BoxBufferGeometry(1, 1, 1);
     const material1 = new THREE.MeshBasicMaterial({
-      color: 0xff0000,
+      color: 0xA47E3B,
     });
     let cube = new THREE.Mesh(geometry1, material1);
     cube.name = "cube";
@@ -70,7 +74,7 @@ export default {
     //Cone
     const geometry2 = new THREE.ConeGeometry(1.5, 2, 3);
     const material2 = new THREE.MeshBasicMaterial({
-      color: 0x018adf,
+      color: 0xA47E3B,
     });
     let cone = new THREE.Mesh(geometry2, material2);
     cone.name = "cone";
@@ -80,6 +84,18 @@ export default {
     AmbientalLigth.name = "Ambiental";
     const DirectionalLigth = new THREE.DirectionalLight(0xffffff, 2);
     DirectionalLigth.name = "Directional";
+
+    var raycaster = new THREE.Raycaster();
+    var mouse = new THREE.Vector2();
+    var objects = this.isMesh;
+    // instantiate a texture loader
+    const textureToShow = 0;
+
+    const arr = [
+      "https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_gates.jpg",
+      "https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate1.jpg",
+      "https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate2.jpg",
+    ];
 
     return {
       scene: scene,
@@ -92,9 +108,18 @@ export default {
       AmbientalLigth: AmbientalLigth,
       DirectionalLigth: DirectionalLigth,
       material: material,
-      option: '',
+      option: this.$store.state.optionBase1,
       infoChildren: this.$store.state.childrens,
       item: "Mesh",
+      raycaster: raycaster,
+      mouse: mouse,
+      objects: objects,
+      intersects: [],
+      selected: sphere,
+      // The textures to use
+      arr: arr,
+      textureToShow: textureToShow,
+      children: {},
     };
   },
 
@@ -122,7 +147,15 @@ export default {
     //Controls
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableDamping = true;
-    this.infoChildren= JSON.stringify(this.$store.state.childrens) === undefined ? '' : this.$store.state.childrens;
+
+    this.infoChildren =
+      JSON.stringify(this.$store.state.childrens) === undefined
+        ? ""
+        : this.$store.state.childrens;
+    this.option =
+      JSON.stringify(this.$store.state.optionBase1) === undefined
+        ? ""
+        : this.$store.state.optionBase1;
   },
 
   mounted() {
@@ -137,14 +170,38 @@ export default {
       this.controls.update();
     },
     infoHijo(value) {
-      this.option = value
-      this.infoChildren =  JSON.stringify(this.$store.state.childrens) === undefined ? value : this.$store.state.childrens;
-      console.log(this.infoChildren);
+      this.option =
+      JSON.stringify(this.$store.state.optionBase1) === undefined
+          ? value
+          : this.$store.state.optionBase1;
+
+      this.infoChildren =
+        JSON.stringify(this.$store.state.childrens) === undefined
+          ? value
+          : this.$store.state.childrens;
     },
     meshChildren(value) {
       this.item = value;
       console.log(this.item);
-    }
+    },
+    onClick(event) {
+      this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+      this.raycaster.setFromCamera(this.mouse, this.camera);
+      this.intersects = this.raycaster.intersectObjects(this.isMesh, true);
+      if (this.intersects.length) {
+        this.infoChildren = this.intersects[0].object;
+        this.option = this.infoChildren;
+        this.$store.commit("ADD_CHILDREN", this.infoChildren);
+        this.$store.commit("ADD_OPTION_BASE1", this.option);
+      }
+    },
+  },
+  computed: {
+    isMesh() {
+      return this.scene.children.filter((i) => i.isMesh === true);
+    },
   },
 };
 </script>

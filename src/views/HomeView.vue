@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <v-col>
+    <!-- <Loading />  -->
+    <v-col ref="home">
       <v-row justify="center">
         <figure class="img">
           <img src="../assets/FreepikLogo.png" alt="" />
@@ -40,11 +41,13 @@
 
 <script>
 import { Icon } from "@iconify/vue2";
+import Loading from '../components/Atoms/Loading.vue'
 
 export default {
   name: "Home",
   components: {
     Icon,
+    Loading,
   },
   data() {
     return {

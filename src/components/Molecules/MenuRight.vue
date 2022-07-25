@@ -1,5 +1,5 @@
 <template>
-  <div color="#fff" class="menuLeft pa-0" padless>
+  <div color="#fff" class="menuRight pa-0" padless>
     <v-main class="pt-6">
       <v-tabs class="tab" color="bluecolor">
         <v-tab
@@ -10,7 +10,6 @@
           <Icon :icon="icon" class="bluecolor--text" width="24" />
         </v-tab>
       </v-tabs>
-
       <!-- Meshes -->
       <v-col
         cols="12"
@@ -21,7 +20,7 @@
       >
         <v-btn-toggle
           class="px-16 py-4"
-          v-model="text"
+          v-model="isActive"
           tile
           color="bluedark accent-3"
           group
@@ -33,7 +32,6 @@
             @click="selected(childrens)"
             :value="childrens.name"
           >
-          
             {{ childrens.name }}
           </v-btn>
           <v-btn
@@ -56,7 +54,7 @@
         <!-- ------------------------------------------------- -->
       </v-col>
 
-      <!-- Ligth -->
+      <!-- isLigth -->
       <v-col
         cols="12"
         class="px-16 py-12 mx-0 my-0"
@@ -66,7 +64,7 @@
       >
         <v-btn-toggle
           class="px-16 py-4"
-          v-model="text"
+          v-model="name"
           tile
           color="bluedark accent-3"
           group
@@ -93,7 +91,7 @@
       >
         <v-btn-toggle
           class="px-16 py-4"
-          v-model="text"
+          v-model="name"
           tile
           color="bluedark accent-3"
           group
@@ -125,6 +123,7 @@ export default {
   props: {
     scene: Object,
     children: Array,
+    active: String,
   },
   data() {
     let option = {};
@@ -132,13 +131,13 @@ export default {
       JSON.stringify(this.$store.state.childrens) === undefined
         ? ""
         : this.$store.state.childrens.name;
+
     return {
       item: "Mesh",
       valid: true,
-      name: "",
+      name: name,
       option: option,
       value: name,
-      text: name,
       items: [
         { id: 1, name: "Mesh", icon: "mdi-playlist-check" },
         { id: 2, name: "Light", icon: "mdi-lightbulb-on-80" },
@@ -146,12 +145,13 @@ export default {
       ],
     };
   },
-  mounted() {
-    console.log(this.scene.children);
-  },
+  // created() {
+  //   this.$emit("escucharHijo", this.option);
+  // },
   methods: {
     selected(children) {
       this.$store.commit("ADD_CHILDREN", children);
+      this.$store.commit("ADD_OPTION_BASE1", this.option);
       this.option =
         JSON.stringify(this.$store.state.childrens) === undefined
           ? children
@@ -180,12 +180,20 @@ export default {
     isCamera() {
       return this.scene.children.filter((i) => i.isCamera === true);
     },
+    isActive: {
+      get() {
+        return this.active;
+      },
+      set(value) {
+        this.value = value;
+      },
+    },
   },
 };
 </script>
 
 <style scoped>
-.menuLeft {
+.menuRight {
   height: 100vh;
 }
 

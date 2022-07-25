@@ -30,24 +30,60 @@
       </v-row>
     </v-container>
 
-    <!-- Side -->
+    <!-- Side /Blending -->
     <v-container>
       <v-row>
-        <v-col class="d-flex px-16" cols="12">
+        <!-- Side -->
+        <v-col class="d-flex pa-4" cols="6">
           <v-select
             v-model="material_info.side"
             @change="changeSide"
             :items="items"
-            :label="material_info.side === 0 ? 'Font' : 'Back'"
+            :label="!!items ? 'Side' : items.text"
+          ></v-select>
+        </v-col>
+        <!-- Blending -->
+        <v-col class="d-flex pa-4" cols="6">
+          <v-select
+            v-model="material_info.blending"
+            @change="changeBlending"
+            :items="blendings"
+            :label="!!blendings ? 'Blending' : blendings.text"
+          ></v-select>
+        </v-col>
+      </v-row>
+    </v-container>
+
+    <!-- Equations -->
+    <v-container>
+      <v-row>
+        <!-- Src -->
+        <v-col class="d-flex px-4 py-0" cols="6">
+          <v-select
+            :disabled="disabled"
+            v-model="material_info.blendSrc"
+            @change="changeSrc"
+            :items="src"
+            :label="!!src ? 'Src' : src.text"
+          ></v-select>
+        </v-col>
+        <!-- Dts -->
+        <v-col class="d-flex px-4 py-0" cols="6">
+          <v-select
+            :disabled="disabled"
+            v-model="material_info.blendDst"
+            @change="changeDts"
+            :items="dts"
+            :label="!!dts ? 'Dts' : dts.text"
           ></v-select>
         </v-col>
       </v-row>
     </v-container>
 
     <!-- color -->
-    <v-container class="pa-0 color" v-if="this.material_info.color">
+    <v-container class="color" v-if="this.material_info.color">
       <v-row>
-        <v-col class="d-flex px-0 mx-0 justify-center" cols="12">
+        <v-col class="d-flex px-4 py-0" cols="6">
           <span class="colorPicker"
             >Color
             <div class="div-color">
@@ -60,6 +96,16 @@
               />
             </div>
           </span>
+          
+        </v-col>
+        <!-- Texture -->
+        <v-col class="d-flex px-4 py-0" cols="6">
+          <v-select
+            v-model="textureSelected"
+            @change="changeTexture"
+            :items="this.arr"
+            :label="!!this.arr ? 'Texture' : this.arr.text"
+          ></v-select>
         </v-col>
       </v-row>
     </v-container>
@@ -67,7 +113,7 @@
     <!-- Visible -->
     <v-container justify="center">
       <v-row>
-        <v-col class="d-flex px-0 mx-0 justify-center" cols="12">
+        <v-col class="d-flex py-0 px-0 mx-0 justify-center" cols="12">
           <v-btn
             v-model="material_info.visible"
             @click="changeVisible"
@@ -105,6 +151,11 @@ import * as THREE from "three";
 import axios from "axios";
 
 export default {
+  props: {
+    material_info: Object,
+    figure: String,
+    material: Object,
+  },
   data() {
     let color = "#CCCCCC";
 
@@ -112,9 +163,10 @@ export default {
     const textureToShow = 0;
 
     const arr = [
-      "https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_gates.jpg",
-      "https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate1.jpg",
-      "https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate2.jpg",
+      {value: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/9c64cfe3-bb3b-4ae8-b5a6-d2f39d21ff87/d3jme6i-8c702ad4-4b7a-4763-9901-99f8b4f038b0.png/v1/fill/w_600,h_400,strp/fondo_transparente_png_by_imsnowbieber_d3jme6i-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NDAwIiwicGF0aCI6IlwvZlwvOWM2NGNmZTMtYmIzYi00YWU4LWI1YTYtZDJmMzlkMjFmZjg3XC9kM2ptZTZpLThjNzAyYWQ0LTRiN2EtNDc2My05OTAxLTk5ZjhiNGYwMzhiMC5wbmciLCJ3aWR0aCI6Ijw9NjAwIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.Ymv-MHRcmXXpzmL3f0xZ0mCcyU85lCLnk0jbOnCO8Zg", text: "Ninguna"},
+      {value: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_gates.jpg", text: "Img 1"},
+      {value: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate1.jpg", text: "Img 2"},
+      {value:"https://s3-us-west-2.amazonaws.com/s.cdpn.io/259155/THREE_crate2.jpg", text: "Img 3"},
     ];
 
     let file_select;
@@ -122,8 +174,9 @@ export default {
     return {
       color: color,
       items: [
-        { value: "0", text: "Font" },
-        { value: "1", text: "Back" },
+        { value: THREE.FrontSide, text: "Front" },
+        { value: THREE.BackSide, text: "Back" },
+        { value: THREE.DoubleSide, text: "Double" },
       ],
       // The textures to use
       arr: arr,
@@ -136,25 +189,56 @@ export default {
           "Avatar size should be less than 2 MB!",
       ],
       file_select: file_select,
+      blendings: [
+        { text: "No", value: THREE.NoBlending },
+        { text: "Normal", value: THREE.NormalBlending },
+        { text: "Additive", value: THREE.AdditiveBlending },
+        { text: "Subtractive", value: THREE.SubtractiveBlending },
+        { text: "Multiply", value: THREE.MultiplyBlending },
+        { text: "Custom", value: THREE.CustomBlending },
+      ],
+      src: [
+        { text: "Zero", value: THREE.ZeroFactor },
+        { text: "One", value: THREE.OneFactor },
+        { text: "SrcColor", value: THREE.SrcColorFactor },
+        { text: "OneMinusSrcColor", value: THREE.OneMinusSrcColorFactor },
+        { text: "SrcAlpha", value: THREE.SrcAlphaFactor },
+        { text: "OneMinusSrcAlpha", value: THREE.OneMinusSrcAlphaFactor },
+        { text: "DstAlpha", value: THREE.DstAlphaFactor },
+        { text: "OneMinusDstAlpha", value: THREE.OneMinusDstAlphaFactor },
+        { text: "DstColor", value: THREE.DstColorFactor },
+        { text: "OneMinusDstColor", value: THREE.OneMinusDstColorFactor },
+        { text: "SrcAlphaSaturate", value: THREE.SrcAlphaSaturateFactor },
+      ],
+      dts: [
+        { text: "Zero", value: THREE.ZeroFactor },
+        { text: "One", value: THREE.OneFactor },
+        { text: "SrcColor", value: THREE.SrcColorFactor },
+        { text: "OneMinusSrcColor", value: THREE.OneMinusSrcColorFactor },
+        { text: "SrcAlpha", value: THREE.SrcAlphaFactor },
+        { text: "OneMinusSrcAlpha", value: THREE.OneMinusSrcAlphaFactor },
+        { text: "DstAlpha", value: THREE.DstAlphaFactor },
+        { text: "OneMinusDstAlpha", value: THREE.OneMinusDstAlphaFactor },
+        { text: "DstColor", value: THREE.DstColorFactor },
+        { text: "OneMinusDstColor", value: THREE.OneMinusDstColorFactor },
+      ],
+      textureSelected: [],
     };
-  },
-  props: {
-    material_info: Object,
-    figure: String,
-    material: Object,
-  },
-  mounted() {
-    this.changeTexture();
   },
   methods: {
     changeSide() {
-      console.log(this.material_info.side);
-
-      if (this.material_info.side === "0") {
-        this.material_info.side = 0;
-      } else if (this.material_info.side === "1") {
-        this.material_info.side = 1;
-      }
+      this.items.value = this.material_info.side;
+    },
+    changeBlending() {
+      this.blendings.value = this.material_info.blending;
+    },
+    changeSrc() {
+      this.material_info.blendEquation = THREE.AddEquation;
+      this.src.value = this.material_info.blendSrc;
+    },
+    changeDts() {
+      this.material_info.blendEquation = THREE.AddEquation;
+      this.dts.value = this.material_info.blendDst;
     },
     changeVisible() {
       this.material_info.visible = !this.material_info.visible;
@@ -164,39 +248,24 @@ export default {
       this.material_info.color.set(this.color);
     },
     changeTexture() {
-      // Click interaction
-      var canvas = document.getElementsByTagName("canvas")[0];
-      var material = this.material;
-      var arr = this.arr;
-      var textureToShow = this.textureToShow;
-      canvas.addEventListener("click", function () {
-        //LOAD TEXTURE and on completion apply it on SPHERE
-        new THREE.TextureLoader().load(
-          arr[textureToShow],
-          (texture) => {
-            //Update Texture
-            material.map = texture;
-            material.needsUpdate = true;
-            // Update the next texture to show
-            textureToShow++;
-            // Have we got to the end of the textures array
-            if (textureToShow > arr.length - 1) {
-              textureToShow = 0;
-            }
-          },
-          (xhr) => {
-            //Download Progress
-            console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-          },
-          (error) => {
-            //Error CallBack
-            console.log("An error happened" + error);
-          }
-        );
-      });
 
-      this.material = material;
-      this.textureToShow = textureToShow;
+      //LOAD TEXTURE and on completion apply it on SPHERE
+      new THREE.TextureLoader().load(
+        this.textureSelected,
+        (texture) => {
+          //Update Texture
+          this.material_info.map = texture;
+          this.material_info.needsUpdate = true;
+        },
+        (xhr) => {
+          //Download Progress
+          console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+        },
+        (error) => {
+          //Error CallBack
+          console.log("An error happened" + error);
+        }
+      );
     },
     onUpload() {
       // upload file
@@ -228,6 +297,11 @@ export default {
         });
 
       console.log("file::", formData);
+    },
+  },
+  computed: {
+    disabled() {
+      return this.material_info.blending !== THREE.CustomBlending;
     },
   },
 };
